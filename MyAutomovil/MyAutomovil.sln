@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAutomovil", "MyAutomovil\MyAutomovil.csproj", "{3036AB1B-5C3E-43B5-913E-74A432F7A6C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc", "MyAutomovil\Mvc.csproj", "{3036AB1B-5C3E-43B5-913E-74A432F7A6C0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.csproj", "{61E18BC3-0D16-4AC0-950F-5004780620EF}"
 EndProject
