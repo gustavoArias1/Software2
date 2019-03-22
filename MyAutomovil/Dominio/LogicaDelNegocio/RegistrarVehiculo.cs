@@ -19,16 +19,20 @@ namespace Dominio.LogicaDelNegocio
         }
         public LinkedList<Vehiculo> ConsultarVehiculo(LinkedList<string>filtros)
         {
-            return null;
+            LinkedList<Vehiculo> lista = new LinkedList<Vehiculo>; 
+            return lista;
         }
         public void ConsultarVehiculo(string placa)
         {
-        
+            
+
         }
         public void EliminarVehiculo(string placa)
         {
 
         }
+
+
     }
 
 

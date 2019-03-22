@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Dominio.LogicaDelNegocio
 {
+     
     class RegistrarModelo
     {
         public void AdicionarModelo(string nombreModelo,string nombreMarca,int numeroPuertas,string cilindraje,string transmision)
@@ -17,8 +18,14 @@ namespace Dominio.LogicaDelNegocio
         }
         public LinkedList<Modelo> ConsultarModelo(string nombreModelo,string nombreMarca)
         {
-            return null;
+            Modelo modelo = null;
+           
+            
+
+            LinkedList<Modelo> lista = new LinkedList<Modelo>();
+            return lista;    
         }
+
         public void Eliminarmodelo(string nombreModelo)
         {
 
