@@ -18,7 +18,7 @@ namespace Dominio.LogicaDelNegocio
             }
             else
             {
-                marcas.Add(marca);
+                //Invocar metodo de adicion de marcas en la base de datos.
                 //Exception
             }
         }

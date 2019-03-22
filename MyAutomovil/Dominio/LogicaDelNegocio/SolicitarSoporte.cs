@@ -7,18 +7,22 @@ namespace Dominio.LogicaDelNegocio
 {
     class SolicitarSoporte
     {
+        List<Reclamo> reclamos = null;
         public void AdicionarReclamo(String tipoReclamo,string concesionario,string descripcion)
         {
-
+            reclamos = ConsularReclamo();
+            //Invocar metodo de adicion en la base de persistencia.
         }
-        public  LinkedList<Reclamo> ConsularReclamo()
+        public List<Reclamo> ConsularReclamo()
         {
-            return null;
+            //Obtner lista de reclamos de la base de datos.
+            return reclamos;
         }
 
-        public Reclamo SolucionarReclamo(Reclamo reclamo)
+        public Reclamo SolucionarReclamo(Reclamo reclamo, string solucionReclamo)
         {
-            return null;
+            reclamo.SolucionReclamo = solucionReclamo;
+            return reclamo;
         }
     }
 }
