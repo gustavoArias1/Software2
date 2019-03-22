@@ -1,4 +1,4 @@
-﻿using Dominio.EntidadesDominio
+﻿using Dominio.EntidadesDominio;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -31,7 +31,7 @@ namespace Dominio.LogicaDelNegocio
 
         public void ActualizarMarca(string nombreMarca, string pais)
         {
-            //Acceso base de datos enviando nombreMerca, pais con sentencia update;
+            //Acceso base de datos enviando nombreMarca, pais con la sentencia update
         }
 
         public Marca ConsultarMarca(string nombre)
