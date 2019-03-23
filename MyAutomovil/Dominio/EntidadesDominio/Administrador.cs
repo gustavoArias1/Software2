@@ -14,7 +14,7 @@ namespace Dominio.EntidadesDominio
         private DateTime fechaNacimiento;
         private string correo;
         private string contraseña;
-        private Concesionario concesionario;
+        private string nombreConcesionario ;
 
         public int Codigo { get => codigo; set => codigo = value; }
         public string Nombre { get => nombre; set => nombre = value; }
@@ -24,7 +24,7 @@ namespace Dominio.EntidadesDominio
         public DateTime FechaNacimiento { get => fechaNacimiento; set => fechaNacimiento = value; }
         public string Correo { get => correo; set => correo = value; }
         public string Contraseña { get => contraseña; set => contraseña = value; }
-        internal Concesionario Concesionario { get => concesionario; set => concesionario = value; }
+        internal string Concesionario { get => nombreConcesionario; set => nombreConcesionario = value; }
 
         public Administrador(string nombre, string apellido, int cedula, string cargo, DateTime fechaNacimiento, 
             string correo, string contraseña)
@@ -37,11 +37,11 @@ namespace Dominio.EntidadesDominio
             this.correo = correo;
             this.contraseña = contraseña;
             this.codigo = 0;
-            this.concesionario = BuscarConcesionario(concesionario.NombreConcesionario);
+            this.nombreConcesionario = BuscarConcesionario(nombre);
         }
 
         public Administrador(string nombre, string apellido, int cedula, string cargo, DateTime fechaNacimiento,
-            string correo, string contraseña,int codigo,Concesionario concesionario)
+            string correo, string contraseña,int codigo,string concesionario)
         {
             this.nombre = nombre;
             this.apellido = apellido;
@@ -51,11 +51,11 @@ namespace Dominio.EntidadesDominio
             this.correo = correo;
             this.contraseña = contraseña;
             this.codigo = codigo;
-            this.concesionario = concesionario;
+            this.nombreConcesionario = concesionario;
         }
 
 
-        private Concesionario BuscarConcesionario(string nombreconcesionario) {
+        private string BuscarConcesionario(string nombreAdministrador) {
             Concesionario c = null;
             
             /*
@@ -63,7 +63,7 @@ namespace Dominio.EntidadesDominio
 
             c = new Concesionario();
              */ 
-            return null;
+            return c.NombreConcesionario;
         }
 
         private int buscarCodigo(int cedula, string nombre) {
