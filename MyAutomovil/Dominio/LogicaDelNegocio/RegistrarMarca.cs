@@ -54,6 +54,7 @@ namespace Dominio.LogicaDelNegocio
             if (marca == null)
             {
                 //Exception
+                return null;
             }
             return marca;
         }
