@@ -58,6 +58,12 @@ namespace Dominio.LogicaDelNegocio
             return marca;
         }
 
+        public List<Marca> ConsultarMarca()
+        {
+            //Codigo de acceso a la base de datos
+            return marcas;
+        }
+
         public List<Marca> RecuperarMarcas()
         {
             //Codigo de acceso a la base de datos
