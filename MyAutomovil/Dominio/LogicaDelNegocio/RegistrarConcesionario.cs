@@ -19,7 +19,7 @@ namespace Dominio.LogicaDelNegocio
             }
             else
             {
-                //agregar en la base de datos
+                //agregar en la base datos un concesionario
             }
 
         }
