@@ -1,4 +1,4 @@
-﻿using Dominio.EntidadesDominio
+﻿using Dominio.EntidadesDominio;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -54,6 +54,7 @@ namespace Dominio.LogicaDelNegocio
             if (marca == null)
             {
                 //Exception
+                return null;
             }
             return marca;
         }

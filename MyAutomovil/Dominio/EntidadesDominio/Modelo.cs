@@ -27,4 +27,6 @@ namespace Dominio.EntidadesDominio
         public int NumeroPuertas { get => numeroPuertas; set => numeroPuertas = value; }
         public string Cilindraje { get => cilindraje; set => cilindraje = value; }
     }
+
+    
 }
