@@ -52,6 +52,7 @@ namespace Dominio.LogicaDelNegocio
             catch (Exception exc)
             {
                 //exception
+               
             }
             if (modelo == null)
             {
