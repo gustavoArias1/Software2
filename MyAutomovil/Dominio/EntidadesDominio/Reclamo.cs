@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio.EntidadesDominio
 {
-    class Reclamo
+    public class Reclamo
     {
         private string tipoReclamo;
         private string concesionario;

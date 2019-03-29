@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio.EntidadesDominio
 {
-    class Cliente
+    public class Cliente
     {
         private string codigo;
         private string nombre;

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Dominio.EntidadesDominio
 {
-    class Excepcion
+    public class Excepcion
     {
 
     }

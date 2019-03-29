@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio.EntidadesDominio
 {
-    class Compra
+    public class Compra
     {
         private string concesionario;
         private string cedula;

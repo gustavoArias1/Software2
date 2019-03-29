@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio.EntidadesDominio
 {
-    class Marca
+    public class Marca
     {
         private string nombre;
         private string pais;
