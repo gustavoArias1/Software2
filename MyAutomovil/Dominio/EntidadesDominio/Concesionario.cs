@@ -13,6 +13,7 @@ namespace Dominio.EntidadesDominio
         private string telefono;
         private string ciudad;
         public List<Vendedor> vendedores = null;
+        public List<Vehiculo> vehiculos = null;
 
         public Concesionario(string nombreConcesionario, string administrador, string fecha, string telefono, string ciudad)
         {
@@ -39,5 +40,12 @@ namespace Dominio.EntidadesDominio
         }
 
 
+         public List<Vendedor> RecuperarVehiculos() {
+            List<Vehiculos> vehiculos = new List<Vehiculo>();
+            /*
+             Consulta DB
+             */
+            return vendedoresAux;
+        }
     }
 }

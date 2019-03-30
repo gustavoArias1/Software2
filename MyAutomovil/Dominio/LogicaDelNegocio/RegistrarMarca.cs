@@ -23,6 +23,11 @@ namespace Dominio.LogicaDelNegocio
             }
         }
 
+        /*
+         context RegistrarMarca :: EliminarMarca
+         pre: ConsultarMarca(nombre)
+         post: !ConsultarMarca(nombre)
+         */
         public void EliminarMarca(string nombreMarca)
         {
             //Acceso base de datos enviando delete
