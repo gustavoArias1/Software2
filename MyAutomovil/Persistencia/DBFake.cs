@@ -1,23 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
-using Dominio.EntidadesDominio;
+
 
 namespace Persistencia
 {
     public class DBFake
     {
-        
-        public List<Marca> AgregarMarcas()
+        List<string[]> concesionario;
+
+        public DBFake()
         {
-            List<Marca> listaMarcas = new List<Marca>();
-            Marca m1 = new Marca("audi", "alemania");
-            Marca m2 = new Marca("ford", "Colombia");
-            Marca m3 = new Marca("mazda", "japon");
-            listaMarcas.Add(m1);
-            listaMarcas.Add(m2);
-            listaMarcas.Add(m3);
-            return listaMarcas;
+            this.concesionario = new List<string[]>();
         }
+            
+
+        public void llenar()
+        {
+            
+            concesionario.Add(new string[] { "1", "casautos", "gustavo andres", "calle 10 # 34-09", "43234234", "manizales" });
+            concesionario.Add(new string[] { "2", "sadasadsasdd", "sasdasdasd", "sasdasdasd", "sasdasdasd", "sasdasdasd" });
+            concesionario.Add(new string[] { "3", "sadasasdasdasdasdd", "sasdasdasd", "sasdasdasd", "sasdasdasd", "sasdasdasd" });
+
+            
+        }
+
+        public List<string[]> consultarConsecionarios()
+        {
+            this.llenar();
+            return concesionario;
+
+        }
+        
+        
 
     }
 }

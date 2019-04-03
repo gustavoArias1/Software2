@@ -1,14 +1,24 @@
 ﻿using Dominio.EntidadesDominio;
+using Persistencia;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Dominio.LogicaDelNegocio
 {
-    class RegistrarConcesionario
+    class RegistrarConcesionario : DBFake
     {
-        List<Concesionario> Concesionarios = new List<Concesionario>();
-        public void AdicionarConcesionario(string nombreConcesionario, Administrador administrador, string direccion, 
+        public List<Concesionario> Concesionarios = new List<Concesionario>();
+        String concecionario = "";
+
+       
+
+        /*context RegistrarConcesionario::AdicionarConcesionario(string nombreConcesionario, String administrador, string direccion, 
+            string telefono, string ciudad)
+           pre : !Concesionarios.contains(concesionario)
+           post: Consultar(nombreConcesionario)
+         */
+        public void AdicionarConcesionario(string nombreConcesionario, String administrador, string direccion, 
             string telefono, string ciudad)
         {
             //acceso a la base de datos recuperarConcesionario
@@ -24,11 +34,17 @@ namespace Dominio.LogicaDelNegocio
 
         }
 
+        /*context RegistrarConcesionario::ActualizarConcesionario
+         pre : Consultar(nombreConcesionario)
+         post :Consultar(nombreConcesionario) 
+         
+         */
         public void ActualizarConcesionario(string nombreConcesionario, Administrador administrador, string direccion,
             string telefono, string ciudad)
         {
             //llamado de metodo de persistencia para hacer un update en la base de datos
         }
+
 
         public Concesionario ConsultarConcesionario(string nombreConcesionario)
         {
@@ -47,7 +63,8 @@ namespace Dominio.LogicaDelNegocio
             }
             catch(Exception ex)
             {
-              // exception
+                //excepcion
+                Console.WriteLine(ex);
             }
             if (concesionario == null)
             {
@@ -70,10 +87,15 @@ namespace Dominio.LogicaDelNegocio
         {
             //llamado del metodo de persisntencia para elimianr un concesionario por medio del codigo
         }
-        public List<Concesionario> RecuperarConcesionario()
+        public void RecuperarConcesionarios()
         {
+            
             //llamado al metodo de persitencia que obiene la lista de concesionarios
-            return null;
+            foreach (string[] x in consultarConsecionarios()) {
+      
+                   this.Concesionarios.Add(new Concesionario(Int32.Parse(x[0]), x[1], x[2], x[3], x[4], x[5]));
+            }
+  
         }
     }
 }
