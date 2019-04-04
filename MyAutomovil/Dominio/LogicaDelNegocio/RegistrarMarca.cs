@@ -77,10 +77,17 @@ namespace Dominio.LogicaDelNegocio
         {
             marcas.Clear();
             ConsultarMarca();
-            Marca marca = new Marca(nombreMarca, pais);
-            if (!marcas.Contains(marca))
+            Marca marca = new Marca(nombreMarca, "");
+            for (int i = 0; i < marcas.Count; i++)
             {
-                //Exception
+                if (marcas[i].Nombre.Equals(nombreMarca))
+                {
+                    marca.Pais = pais;
+                }
+            }
+            if (marca.Pais == "")
+            {
+                Console.WriteLine("La marca no exite");
             }
             else
             {

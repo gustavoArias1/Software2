@@ -17,11 +17,10 @@ namespace Dominio.LogicaDelNegocio
             RegistrarMarca marca = new RegistrarMarca();
             //marca.ConsultarMarca();
             //marca.AdicionarMarca("Toyota", "Japon");
-            marca.EliminarMarca("Audi");
-            Console.WriteLine(marca.marcas.Count);
+            //marca.EliminarMarca("Toyota");
+            //marca.ActualizarMarca("Toyota", "Colombia");
             /*for (int i = 0; i < marca.marcas.Count; i++)
             {
-                Console.WriteLine(i);
                 Console.WriteLine(marca.marcas[i].Nombre + " " +marca.marcas[i].Pais);
             }*/
         }
