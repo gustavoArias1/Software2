@@ -67,5 +67,22 @@ namespace Persistencia
                 }
             }
         }
+
+        /*
+         * Metodo para actualizar un elemento de la base de datos fake
+         * @ Manuel Galvis
+         * @ version 1.0 04/04/2019
+         */
+        public void ActualizarMarcaRepositorio(string nombreMarca, string pais)
+        {
+            for (int i = 0; i < marcas.Count; i++)
+            {
+                if (marcas[i].Equals(nombreMarca))
+                {
+                    marcas[i].SetValue(nombreMarca, 0);
+                    marcas[i].SetValue(pais, 1);
+                }
+            }
+        }
     }
 }

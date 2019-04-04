@@ -13,7 +13,7 @@ namespace Dominio.LogicaDelNegocio
      */
     class RegistrarMarca : DBFake
     {
-        List<Marca> marcas = new List<Marca>();
+        public List<Marca> marcas = new List<Marca>();
 
         /*
          * El metodo AdicionarMarca agrega una nueva marca en la base de datos consultando si dicha marca no existe.
@@ -29,7 +29,7 @@ namespace Dominio.LogicaDelNegocio
             Marca marca = new Marca(nombreMarca, pais);
             if (marcas.Contains(marca))
             {
-                //Exception
+                System.Console.WriteLine("La marca ya se encuentra regitrada");
             }
             else
             {
@@ -62,7 +62,7 @@ namespace Dominio.LogicaDelNegocio
             }
             else
             {
-                
+                EliminarMarcaRepositorio(nombreMarca);
             }
         }
 
@@ -76,7 +76,16 @@ namespace Dominio.LogicaDelNegocio
          */
         public void ActualizarMarca(string nombreMarca, string pais)
         {
-            //Acceso base de datos enviando nombreMarca, pais con la sentencia update
+            ConsultarMarca();
+            Marca marca = new Marca(nombreMarca, pais);
+            if (!marcas.Contains(marca))
+            {
+                //Exception
+            }
+            else
+            {
+                ActualizarMarcaRepositorio(nombreMarca, pais);
+            }
         }
 
         /*
@@ -107,7 +116,6 @@ namespace Dominio.LogicaDelNegocio
             if (marca == null)
             {
                 //Exception
-                return null;
             }
             return marca;
         }
