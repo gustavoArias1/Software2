@@ -61,9 +61,9 @@ namespace Persistencia
         {
             for (int i = 0; i < marcas.Count; i++)
             {
-                if (marcas[i].Equals(nombreMarca))
+                if (marcas[i].GetValue(0).Equals(nombreMarca))
                 {
-                    marcas.RemoveAt(i);
+                    marcas.RemoveAt(i);                   
                 }
             }
         }

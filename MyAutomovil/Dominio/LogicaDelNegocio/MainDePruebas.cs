@@ -12,13 +12,18 @@ namespace Dominio.LogicaDelNegocio
             RegistrarConcesionario r = new RegistrarConcesionario();
             r.RecuperarConcesionarios();
             System.Console.WriteLine(r.Concesionarios[0].Administrador);
+
+            /*AQUI EMPIEZAN LAS PRUEBAS DE MARCAS*/
             RegistrarMarca marca = new RegistrarMarca();
-            marca.AdicionarMarca("Toyota", "Japon");
-            marca.ConsultarMarca();
-            for (int i = 0; i < marca.marcas.Count; i++)
+            //marca.ConsultarMarca();
+            //marca.AdicionarMarca("Toyota", "Japon");
+            marca.EliminarMarca("Audi");
+            Console.WriteLine(marca.marcas.Count);
+            /*for (int i = 0; i < marca.marcas.Count; i++)
             {
-                System.Console.WriteLine(marca.marcas[i].Nombre + " " + marca.marcas[i].Pais);
-            }
+                Console.WriteLine(i);
+                Console.WriteLine(marca.marcas[i].Nombre + " " +marca.marcas[i].Pais);
+            }*/
         }
     }
 }

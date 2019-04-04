@@ -25,16 +25,17 @@ namespace Dominio.LogicaDelNegocio
          */
         public void AdicionarMarca(string nombreMarca,string pais)
         {
+            marcas.Clear();
             ConsultarMarca();
             Marca marca = new Marca(nombreMarca, pais);
-            if (marcas.Contains(marca))
+            for (int i = 0; i < marcas.Count; i++)
             {
-                System.Console.WriteLine("La marca ya se encuentra regitrada");
+                if (marcas[i].Nombre.Equals(nombreMarca))
+                {
+                    Console.WriteLine("La marca ya se encuentra regitrada");
+                }
             }
-            else
-            {
-                AdicionarMarcaRepositorio(marca.Nombre, marca.Pais);
-            }
+            AdicionarMarcaRepositorio(marca.Nombre, marca.Pais);
         }
 
         /*
@@ -47,22 +48,20 @@ namespace Dominio.LogicaDelNegocio
          */
         public void EliminarMarca(string nombreMarca)
         {
-            Boolean temp = true;
-            ConsultarMarca();
-            for (int i = 0; i < marcas.Count; i++)
+            Marca marca = ConsultarMarca(nombreMarca);
+            if (marcas.Contains(marca))
             {
-                if (marcas[i].Nombre == nombreMarca)
+                for (int i = 0; i < marcas.Count; i++)
                 {
-                    temp = false;
+                    if (marcas[i].Nombre.Equals(marca.Nombre))
+                    {
+                        EliminarMarcaRepositorio(nombreMarca);
+                    }
                 }
-            }
-            if (temp == false)
-            {
-                //Exception
             }
             else
             {
-                EliminarMarcaRepositorio(nombreMarca);
+                Console.WriteLine("La marca no existe");  
             }
         }
 
@@ -76,6 +75,7 @@ namespace Dominio.LogicaDelNegocio
          */
         public void ActualizarMarca(string nombreMarca, string pais)
         {
+            marcas.Clear();
             ConsultarMarca();
             Marca marca = new Marca(nombreMarca, pais);
             if (!marcas.Contains(marca))
@@ -98,6 +98,7 @@ namespace Dominio.LogicaDelNegocio
          */
         public Marca ConsultarMarca(string nombre)
         {
+            marcas.Clear();
             ConsultarMarca();
             Marca marca = null;
             try
@@ -130,7 +131,7 @@ namespace Dominio.LogicaDelNegocio
         {
             foreach (string[] x in ConsultarMarcasRepositorio())
             {
-                this.marcas.Add(new Marca(x[0], x[1]));
+                marcas.Add(new Marca(x[0], x[1]));
             }
         }
     }
