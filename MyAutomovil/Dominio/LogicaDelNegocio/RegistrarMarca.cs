@@ -33,7 +33,7 @@ namespace Dominio.LogicaDelNegocio
             }
             else
             {
-                
+                AdicionarMarcaRepositorio(marca.Nombre, marca.Pais);
             }
         }
 
@@ -47,8 +47,23 @@ namespace Dominio.LogicaDelNegocio
          */
         public void EliminarMarca(string nombreMarca)
         {
-            //Acceso base de datos enviando delete
-            //Exception
+            Boolean temp = true;
+            ConsultarMarca();
+            for (int i = 0; i < marcas.Count; i++)
+            {
+                if (marcas[i].Nombre == nombreMarca)
+                {
+                    temp = false;
+                }
+            }
+            if (temp == false)
+            {
+                //Exception
+            }
+            else
+            {
+                
+            }
         }
 
         /*
@@ -97,9 +112,18 @@ namespace Dominio.LogicaDelNegocio
             return marca;
         }
 
+        /*
+         * El metodo de consultar marcas llenara la lista de marcas con las marcas almacenadas en la base de datos.
+         * @ Manuel Galvis
+         * @ version 2.0 04/04/2019
+         context RegistrarMarca :: ConsultarMarca
+         post: ConsultarMarca()*/
         public void ConsultarMarca()
         {
-            //Codigo de acceso a la base de datos
+            foreach (string[] x in ConsultarMarcasRepositorio())
+            {
+                this.marcas.Add(new Marca(x[0], x[1]));
+            }
         }
     }
 }

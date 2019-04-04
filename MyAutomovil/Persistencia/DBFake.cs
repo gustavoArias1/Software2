@@ -41,5 +41,31 @@ namespace Persistencia
             this.Llenar();
             return marcas;
         }
+
+        /*
+         * Metodo para adicionar marca en la base de datos fake
+         * @ Manuel Galvis
+         * @ version 1.0 04/04/2019
+         */
+        public void AdicionarMarcaRepositorio(string nombreMarca, string pais)
+        {
+            marcas.Add(new string[] { nombreMarca, pais });
+        }
+
+        /*
+         * Metodo para eliminar un elemento de la base de datos fake
+         * @ Manuel Galvis
+         * @ version 1.0 04/04/2019
+         */
+        public void EliminarMarcaRepositorio(string nombreMarca)
+        {
+            for (int i = 0; i < marcas.Count; i++)
+            {
+                if (marcas[i].Equals(nombreMarca))
+                {
+                    marcas.RemoveAt(i);
+                }
+            }
+        }
     }
 }
