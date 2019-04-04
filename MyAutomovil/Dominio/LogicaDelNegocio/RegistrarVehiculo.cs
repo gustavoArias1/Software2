@@ -23,8 +23,10 @@ namespace Dominio.LogicaDelNegocio
          * [1]-> nombreMarca
          * [2]->precioMin
          * [3]->precioMax
-         @ context: RegistrarVehiculo::ConsultarVehiculo 
-          
+         * [4]->nombreModelo
+         @ context: RegistrarVehiculo::ConsultarVehiculo(filtros:List) 
+          pre: concesionario.vehiculos.count() > 0
+          post: return vehiculos:List
              */
         public List<Vehiculo> ConsultarVehiculo(List<string>filtros)
         {
@@ -38,13 +40,14 @@ namespace Dominio.LogicaDelNegocio
             int precioMin = Convert.ToInt32(filtros[2]);
             int precioMax = Convert.ToInt32(filtros[3]);
             //realizamos el primer filtro que consiste en que toda la lista de filtros difiere del valor ""
-            if(filtros[1] != "" && filtros[2] != "" && filtros[3] != "" /*faltan todos los demas*/){
+            if(filtros[1] != "" && filtros[2] != "" && filtros[3] != "" && filtros[4] != ""/*faltan todos los demas*/){
                 foreach ( Vehiculo v in c.vehiculos){
-                    if(filtros[1] == v.Marca && v.precio >= precioMin && v.precio <= precioMax)
+                    if(filtros[1] == v.Marca && v.precio >= precioMin && v.precio <= precioMax && v.Modelo == filtros[4])
                     {
                         vehiculos.add(v);
                     }
                 }
+             // filtro cuando no se ingresa una marca, por lo tanto tampoco un modelo
             }else if(filtros[1] == ""  && filtros[2] != "" && filtros[3] != "" /*faltan todos los demas*/){
                  foreach ( Vehiculo v in c.vehiculos){
                     if(v.precio >= precioMin && v.precio <= precioMax)
@@ -56,10 +59,35 @@ namespace Dominio.LogicaDelNegocio
 
             return lista;
         }
-        public void ConsultarVehiculo(string placa)
+        /*
+             Consultar vehiculo solo por el atributo placa
+             context: RegistrarVehiculo::ConsultarVehiculo(placa:string,nombreConcesionario :string):vehiculo
+             pre: concesionario.vehiculos.count() > 0
+             post: return vehiculo:Vehiculo
+             */
+        public Vehiculo ConsultarVehiculo(string nombreConcesionario,string placa)
         {
-            
+            Vehiculo v = null;
+            //Obtenemos nuestro Object Concesionario
+            Concesionario c = RecuperarConcesionario(nombreConcesionario);
+            //Obtenemos y llenamos nuestra lista de vehiculos en la clase concesionario
+            c.vehiculos = c.RecuperarVehiculos();
+            //verificamos que el concesionario tenga vehiculos
+            if(c.vehiculos.count() > 0){
+                foreach(Vehiculo aux in c.vehiculos){
+                        if(aux.Placa == placa){
+                        v = aux;
+                    }
+                }
+            }else{
+                //excepcion o error no hay vehiculos para este concesionario
+            }
+            return v;
+        }
 
+        public List<Vehiculo> ConsultarVehiculoUltimoMesAgregado(string nombreConcesionario){
+            Concesionario c = RecuperarConcesionario(nombreConcesionario);
+            return c.RecuperarVehiculosUltimoMes;
         }
         public void EliminarVehiculo(string placa)
         {
@@ -71,6 +99,8 @@ namespace Dominio.LogicaDelNegocio
 
             return aux;
         }
+
+
 
         public Concesionario RecuperarConcesionario(string nombreConcesionario){
             Concesionario c = null;

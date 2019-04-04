@@ -14,8 +14,10 @@ namespace Dominio.EntidadesDominio
         private string marca;
         private string modelo;
         private string precio;
+        private string placa;
 
-        public Compra(string concesionario, string cedula, string nombreProveedor, string apellidoProveedor, DateTime fecha, string marca, string modelo, string precio)
+        public Compra(string concesionario, string cedula, string nombreProveedor, string apellidoProveedor,
+            DateTime fecha, string marca, string modelo, string precio,string placa)
         {
             this.concesionario = concesionario;
             this.cedula = cedula;
@@ -25,6 +27,7 @@ namespace Dominio.EntidadesDominio
             this.marca = marca;
             this.modelo = modelo;
             this.precio = precio;
+            this.placa = placa;
         }
 
         public string Concesionario { get => concesionario; set => concesionario = value; }
@@ -35,5 +38,6 @@ namespace Dominio.EntidadesDominio
         public string Marca { get => marca; set => marca = value; }
         public string Modelo { get => modelo; set => modelo = value; }
         public string Precio { get => precio; set => precio = value; }
+        public string Placa { get => placa; set => placa = value; }
     }
 }
