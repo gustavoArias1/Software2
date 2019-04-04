@@ -2,15 +2,30 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Persistencia;
 
 namespace Dominio.LogicaDelNegocio
 {
-    class RegistrarMarca
+    /*
+     * La clase registrar marca hara operaciones dml sobre las marcas del sistema realizando verificaciones de datos
+     * @ Manuel Galvis
+     * @ version 2.0 04/04/2019
+     */
+    class RegistrarMarca : DBFake
     {
         List<Marca> marcas = new List<Marca>();
+
+        /*
+         * El metodo AdicionarMarca agrega una nueva marca en la base de datos consultando si dicha marca no existe.
+         * @ Manuel Galvis
+         * @ version 2.0 04/04/2019
+         context RegistrarMarca :: AdicionarMarca
+         pre: !ConsultarMarca(nombreMarca) and nombreMarca != null and pais != null
+         post: ConsultarMarca(nombreMarca) or self@pre.ConsultarMarca(nombreMarca) or self@!nombreMarca.Exception or self@!pais.Exception
+         */
         public void AdicionarMarca(string nombreMarca,string pais)
         {
-            //Acceso base de datos metodo recuperar marcas
+            ConsultarMarca();
             Marca marca = new Marca(nombreMarca, pais);
             if (marcas.Contains(marca))
             {
@@ -18,15 +33,17 @@ namespace Dominio.LogicaDelNegocio
             }
             else
             {
-                //Invocar metodo de adicion de marcas en la base de datos.
-                //Exception
+                
             }
         }
 
         /*
+         * El metodo EliminarMarca elimina una marca especifica de la base de datos.
+         * @ Manuel Galvis
+         * @ version 2.0 04/04/2019
          context RegistrarMarca :: EliminarMarca
-         pre: ConsultarMarca(nombre)
-         post: !ConsultarMarca(nombre)
+         pre: ConsultarMarca(nombreMarca)
+         post: !ConsultarMarca(nombreMarca) or self@pre.ConsultarMarca(nombreMarca)
          */
         public void EliminarMarca(string nombreMarca)
         {
@@ -34,14 +51,30 @@ namespace Dominio.LogicaDelNegocio
             //Exception
         }
 
+        /*
+         * El metodo ActualizarMarca actualizara los datos de una marca especifica modificando sus atributos
+         * @ Manuel Galvis
+         * @ version 2.0 04/04/2019
+         context RegistrarMarca :: ActualizarMarca
+         pre: ConsultarMarca(nombreMarca) and nombreMarca != null and pais != null
+         post: ConsultarMarca(nombreMarca) or self@!nombreMarca.Exception or self@!pais.Exception
+         */
         public void ActualizarMarca(string nombreMarca, string pais)
         {
             //Acceso base de datos enviando nombreMarca, pais con la sentencia update
         }
 
+        /*
+         * El metodo ConsultarMarca consulta una marca especifica de la base de datos en caso de que no exista mostrara un mensaje de error
+         * @ Manuel Galvis
+         * @ version 2.0
+         context RegistrarMarca :: ConsultarMarca
+         pre: nombre != null
+         post: ConsultarMarca(nombre) or self@!nombre.Exception
+         */
         public Marca ConsultarMarca(string nombre)
         {
-            //Acceso base de datos metodo recuperar marcas
+            ConsultarMarca();
             Marca marca = null;
             try
             {
@@ -64,17 +97,9 @@ namespace Dominio.LogicaDelNegocio
             return marca;
         }
 
-        public List<Marca> ConsultarMarca()
+        public void ConsultarMarca()
         {
             //Codigo de acceso a la base de datos
-            return marcas;
-        }
-
-        public List<Marca> RecuperarMarcas()
-        {
-            //Codigo de acceso a la base de datos
-            return null;
         }
     }
 }
-
