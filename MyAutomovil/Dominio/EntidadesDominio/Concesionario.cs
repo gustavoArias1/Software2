@@ -51,7 +51,7 @@ namespace Dominio.EntidadesDominio
         }
 
 
-         public List<Vendedor> RecuperarVehiculos() {
+         public List<Vehiculo> RecuperarVehiculos() {
             List<Vehiculo> vehiculos = new List<Vehiculo>();
             /*
              Consulta DB
@@ -60,7 +60,7 @@ namespace Dominio.EntidadesDominio
         }
 
         public List<Compra> RecuperarCompras(){
-            List<Compra> compras = new List<Compras>();
+            List<Compra> compras = new List<Compra>();
             return compras;
         }
         /*
@@ -76,7 +76,7 @@ namespace Dominio.EntidadesDominio
             if(aux.Count > 0){
                 foreach(Vehiculo v in aux){
                     if(placas.Contains(v.Placa)){
-                        vehiculosAux.Add();
+                        vehiculosAux.Add(v);
                     }
                 }
             }else{
@@ -100,7 +100,7 @@ namespace Dominio.EntidadesDominio
                     //tomamos el mes
                     string [] fechaHoyList = fechaHoy.Split('/');
                     //si los meses son iguales guarde la placa
-                    if(fechaList[1] == fechaHoy[1]){
+                    if(fechaList[1].Equals(fechaHoy[1])){
                         placas.Add(c.Placa);
                     }
                 }

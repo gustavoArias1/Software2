@@ -42,22 +42,22 @@ namespace Dominio.LogicaDelNegocio
             //realizamos el primer filtro que consiste en que toda la lista de filtros difiere del valor ""
             if(filtros[1] != "" && filtros[2] != "" && filtros[3] != "" && filtros[4] != ""/*faltan todos los demas*/){
                 foreach ( Vehiculo v in c.vehiculos){
-                    if(filtros[1] == v.Marca && v.precio >= precioMin && v.precio <= precioMax && v.Modelo == filtros[4])
+                    if(filtros[1].Equals(v.Marca) && v.Precio >= precioMin && v.Precio <= precioMax && v.Modelo.Equals(filtros[4]))
                     {
-                        vehiculos.add(v);
+                        vehiculos.Add(v);
                     }
                 }
              // filtro cuando no se ingresa una marca, por lo tanto tampoco un modelo
             }else if(filtros[1] == ""  && filtros[2] != "" && filtros[3] != "" /*faltan todos los demas*/){
                  foreach ( Vehiculo v in c.vehiculos){
-                    if(v.precio >= precioMin && v.precio <= precioMax)
+                    if(v.Precio >= precioMin && v.Precio <= precioMax)
                     {
-                        vehiculos.add(v);
+                        vehiculos.Add(v);
                     }
                 }
             }
 
-            return lista;
+            return vehiculos;
         }
         /*
              Consultar vehiculo solo por el atributo placa
@@ -73,7 +73,7 @@ namespace Dominio.LogicaDelNegocio
             //Obtenemos y llenamos nuestra lista de vehiculos en la clase concesionario
             c.vehiculos = c.RecuperarVehiculos();
             //verificamos que el concesionario tenga vehiculos
-            if(c.vehiculos.count() > 0){
+            if(c.vehiculos.Count > 0){
                 foreach(Vehiculo aux in c.vehiculos){
                         if(aux.Placa == placa){
                         v = aux;
@@ -87,7 +87,7 @@ namespace Dominio.LogicaDelNegocio
 
         public List<Vehiculo> ConsultarVehiculoUltimoMesAgregado(string nombreConcesionario){
             Concesionario c = RecuperarConcesionario(nombreConcesionario);
-            return c.RecuperarVehiculosUltimoMes;
+            return c.RecuperarVehiculosUltimoMes();
         }
         public void EliminarVehiculo(string placa)
         {

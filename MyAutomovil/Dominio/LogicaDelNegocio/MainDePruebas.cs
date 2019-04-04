@@ -8,7 +8,6 @@ namespace Dominio.LogicaDelNegocio
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Yolo");
             System.Console.WriteLine("holaaaa");
             RegistrarConcesionario r = new RegistrarConcesionario();
             r.RecuperarConcesionarios();

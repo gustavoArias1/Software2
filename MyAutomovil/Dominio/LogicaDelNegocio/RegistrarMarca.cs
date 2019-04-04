@@ -111,7 +111,7 @@ namespace Dominio.LogicaDelNegocio
                 }
             } catch (Exception ex)
             {
-                //Exception
+                Console.WriteLine(ex);
             }
             if (marca == null)
             {

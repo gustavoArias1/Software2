@@ -32,7 +32,7 @@ namespace Dominio.EntidadesDominio
         public string NumeroChasis { get => numeroChasis; set => numeroChasis = value; }
         public string Color { get => color; set => color = value; }
         public string Concesionario { get => concesionario; set => concesionario = value; }
-        public double precio { get => concesionario; set => concesionario = value; }
+        public double Precio { get => precio; set => precio = value; }
         internal Marca Marca { get => marca; set => marca = value; }
         internal Modelo Modelo { get => modelo; set => modelo = value; }
     }
