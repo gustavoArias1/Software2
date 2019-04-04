@@ -6,6 +6,12 @@ using System.Text;
 
 namespace Dominio.LogicaDelNegocio
 {
+    /*
+     Esta clase sirve basicamente como un crud de concesionario ya que sirve para registrar,consultar,update y eliminar 
+     un concesionario de la base de datos 
+     @ Gustavo Andres Arias Loaiza
+     @ 04/04/2019
+     */
     class RegistrarConcesionario : DBFake
     {
         public List<Concesionario> Concesionarios = new List<Concesionario>();
@@ -13,8 +19,8 @@ namespace Dominio.LogicaDelNegocio
 
        
 
-        /*context RegistrarConcesionario::AdicionarConcesionario(string nombreConcesionario, String administrador, string direccion, 
-            string telefono, string ciudad)
+        /*context RegistrarConcesionario::AdicionarConcesionario(nombreConcesionario,administrador,direccion, 
+            telefono,ciudad)
            pre : !Concesionarios.contains(concesionario)
            post: Consultar(nombreConcesionario)
          */
@@ -35,9 +41,8 @@ namespace Dominio.LogicaDelNegocio
         }
 
         /*context RegistrarConcesionario::ActualizarConcesionario
-         pre : Consultar(nombreConcesionario)
-         post :Consultar(nombreConcesionario) 
-         
+         *pre :  Consultar(nombreConcesionario) and nombreConcesionario !=null
+         *post : Consultar(nombreConcesionario) 
          */
         public void ActualizarConcesionario(string nombreConcesionario, Administrador administrador, string direccion,
             string telefono, string ciudad)
@@ -46,6 +51,10 @@ namespace Dominio.LogicaDelNegocio
         }
 
 
+
+        /* Context RegistrarConcesionario :: ConsultarConcesionario 
+         * pre :  
+         */
         public Concesionario ConsultarConcesionario(string nombreConcesionario)
         {
             // Accsesos a la base de datos por medio del metodo recuperarConcesionario
@@ -91,7 +100,7 @@ namespace Dominio.LogicaDelNegocio
         {
             
             //llamado al metodo de persitencia que obiene la lista de concesionarios
-            foreach (string[] x in consultarConsecionarios()) {
+            foreach (string[] x in ConsultarConcesionariosRepositorio()) {
       
                    this.Concesionarios.Add(new Concesionario(Int32.Parse(x[0]), x[1], x[2], x[3], x[4], x[5]));
             }

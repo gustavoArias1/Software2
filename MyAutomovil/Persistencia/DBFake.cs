@@ -14,7 +14,7 @@ namespace Persistencia
         }
             
 
-        public void llenar()
+        public void Llenar()
         {
             
             concesionario.Add(new string[] { "1", "casautos", "gustavo andres", "calle 10 # 34-09", "43234234", "manizales" });
@@ -24,9 +24,9 @@ namespace Persistencia
             
         }
 
-        public List<string[]> consultarConsecionarios()
+        public List<string[]> ConsultarConcesionariosRepositorio()
         {
-            this.llenar();
+            this.Llenar();
             return concesionario;
 
         }

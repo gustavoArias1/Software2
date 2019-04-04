@@ -11,7 +11,7 @@ namespace Dominio.LogicaDelNegocio
             System.Console.WriteLine("holaaaa");
             RegistrarConcesionario r = new RegistrarConcesionario();
             r.RecuperarConcesionarios();
-            System.Console.WriteLine(r.Concesionarios[1].Administrador);
+            System.Console.WriteLine(r.Concesionarios[0].Administrador);
 
         }
     }
