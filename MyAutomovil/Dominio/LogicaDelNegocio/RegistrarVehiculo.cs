@@ -23,12 +23,16 @@ namespace Dominio.LogicaDelNegocio
          * [1]-> nombreMarca
          * [2]->precioMin
          * [3]->precioMax
-         * [4]->nombreModelo
+         * [4]->nombresModelos debe venir con el formato aus33,aujhg89
+         * [5]->color
+         * [6]->año
+         @William vasquez
+         @ version 1.5 05/04/2019
          @ context: RegistrarVehiculo::ConsultarVehiculo(filtros:List) 
           pre: concesionario.vehiculos.count() > 0
           post: return vehiculos:List
              */
-        public List<Vehiculo> ConsultarVehiculo(List<string>filtros)
+        public List<Vehiculo> ConsultarVehiculo(List<string> filtros)
         {
             //Lista que enviaremos despues de la recoleccion de la información
             List<Vehiculo> vehiculos = new List<Vehiculo>();
@@ -39,25 +43,168 @@ namespace Dominio.LogicaDelNegocio
             //convertimos a las variables precioMin y precioMax 
             int precioMin = Convert.ToInt32(filtros[2]);
             int precioMax = Convert.ToInt32(filtros[3]);
+            //obtenemos la lista de modelos
+            string[] modelos = filtros[4].Split(',');
             //realizamos el primer filtro que consiste en que toda la lista de filtros difiere del valor ""
-            if(filtros[1] != "" && filtros[2] != "" && filtros[3] != "" && filtros[4] != ""/*faltan todos los demas*/){
-                foreach ( Vehiculo v in c.vehiculos){
-                    if(filtros[1].Equals(v.Marca) && v.Precio >= precioMin && v.Precio <= precioMax && v.Modelo.Equals(filtros[4]))
+            if (filtros[1] != "" && filtros[2] != "" && filtros[3] != "" && filtros[4] != "" && filtros[5] != ""
+                && filtros[6] != "") {
+                foreach (Vehiculo v in c.vehiculos) {
+                    if (filtros[1].Equals(v.Marca) && v.Precio >= precioMin && v.Precio <= precioMax && ContieneModelo(modelos,v.Modelo)
+                        && v.Color.Equals(filtros[5]) && v.Año.Equals(filtros[6]))
                     {
                         vehiculos.Add(v);
                     }
                 }
-             // filtro cuando no se ingresa una marca, por lo tanto tampoco un modelo
-            }else if(filtros[1] == ""  && filtros[2] != "" && filtros[3] != "" /*faltan todos los demas*/){
-                 foreach ( Vehiculo v in c.vehiculos){
-                    if(v.Precio >= precioMin && v.Precio <= precioMax)
+                // filtro cuando no se ingresa una marca, por lo tanto tampoco un modelo pero si los demas
+            } else if (filtros[1] == "" && filtros[2] != "" && filtros[3] != "" && filtros[4] == "" && filtros[5] != ""
+                 && filtros[6] != "")
+            {
+                foreach (Vehiculo v in c.vehiculos) {
+                    if (v.Precio >= precioMin && v.Precio <= precioMax && v.Color.Equals(filtros[5]) && v.Año.Equals(filtros[6]))
+                    {
+                        vehiculos.Add(v);
+                    }
+                }
+                //Todos menos color 
+            } else if (filtros[1] != "" && filtros[2] != "" && filtros[3] != "" && filtros[4] != "" && filtros[5] == ""
+                 && filtros[6] != "")
+            {
+                foreach (Vehiculo v in c.vehiculos)
+                {
+                    if (filtros[1].Equals(v.Marca) && v.Precio >= precioMin && v.Precio <= precioMax &&
+                        ContieneModelo(modelos, v.Modelo) && v.Año.Equals(filtros[6]))
                     {
                         vehiculos.Add(v);
                     }
                 }
             }
-
+            //todos menos año
+            else if (filtros[1] != "" && filtros[2] != "" && filtros[3] != "" && filtros[4] != "" && filtros[5] != ""
+                && filtros[6] == "")
+            {
+                foreach (Vehiculo v in c.vehiculos)
+                {
+                    if (filtros[1].Equals(v.Marca) && v.Precio >= precioMin && v.Precio <= precioMax &&
+                        ContieneModelo(modelos, v.Modelo) && v.Color.Equals(filtros[5]))
+                    {
+                        vehiculos.Add(v);
+                    }
+                }
+            }
+            //todos menos año y color
+            else if (filtros[1] != "" && filtros[2] != "" && filtros[3] != "" && filtros[4] != "" && filtros[5] == ""
+                && filtros[6] == "")
+            {
+                foreach (Vehiculo v in c.vehiculos)
+                {
+                    if (filtros[1].Equals(v.Marca) && v.Precio >= precioMin && v.Precio <= precioMax &&
+                        ContieneModelo(modelos, v.Modelo))
+                    {
+                        vehiculos.Add(v);
+                    }
+                }
+            }
+            //todo menos color y marca por lo tanto tampoco modelo
+            else if (filtros[1] == "" && filtros[2] != "" && filtros[3] != "" && filtros[4] == "" && filtros[5] == ""
+                && filtros[6] != "")
+            {
+                foreach (Vehiculo v in c.vehiculos)
+                {
+                    if (v.Precio >= precioMin && v.Precio <= precioMax &&
+                        v.Año.Equals(filtros[6]))
+                    {
+                        vehiculos.Add(v);
+                    }
+                }
+            }
+            //todo menos marca y año por lo tanto tampoco modelo
+            else if (filtros[1] == "" && filtros[2] != "" && filtros[3] != "" && filtros[4] == "" && filtros[5] != ""
+                && filtros[6] == "")
+            {
+                foreach (Vehiculo v in c.vehiculos)
+                {
+                    if (v.Precio >= precioMin && v.Precio <= precioMax &&
+                        v.Color.Equals(filtros[5]))
+                    {
+                        vehiculos.Add(v);
+                    }
+                }
+            }
+            //solo precios
+            else if (filtros[1] == "" && filtros[2] != "" && filtros[3] != "" && filtros[4] == "" && filtros[5] == ""
+                && filtros[6] == "")
+            {
+                foreach (Vehiculo v in c.vehiculos)
+                {
+                    if (v.Precio >= precioMin && v.Precio <= precioMax)
+                    {
+                        vehiculos.Add(v);
+                    }
+                }
+            }
+            //todo menos modelo y color
+            else if (filtros[1] != "" && filtros[2] != "" && filtros[3] != "" && filtros[4] == "" && filtros[5] == ""
+               && filtros[6] != "")
+            {
+                foreach (Vehiculo v in c.vehiculos)
+                {
+                    if (filtros[1].Equals(v.Marca) && v.Precio >= precioMin && v.Precio <= precioMax 
+                        && v.Año.Equals(filtros[6]))
+                    {
+                        vehiculos.Add(v);
+                    }
+                }
+            }
+            // todo menos modelo
+            else if (filtros[1] != "" && filtros[2] != "" && filtros[3] != "" && filtros[4] == "" && filtros[5] != ""
+               && filtros[6] != "")
+            {
+                foreach (Vehiculo v in c.vehiculos)
+                {
+                    if (filtros[1].Equals(v.Marca) && v.Precio >= precioMin && v.Precio <= precioMax
+                        && v.Año.Equals(filtros[6]) && v.Color.Equals(filtros[5]))
+                    {
+                        vehiculos.Add(v);
+                    }
+                }
+            }
+            //todo menos modleo.color,año
+            else if (filtros[1] != "" && filtros[2] != "" && filtros[3] != "" && filtros[4] == "" && filtros[5] == ""
+               && filtros[6] == "")
+            {
+                foreach (Vehiculo v in c.vehiculos)
+                {
+                    if (filtros[1].Equals(v.Marca) && v.Precio >= precioMin && v.Precio <= precioMax)
+                    {
+                        vehiculos.Add(v);
+                    }
+                }
+            }
+            //todo menos modelo y año
+            else if (filtros[1] != "" && filtros[2] != "" && filtros[3] != "" && filtros[4] == "" && filtros[5] != ""
+               && filtros[6] == "")
+            {
+                foreach (Vehiculo v in c.vehiculos)
+                {
+                    if (filtros[1].Equals(v.Marca) && v.Precio >= precioMin && v.Precio <= precioMax && v.Año.Equals(filtros[6]))
+                    {
+                        vehiculos.Add(v);
+                    }
+                }
+            }
             return vehiculos;
+        }
+        /*
+         metodo que me retorna si un modelo existe en la lista de modelos filtrados
+             */
+        private Boolean ContieneModelo(string []modelos,string modelo)
+        {
+            for (int i = 0; i < modelos.Length; i++) {
+                if (modelos[i].Equals(modelo)) {
+                    return true;
+                }
+            }
+            return false;
         }
         /*
              Consultar vehiculo solo por el atributo placa

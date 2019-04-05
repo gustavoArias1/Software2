@@ -7,15 +7,15 @@ namespace Dominio.EntidadesDominio
     public class Vehiculo
     {
         private string placa;
-        private Marca marca;
-        private Modelo modelo;
+        private string marca;
+        private string modelo;
         private string año;
         private string numeroChasis;
         private string color;
         private string concesionario;
         private double precio;
 
-        public Vehiculo(string placa, Marca marca, Modelo modelo, string año, string numeroChasis, string color, string concesionario,double precio)
+        public Vehiculo(string placa, string marca, string modelo, string año, string numeroChasis, string color, string concesionario,double precio)
         {
             this.placa = placa;
             this.marca = marca;
@@ -33,7 +33,7 @@ namespace Dominio.EntidadesDominio
         public string Color { get => color; set => color = value; }
         public string Concesionario { get => concesionario; set => concesionario = value; }
         public double Precio { get => precio; set => precio = value; }
-        internal Marca Marca { get => marca; set => marca = value; }
-        internal Modelo Modelo { get => modelo; set => modelo = value; }
+        public string Marca { get => marca; set => marca = value; }
+        public string Modelo { get => modelo; set => modelo = value; }
     }
 }
