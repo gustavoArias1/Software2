@@ -13,6 +13,7 @@ namespace Persistencia
         {
             this.concesionario = new List<string[]>();
             this.marcas = new List<string[]>();
+            this.Llenar();
         }
             
         public void Llenar()
@@ -25,9 +26,14 @@ namespace Persistencia
             marcas.Add(new string[] { "Toyota", "Japon" });
         }
 
+        public void AdicionarConcesionarioRepositorio(int codigo, string nombreConcesionario, string adminConcesionario, string direccion, string telefono, string cuidad)
+        {
+            concesionario.Add(new string[] { codigo.ToString(), nombreConcesionario, adminConcesionario, direccion, telefono, cuidad });
+        }
+
         public List<string[]> ConsultarConcesionariosRepositorio()
         {
-            this.Llenar();
+           
             return concesionario;
         }
 
@@ -38,7 +44,7 @@ namespace Persistencia
          */
         public List<string[]> ConsultarMarcasRepositorio()
         {
-            this.Llenar();
+            
             return marcas;
         }
 
@@ -61,7 +67,7 @@ namespace Persistencia
         {
             for (int i = 0; i < marcas.Count; i++)
             {
-                if (marcas[i].Equals(nombreMarca))
+                if (marcas[i].GetValue(0).Equals(nombreMarca))
                 {
                     marcas.RemoveAt(i);
                 }
@@ -77,7 +83,7 @@ namespace Persistencia
         {
             for (int i = 0; i < marcas.Count; i++)
             {
-                if (marcas[i].Equals(nombreMarca))
+                if (marcas[i].GetValue(0).Equals(nombreMarca))
                 {
                     marcas[i].SetValue(nombreMarca, 0);
                     marcas[i].SetValue(pais, 1);
