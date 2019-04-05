@@ -6,7 +6,7 @@ namespace Dominio.EntidadesDominio
 {
     public class Cliente
     {
-        private string codigo;
+        private int codigo;
         private string nombre;
         private string apellido;
         private DateTime fechaDeNacimiento;

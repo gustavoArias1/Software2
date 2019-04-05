@@ -123,7 +123,7 @@ namespace Dominio.LogicaDelNegocio
             }
             if (marca == null)
             {
-                //Exception
+                Console.WriteLine("La marca no existe");
             }
             return marca;
         }
