@@ -7,23 +7,35 @@ namespace Dominio.LogicaDelNegocio
 {
     class RegistrarCliente
     {
-        public List<Cliente> clientes= null;
+        public List<Cliente> clientes;
 
         public void AdicionarCliente (string nombre, string apellido, int cedula, DateTime fechaDeNacimiento, 
             string correo, string contraseña)
         {
             clientes = RecuperarClientes();
             Cliente cliente = new Cliente(nombre, apellido, fechaDeNacimiento, cedula, correo, contraseña);
-            if (clientes.Contains(cliente))
+            if (clientes.Count > 0)
             {
-                //lanza execepcion indica que el cliente ya existe
+                if (clientes.Contains(cliente))
+                {
+                    //lanza execepcion indica que el cliente ya existe
+                    System.Console.WriteLine("El cliente ya existe");
+                }
+                else
+                {
+                    /*
+                    Creamos el cliente en la base de datos 
+                    lanzamos excepcion indica que el cliente ya fue creado
+                 */
+                    System.Console.WriteLine("El cliente ha sido creado");
+                }
             }
-            else
-            {
+            else {
                 /*
-                Creamos el cliente en la base de datos 
-                lanzamos excepcion indica que el cliente ya fue creado
-             */
+                    Creamos el cliente en la base de datos 
+                    lanzamos excepcion indica que el cliente ya fue creado
+                 */
+                System.Console.WriteLine("El cliente ha sido creado");
             }
         }
 
@@ -33,13 +45,14 @@ namespace Dominio.LogicaDelNegocio
             /*
              actualizamos en la DB bajo la clausula update
              */
+            System.Console.WriteLine("El cliente ha sido Actualizado");
         }
 
         public List<Cliente> ConsultarCliente(string nombre, string apellido, int cedula)
         {
             List<Cliente> clientesAux = new List<Cliente>();
             clientes = RecuperarClientes();
-            try
+            if (clientes.Count > 0)
             {
                 for (int i = 0; i < clientes.Count; i++)
                 {
@@ -50,12 +63,13 @@ namespace Dominio.LogicaDelNegocio
                     }
                 }
             }
-            catch (Exception ex) {
-                //Excepcion
+            else {
+                //lanzarExcepcion de no hay clientes para consultar
+                System.Console.WriteLine("No se encontraron registros de clientes");
             }
             if (clientesAux.Count == 0) {
                 //lanzarExcepcion de no se encontraron coincidencias
-                return null;
+                System.Console.WriteLine("No se encontraron coincidencias");
             }
             return clientesAux;
         }
@@ -65,6 +79,7 @@ namespace Dominio.LogicaDelNegocio
             /*
              eliminamos en la base de datos bajo la clausula delete
              */
+            System.Console.WriteLine("El cliente ha sido eliminado");
         }
 
         /*
