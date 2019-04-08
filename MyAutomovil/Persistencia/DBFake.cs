@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-
 namespace Persistencia
 {
     public class DBFake
@@ -9,11 +8,16 @@ namespace Persistencia
         List<string[]> concesionario;
         List<string[]> marcas;
         List<string[]> vehiculos;
+        List<string[]> reclamos;
+        List<string[]> reclamosSolucionados;
+
         public DBFake()
         {
             this.concesionario = new List<string[]>();
             this.marcas = new List<string[]>();
             this.vehiculos = new List<string[]>();
+            this.reclamos = new List<string[]>();
+            this.reclamosSolucionados = new List<string[]>();
             this.Llenar();
         }
             
@@ -28,6 +32,9 @@ namespace Persistencia
             vehiculos.Add(new string[] {"HEX56","Mazda","Speak3","2012","hdvb6wtd6g63","negro", "casautos", "10839566" });
             vehiculos.Add(new string[] { "HYU76", "Mazda", "Speak3", "2013", "hts7n8ahd6g3", "blanco", "casautos", "10837066" });
             vehiculos.Add(new string[] { "PLX58", "Mazda", "Razer", "2015", "hdvb8j0d6g63", "negro", "casautos", "12839966" });
+            reclamos.Add(new string[] { "1", "Vehiculo", "CasaAutos", "Vehiculo con fallas en las puertas", "1059813898" });
+            reclamos.Add(new string[] { "2", "TransaccionBancaria", "CasaAutos", "Pago retrasado", "1059813898" });
+            reclamos.Add(new string[] { "3", "Vehiculo", "CasaAutos", "Motor averiado", "1059813898" });
         }
 
         public void AdicionarVehiculoRepositorio(string placa,string nombreMarca,string nombreModelo,string año,
@@ -155,6 +162,47 @@ namespace Persistencia
                     marcas[i].SetValue(pais, 1);
                 }
             }
+        }
+
+        /*
+         * Metodo para agregar un elemento de reclamo a la base de datos fake
+         * @ Manuel Galvis
+         * @ version 1.0 07/04/2019
+         */
+        public void AdicionarReclamoRepositorio(int idReclamo, String tipoReclamo, string concesionario, string descripcion, int idCliente)
+        {
+            reclamos.Add(new string[] { Convert.ToString(idReclamo), tipoReclamo, concesionario, descripcion, Convert.ToString(idCliente) });
+        }
+
+        /*
+         * Metodo para consultar reclamos de la base de datos fake que retornara todos los reclamos
+         * @ Manuel Galvis
+         * @ version 1.0 07/04/2019
+         */
+        public List<string[]> ConsultarReclamosRepositorio()
+        {
+
+            return reclamos;
+        }
+
+        /*
+         * Metodo para consultar reclamos solucionados de la base de datos fake que retornara todos los reclamos solucionados
+         * @ Manuel Galvis
+         * @ version 1.0 07/04/2019
+         */
+        public List<string[]> ConsultarSolucionRepositorio()
+        {
+            return reclamosSolucionados;
+        }
+
+        /*
+         * Metodo para agregar un elemento de reclamo solucionado a la base de datos fake
+         * @ Manuel Galvis
+         * @ version 1.0 07/04/2019
+         */
+        public void AdicionarReclamoSolucionRepositorio(int idReclamo, string tipoReclamo, string concesionario, string descripcion, int idCliente, string solucionReclamo, int idAdministrador)
+        {
+            reclamosSolucionados.Add(new string[] { Convert.ToString(idReclamo), tipoReclamo, concesionario, descripcion, Convert.ToString(idCliente), solucionReclamo, Convert.ToString(idAdministrador) });
         }
     }
 }
