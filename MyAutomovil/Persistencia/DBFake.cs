@@ -8,11 +8,12 @@ namespace Persistencia
     {
         List<string[]> concesionario;
         List<string[]> marcas;
-
+        List<string[]> vehiculos;
         public DBFake()
         {
             this.concesionario = new List<string[]>();
             this.marcas = new List<string[]>();
+            this.vehiculos = new List<string[]>();
             this.Llenar();
         }
             
@@ -24,7 +25,72 @@ namespace Persistencia
             marcas.Add(new string[] { "Mazda", "Japon" });
             marcas.Add(new string[] { "Nissan", "Japon" });
             marcas.Add(new string[] { "Toyota", "Japon" });
+            vehiculos.Add(new string[] {"HEX56","Mazda","Speak3","2012","hdvb6wtd6g63","negro", "casautos", "10839566" });
+            vehiculos.Add(new string[] { "HYU76", "Mazda", "Speak3", "2013", "hts7n8ahd6g3", "blanco", "casautos", "10837066" });
+            vehiculos.Add(new string[] { "PLX58", "Mazda", "Razer", "2015", "hdvb8j0d6g63", "negro", "casautos", "12839966" });
         }
+
+        public void AdicionarVehiculoRepositorio(string placa,string nombreMarca,string nombreModelo,string año,
+            string chasis,string color, double precio ) {
+            vehiculos.Add(new string[] { placa,nombreMarca,nombreModelo,año,chasis,color,precio.ToString()});
+        }
+
+        public void EliminarVehiculoRepositorio(string placa) {
+            for (int i = 0; i < vehiculos.Count; i++) {
+                if (vehiculos[i].GetValue(0).Equals(placa)) {
+                    vehiculos.RemoveAt(i);
+                }
+            }
+        }
+
+        public void ActualizarVehiculosRepositorio(string placa, string nombreMarca, string nombreModelo, string año,
+            string chasis, string color, double precio) {
+            for (int i = 0; i < vehiculos.Count; i++)
+            {
+                if (vehiculos[i].GetValue(0).Equals(placa))
+                {
+                    vehiculos[i].SetValue(nombreMarca, 1);
+                    vehiculos[i].SetValue(nombreModelo, 2);
+                    vehiculos[i].SetValue(año, 3);
+                    vehiculos[i].SetValue(chasis, 4);
+                    vehiculos[i].SetValue(color, 5);
+                    vehiculos[i].SetValue(precio.ToString(),6);
+                }
+            }
+        }
+
+        /*
+         retorna los datos para crear un concesionario tras el envio de un nombreconcesionario
+             */
+        public string[] RecuperarConcesionarioRepositorio(string nombreConcesionario) {
+            for (int i = 0; i < concesionario.Count; i++) {
+                Console.WriteLine(concesionario[i][1]+" "+ nombreConcesionario);
+                if (concesionario[i][1].Equals(nombreConcesionario)) {
+                    return concesionario[i];
+                }
+            }
+            return null;
+        }
+
+        /*
+         Recuperar todos los vehiculos que han sido creados
+             */
+        public List<string[]> RecuperarVehiculosRepositorio() {
+            return vehiculos;
+        }
+
+        public List<string[]> RecuperarVehiculosRepositorio(string nombreConcesionario) {
+            List<string[]> x = new List<string[]>();
+            for (int i = 0; i < vehiculos.Count; i++)
+            {
+                if (vehiculos[i][6].Equals(nombreConcesionario)) {
+                    x.Add(vehiculos[i]);
+                }
+            }
+            return x;
+        }
+
+        
 
         public void AdicionarConcesionarioRepositorio(int codigo, string nombreConcesionario, string adminConcesionario, string direccion, string telefono, string cuidad)
         {
