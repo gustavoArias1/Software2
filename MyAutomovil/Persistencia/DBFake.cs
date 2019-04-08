@@ -10,8 +10,6 @@ namespace Persistencia
         List<string[]> vehiculos;
         List<string[]> reclamos;
         List<string[]> reclamosSolucionados;
-        List<string[]> clientes;
-        List<string[]> vendedores;
 
         public DBFake()
         {
@@ -23,6 +21,7 @@ namespace Persistencia
             this.clientes = new List<string[]>();
             this.vendedores = new List<string[]>();
             this.Llenar();
+            this.modelos = new List<string[]>();
         }
 
         public void Llenar()
@@ -39,15 +38,6 @@ namespace Persistencia
             reclamos.Add(new string[] { "1", "Vehiculo", "CasaAutos", "Vehiculo con fallas en las puertas", "1059813898" });
             reclamos.Add(new string[] { "2", "TransaccionBancaria", "CasaAutos", "Pago retrasado", "1059813898" });
             reclamos.Add(new string[] { "3", "Vehiculo", "CasaAutos", "Motor averiado", "1059813898" });
-            clientes.Add(new string[] { "1", "Javier", "cuathemoc", "5/2/1992", "156278729", "Javihou@gmail.com", "gs8yshns" });
-            clientes.Add(new string[] { "2", "Jose", "Rios", "5/4/1990", "15625878729", "HosRe@gmail.com", "gs8a6yhuns" });
-            clientes.Add(new string[] { "3", "Pedro", "Cramona", "15/2/1982", "158778729", "PedCaru@gmail.com", "absdhns" });
-            vendedores.Add(new string[] {"Juan","Raigoza","61287392","vendedor","4/5/1990","Juan.2@myautomovil.com","6wy8hdyh8",
-            "2","casautos"});
-            vendedores.Add(new string[] {"pedro","Reyes","61287392","vendedor","4/5/1990","pedro.3@myautomovil.com","6wy8hdyh8",
-            "3","casautos"});
-            vendedores.Add(new string[] {"admin","casautos","61285672","administrador","8/5/1988","admin.casautos@myautomovil.com","6wy875678u8",
-            "1","casautos"});
         }
 
         public void AdicionarVehiculoRepositorio(string placa, string nombreMarca, string nombreModelo, string año,
@@ -329,5 +319,58 @@ namespace Persistencia
         {
             reclamosSolucionados.Add(new string[] { Convert.ToString(idReclamo), tipoReclamo, concesionario, descripcion, Convert.ToString(idCliente), solucionReclamo, Convert.ToString(idAdministrador) });
         }
+
+
+        public void AdicionarModelosRepositorio(string nombreModelo, string nombreMarca, int numeroPuertas, string cilindraje,
+           string transmision)
+        {
+            modelos.Add(new string[] { nombreModelo, nombreMarca, Convert.ToString (numeroPuertas), cilindraje, transmision });
+        }
+
+        public void ActualizarModelosRepositorio(string nombreModelo, string nombreMarca, int numeroPuertas, string cilindraje,
+           string transmision)
+        {
+            for (int i = 0; i < modelos.Count; i++)
+            {
+                if (modelos[i].GetValue(0).Equals(nombreModelo) && modelos[i].GetValue(0).Equals(nombreMarca))
+                {
+                    modelos[i].SetValue(nombreMarca, 1);
+                    modelos[i].SetValue(nombreModelo, 2);
+                    modelos[i].SetValue(numeroPuertas, 3);
+                    modelos[i].SetValue(cilindraje, 4);
+                    modelos[i].SetValue(transmision, 5);
+                   
+                }
+            }
+        }
+
+        public void EliminarModeloRepositorio(string nombreModelo)
+        {
+            for (int i = 0; i < modelos.Count; i++)
+            {
+                if (modelos[i].GetValue(0).Equals(nombreModelo))
+                {
+                    modelos.RemoveAt(i);
+                }
+            }
+        }
+
+        public List<string[]> ConsultarModelosRepositorio()
+        {
+
+            return modelos;
+        }
+
+        /*
+         Recuperar todos los modelos que han sido creados 
+             */
+        public List<string[]> RecuperarModelosRepositorio()
+        {
+            return modelos;
+        }
+
+
+    
+
     }
 }
