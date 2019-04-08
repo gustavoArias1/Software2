@@ -104,6 +104,31 @@ namespace Persistencia
             concesionario.Add(new string[] { codigo.ToString(), nombreConcesionario, adminConcesionario, direccion, telefono, cuidad });
         }
 
+        public void ActualizarConcesionarioRepositorio(int codigo, string nombreConcesionario, string adminConcesionario, string direccion, string telefono, string cuidad)
+        {
+            for (int i = 0; i < concesionario.Count; i++)
+            {
+                if (concesionario[i].GetValue(0).Equals(codigo))
+                {
+                    concesionario[i].SetValue(nombreConcesionario, 1);
+                    concesionario[i].SetValue(adminConcesionario, 2);
+                    concesionario[i].SetValue(direccion, 3);
+                    concesionario[i].SetValue(telefono, 4);
+                    concesionario[i].SetValue(cuidad, 5);
+                }
+            }
+        }
+        public void EliminarConcesionarioRepositorio(string nombreConcesionario)
+        {
+            for (int i =0; i<concesionario.Count; i++)
+            {
+                if (concesionario[i].GetValue(0).Equals(nombreConcesionario))
+                {
+                    concesionario.RemoveAt(i);
+                }
+            }
+        }
+
         public List<string[]> ConsultarConcesionariosRepositorio()
         {
            
