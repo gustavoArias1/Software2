@@ -124,7 +124,7 @@ namespace Persistencia
             concesionario.Add(new string[] { codigo.ToString(), nombreConcesionario, adminConcesionario, direccion, telefono, cuidad });
         }
 
-        public void ActualizarConcesionarioRepositorio(int codigo, string nombreConcesionario, string adminConcesionario, string direccion, string telefono, string cuidad)
+        public void ActualizarConcesionarioRepositorio(string codigo, string nombreConcesionario, string adminConcesionario, string direccion, string telefono, string cuidad)
         {
             for (int i = 0; i < concesionario.Count; i++)
             {
@@ -142,7 +142,7 @@ namespace Persistencia
         {
             for (int i = 0; i < concesionario.Count; i++)
             {
-                if (concesionario[i].GetValue(0).Equals(nombreConcesionario))
+                if (concesionario[i].GetValue(1).Equals(nombreConcesionario))
                 {
                     concesionario.RemoveAt(i);
                 }

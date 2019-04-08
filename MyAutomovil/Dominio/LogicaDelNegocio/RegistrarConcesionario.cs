@@ -78,8 +78,7 @@ namespace Dominio.LogicaDelNegocio
             }
             if (concesionario == null)
             {
-                //exception
-
+                Console.WriteLine("ERROR NO EXISTE CONCESIONARIO");
             }
 
 
@@ -111,8 +110,11 @@ namespace Dominio.LogicaDelNegocio
             }
             if (existe)
             {
-                ActualizarConcesionarioRepositorio(codigo, nombreConcesionario, administrador, direccion, telefono, ciudad);    
+
+                ActualizarConcesionarioRepositorio(codigo.ToString(), nombreConcesionario, administrador, direccion, telefono, ciudad);
+                System.Console.WriteLine("si existe");
             }
+
             else
             {
                 System.Console.WriteLine("ERROR CONCESIONARIO NO EXISTE");
@@ -130,12 +132,10 @@ namespace Dominio.LogicaDelNegocio
         * post: ConsultarConcesionario() 
         */
 
-        public List<Concesionario> ConsultarConcesionarios()
+        public void  ConsultarConcesionarios()
         {
-            // Accsesos a la base de datos por medio del metodo recuperarConcesionario
-            //exception 
-
-            return null;
+            Concesionarios.Clear();
+            RecuperarConcesionarios();
         }
 
         /* Este metodo nos permite eliminar un Concesionario de la base de datos 
@@ -147,6 +147,7 @@ namespace Dominio.LogicaDelNegocio
          */
         public void EliminarConcesionario(string nombreConcesionario)
         {
+           
             Concesionario con = ConsultarConcesionario(nombreConcesionario);
             if (Concesionarios.Contains(con))
             {
