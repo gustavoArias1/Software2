@@ -10,6 +10,7 @@ namespace Persistencia
         List<string[]> vehiculos;
         List<string[]> reclamos;
         List<string[]> reclamosSolucionados;
+        List<String[]> modelos;
 
         public DBFake()
         {
@@ -19,6 +20,7 @@ namespace Persistencia
             this.reclamos = new List<string[]>();
             this.reclamosSolucionados = new List<string[]>();
             this.Llenar();
+            this.modelos = new List<string[]>();
         }
             
         public void Llenar()
@@ -35,6 +37,9 @@ namespace Persistencia
             reclamos.Add(new string[] { "1", "Vehiculo", "CasaAutos", "Vehiculo con fallas en las puertas", "1059813898" });
             reclamos.Add(new string[] { "2", "TransaccionBancaria", "CasaAutos", "Pago retrasado", "1059813898" });
             reclamos.Add(new string[] { "3", "Vehiculo", "CasaAutos", "Motor averiado", "1059813898" });
+            modelos.Add(new string[] { "Mazda", "speed", "4", "1600", "Automatica" });
+            modelos.Add(new string[] { "Audi", "A4", "4", "2000", "Automatica" });
+            modelos.Add(new string[] { "Mazda", "X5", "3", "1800", "Manual" });
         }
 
         public void AdicionarVehiculoRepositorio(string placa,string nombreMarca,string nombreModelo,string año,
@@ -229,5 +234,58 @@ namespace Persistencia
         {
             reclamosSolucionados.Add(new string[] { Convert.ToString(idReclamo), tipoReclamo, concesionario, descripcion, Convert.ToString(idCliente), solucionReclamo, Convert.ToString(idAdministrador) });
         }
+
+
+        public void AdicionarModelosRepositorio(string nombreModelo, string nombreMarca, int numeroPuertas, string cilindraje,
+           string transmision)
+        {
+            modelos.Add(new string[] { nombreModelo, nombreMarca, Convert.ToString (numeroPuertas), cilindraje, transmision });
+        }
+
+        public void ActualizarModelosRepositorio(string nombreModelo, string nombreMarca, int numeroPuertas, string cilindraje,
+           string transmision)
+        {
+            for (int i = 0; i < modelos.Count; i++)
+            {
+                if (modelos[i].GetValue(0).Equals(nombreModelo) && modelos[i].GetValue(0).Equals(nombreMarca))
+                {
+                    modelos[i].SetValue(nombreMarca, 1);
+                    modelos[i].SetValue(nombreModelo, 2);
+                    modelos[i].SetValue(numeroPuertas, 3);
+                    modelos[i].SetValue(cilindraje, 4);
+                    modelos[i].SetValue(transmision, 5);
+                   
+                }
+            }
+        }
+
+        public void EliminarModeloRepositorio(string nombreModelo)
+        {
+            for (int i = 0; i < modelos.Count; i++)
+            {
+                if (modelos[i].GetValue(0).Equals(nombreModelo))
+                {
+                    modelos.RemoveAt(i);
+                }
+            }
+        }
+
+        public List<string[]> ConsultarModelosRepositorio()
+        {
+
+            return modelos;
+        }
+
+        /*
+         Recuperar todos los modelos que han sido creados 
+             */
+        public List<string[]> RecuperarModelosRepositorio()
+        {
+            return modelos;
+        }
+
+
+    
+
     }
 }
