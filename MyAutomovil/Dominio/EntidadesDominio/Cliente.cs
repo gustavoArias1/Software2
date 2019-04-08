@@ -25,7 +25,7 @@ namespace Dominio.EntidadesDominio
             this.contraseña = contraseña;
         }
 
-        public Cliente(string codigo, string nombre, string apellido, DateTime fechaDeNacimiento, int cedula, 
+        public Cliente(int codigo, string nombre, string apellido, DateTime fechaDeNacimiento, int cedula, 
             string correo, string contraseña)
         {
             this.codigo = codigo;
@@ -37,7 +37,7 @@ namespace Dominio.EntidadesDominio
             this.contraseña = contraseña;
         }
 
-        public string Codigo { get => codigo; set => codigo = value; }
+        public int Codigo { get => codigo; set => codigo = value; }
         public string Nombre { get => nombre; set => nombre = value; }
         public string Apellido { get => apellido; set => apellido = value; }
         public DateTime FechaDeNacimiento { get => fechaDeNacimiento; set => fechaDeNacimiento = value; }

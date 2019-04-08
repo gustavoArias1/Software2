@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using Persistencia;
 namespace Dominio.EntidadesDominio
 {
-    public class Concesionario
+    public class Concesionario :DBFake
     {
         private int codigo; 
         private string nombreConcesionario;
@@ -51,11 +51,18 @@ namespace Dominio.EntidadesDominio
         }
 
 
-         public List<Vehiculo> RecuperarVehiculos() {
+        public List<Vehiculo> RecuperarVehiculos()
+        {
             List<Vehiculo> vehiculos = new List<Vehiculo>();
-            /*
-             Consulta DB
-             */
+            List<string[]> vehiculosAux = RecuperarVehiculosRepositorio(this.nombreConcesionario);
+            if (vehiculosAux.Count > 0)
+            {
+                for (int i = 0; i < vehiculosAux.Count; i++)
+                {
+                    vehiculos.Add(new Vehiculo(vehiculosAux[i][0], vehiculosAux[i][1], vehiculosAux[i][2], vehiculosAux[i][3],
+                        vehiculosAux[i][4], vehiculosAux[i][5], vehiculosAux[i][6], Double.Parse(vehiculosAux[i][7])));
+                }
+            }
             return vehiculos;
         }
 
