@@ -2,10 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Persistencia;
 
 namespace Dominio.LogicaDelNegocio
 {
-    class RegistrarCliente
+    class RegistrarCliente : DBFake
     {
         public List<Cliente> clientes;
 
@@ -23,28 +24,21 @@ namespace Dominio.LogicaDelNegocio
                 }
                 else
                 {
-                    /*
-                    Creamos el cliente en la base de datos 
-                    lanzamos excepcion indica que el cliente ya fue creado
-                 */
+                    AdicionarClienteRepositorio(nombre, apellido,   fechaDeNacimiento, cedula, correo, contraseña);
                     System.Console.WriteLine("El cliente ha sido creado");
                 }
             }
             else {
-                /*
-                    Creamos el cliente en la base de datos 
-                    lanzamos excepcion indica que el cliente ya fue creado
-                 */
+                
+                AdicionarClienteRepositorio(nombre, apellido, fechaDeNacimiento, cedula, correo, contraseña);
                 System.Console.WriteLine("El cliente ha sido creado");
             }
         }
 
-        public void ActualizarCliente(string nombre, string apellido, int cedula, DateTime fechaDeNacimiento,
+        public void ActualizarCliente(int codigo,string nombre, string apellido,  DateTime fechaDeNacimiento, int cedula,
             string correo, string contraseña)
         {
-            /*
-             actualizamos en la DB bajo la clausula update
-             */
+            ActualizarClienteRepositorio(codigo, nombre, apellido,  fechaDeNacimiento, cedula, correo, contraseña);
             System.Console.WriteLine("El cliente ha sido Actualizado");
         }
 
@@ -52,7 +46,7 @@ namespace Dominio.LogicaDelNegocio
         {
             List<Cliente> clientesAux = new List<Cliente>();
             clientes = RecuperarClientes();
-            if (clientes.Count > 0)
+            if (clientes != null)
             {
                 for (int i = 0; i < clientes.Count; i++)
                 {
@@ -74,11 +68,9 @@ namespace Dominio.LogicaDelNegocio
             return clientesAux;
         }
 
-        public void EliminarCliente(string codigo)
+        public void EliminarCliente(int codigo)
         {
-            /*
-             eliminamos en la base de datos bajo la clausula delete
-             */
+            EliminarClienteRepositorio(codigo);
             System.Console.WriteLine("El cliente ha sido eliminado");
         }
 
@@ -87,9 +79,19 @@ namespace Dominio.LogicaDelNegocio
          */
         public List<Cliente> RecuperarClientes() {
             List<Cliente> clientesAux = new List<Cliente>();
-            /*
-             Extraccion db de clientes
-             */
+            List<string[]> aux = RecuperarClientesRepositorio();
+            if (aux.Count > 0)
+            {
+                for (int i = 0; i < aux.Count; i++)
+                {
+                    clientesAux.Add(new Cliente(Int32.Parse(aux[i][0]),aux[i][1], aux[i][2], DateTime.Parse(aux[i][3]), 
+                        Int32.Parse(aux[i][4]), aux[i][5], aux[i][6]));
+                }
+            }
+            else {
+                Console.WriteLine("No se encontraron Clientes");
+                return null;
+            }
             return clientesAux;
         }
     }

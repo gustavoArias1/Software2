@@ -4,7 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <ApplicationIcon />
     <OutputType>Exe</OutputType>
-    <StartupObject>Dominio.LogicaDelNegocio.MainDePruebas</StartupObject>
+    <StartupObject>Dominio.LogicaDelNegocio.MainDePruebasWilliam</StartupObject>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
 
   <ItemGroup>

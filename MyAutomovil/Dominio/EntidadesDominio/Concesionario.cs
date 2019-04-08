@@ -14,7 +14,7 @@ namespace Dominio.EntidadesDominio
         private string ciudad;
         public List<Vendedor> vendedores = null;
         public List<Vehiculo> vehiculos = null;
-        public List<Compra> compras = null; 
+        public List<Compra> compras = null;
 
         public Concesionario(string nombreConcesionario, string administrador, string direccion, string telefono, string ciudad)
         {
@@ -44,9 +44,18 @@ namespace Dominio.EntidadesDominio
 
         public List<Vendedor> RecuperarEmpleados() {
             List<Vendedor> vendedoresAux = new List<Vendedor>();
-            /*
-             Consulta DB
-             */
+            List<string[]> vendedoresAux2 = RecuperarEmpleadosRepositorio(this.NombreConcesionario);
+            if (vendedoresAux2.Count > 0) {
+                for (int i = 0; i < vendedoresAux2.Count; i++) {
+                    vendedoresAux.Add(new Vendedor(vendedoresAux2[i][0], vendedoresAux2[i][1], Int32.Parse(vendedoresAux2[i][2]),
+                        vendedoresAux2[i][3], DateTime.Parse(vendedoresAux2[i][4]), vendedoresAux2[i][5], vendedoresAux2[i][6],
+                        Int32.Parse(vendedoresAux2[i][7]), vendedoresAux2[i][8]));
+                }
+            }
+            else {
+                Console.WriteLine("No se encontraron coincidencias para este concesionario");
+            }
+             
             return vendedoresAux;
         }
 
@@ -66,16 +75,17 @@ namespace Dominio.EntidadesDominio
             return vehiculos;
         }
 
+        /*
+          context:: Concesionario::RecuperarCompras()
+          pre: compras.count() > 0
+          post: vehiculos:List
+         
+          */
         public List<Compra> RecuperarCompras(){
             List<Compra> compras = new List<Compra>();
             return compras;
         }
-        /*
-         context:: Concesionario::RecuperarCompras(){
-         pre: compras.count() > 0
-         post: vehiculos:List
-            }
-             */
+     
         public List<Vehiculo> RecuperarVehiculosUltimoMes(){
             List<Vehiculo> vehiculosAux = new List<Vehiculo>();
             List<Vehiculo> aux = RecuperarVehiculos();

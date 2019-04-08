@@ -10,6 +10,8 @@ namespace Persistencia
         List<string[]> vehiculos;
         List<string[]> reclamos;
         List<string[]> reclamosSolucionados;
+        List<string[]> clientes;
+        List<string[]> vendedores;
 
         public DBFake()
         {
@@ -18,9 +20,11 @@ namespace Persistencia
             this.vehiculos = new List<string[]>();
             this.reclamos = new List<string[]>();
             this.reclamosSolucionados = new List<string[]>();
+            this.clientes = new List<string[]>();
+            this.vendedores = new List<string[]>();
             this.Llenar();
         }
-            
+
         public void Llenar()
         {
             concesionario.Add(new string[] { "1", "casautos", "gustavo andres", "calle 10 # 34-09", "43234234", "manizales" });
@@ -29,17 +33,28 @@ namespace Persistencia
             marcas.Add(new string[] { "Mazda", "Japon" });
             marcas.Add(new string[] { "Nissan", "Japon" });
             marcas.Add(new string[] { "Toyota", "Japon" });
-            vehiculos.Add(new string[] {"HEX56","Mazda","Speak3","2012","hdvb6wtd6g63","negro", "casautos", "10839566" });
+            vehiculos.Add(new string[] { "HEX56", "Mazda", "Speak3", "2012", "hdvb6wtd6g63", "negro", "casautos", "10839566" });
             vehiculos.Add(new string[] { "HYU76", "Mazda", "Speak3", "2013", "hts7n8ahd6g3", "blanco", "casautos", "10837066" });
             vehiculos.Add(new string[] { "PLX58", "Mazda", "Razer", "2015", "hdvb8j0d6g63", "negro", "casautos", "12839966" });
             reclamos.Add(new string[] { "1", "Vehiculo", "CasaAutos", "Vehiculo con fallas en las puertas", "1059813898" });
             reclamos.Add(new string[] { "2", "TransaccionBancaria", "CasaAutos", "Pago retrasado", "1059813898" });
             reclamos.Add(new string[] { "3", "Vehiculo", "CasaAutos", "Motor averiado", "1059813898" });
+            clientes.Add(new string[] { "1", "Javier", "cuathemoc", "5/2/1992", "156278729", "Javihou@gmail.com", "gs8yshns" });
+            clientes.Add(new string[] { "2", "Jose", "Rios", "5/4/1990", "15625878729", "HosRe@gmail.com", "gs8a6yhuns" });
+            clientes.Add(new string[] { "3", "Pedro", "Cramona", "15/2/1982", "158778729", "PedCaru@gmail.com", "absdhns" });
+            vendedores.Add(new string[] {"Juan","Raigoza","61287392","vendedor","4/5/1990","Juan.2@myautomovil.com","6wy8hdyh8",
+            "2","casautos"});
+            vendedores.Add(new string[] {"pedro","Reyes","61287392","vendedor","4/5/1990","pedro.3@myautomovil.com","6wy8hdyh8",
+            "3","casautos"});
+            vendedores.Add(new string[] {"admin","casautos","61285672","administrador","8/5/1988","admin.casautos@myautomovil.com","6wy875678u8",
+            "1","casautos"});
         }
 
-        public void AdicionarVehiculoRepositorio(string placa,string nombreMarca,string nombreModelo,string año,
-            string chasis,string color, double precio ) {
-            vehiculos.Add(new string[] { placa,nombreMarca,nombreModelo,año,chasis,color,precio.ToString()});
+        public void AdicionarVehiculoRepositorio(string placa, string nombreMarca, string nombreModelo, string año,
+            string chasis, string color, double precio) {
+            Console.WriteLine("oshe");
+            vehiculos.Add(new string[] { placa, nombreMarca, nombreModelo, año, chasis, color, precio.ToString() });
+            Console.WriteLine("tamaño: " + vehiculos.Count);
         }
 
         public void EliminarVehiculoRepositorio(string placa) {
@@ -61,7 +76,7 @@ namespace Persistencia
                     vehiculos[i].SetValue(año, 3);
                     vehiculos[i].SetValue(chasis, 4);
                     vehiculos[i].SetValue(color, 5);
-                    vehiculos[i].SetValue(precio.ToString(),6);
+                    vehiculos[i].SetValue(precio.ToString(), 6);
                 }
             }
         }
@@ -71,7 +86,6 @@ namespace Persistencia
              */
         public string[] RecuperarConcesionarioRepositorio(string nombreConcesionario) {
             for (int i = 0; i < concesionario.Count; i++) {
-                Console.WriteLine(concesionario[i][1]+" "+ nombreConcesionario);
                 if (concesionario[i][1].Equals(nombreConcesionario)) {
                     return concesionario[i];
                 }
@@ -97,7 +111,7 @@ namespace Persistencia
             return x;
         }
 
-        
+
 
         public void AdicionarConcesionarioRepositorio(int codigo, string nombreConcesionario, string adminConcesionario, string direccion, string telefono, string cuidad)
         {
@@ -120,7 +134,7 @@ namespace Persistencia
         }
         public void EliminarConcesionarioRepositorio(string nombreConcesionario)
         {
-            for (int i =0; i<concesionario.Count; i++)
+            for (int i = 0; i < concesionario.Count; i++)
             {
                 if (concesionario[i].GetValue(0).Equals(nombreConcesionario))
                 {
@@ -131,9 +145,95 @@ namespace Persistencia
 
         public List<string[]> ConsultarConcesionariosRepositorio()
         {
-           
+
             return concesionario;
         }
+
+        public List<string[]> RecuperarClientesRepositorio() {
+            return clientes;
+        }
+
+        public void EliminarClienteRepositorio(int codigo) {
+            for (int i = 0; i < this.clientes.Count; i++) {
+                if (Int32.Parse(this.clientes[i][0]) == codigo) {
+                    this.clientes.RemoveAt(i);
+                }
+            }
+        }
+
+        public void ActualizarClienteRepositorio(int codigo, string nombre, string apellido, DateTime fechaNac, int cedula
+            , string correo, string contraseña) {
+            for (int i = 0; i < this.clientes.Count; i++)
+            {
+                if (Int32.Parse(this.clientes[i][0]) == codigo)
+                {
+                    this.clientes[i][1] = nombre;
+                    this.clientes[i][2] = apellido;
+                    this.clientes[i][3] = fechaNac.Date.ToString("d");
+                    this.clientes[i][4] = cedula.ToString();
+                    this.clientes[i][5] = correo;
+                    this.clientes[i][6] = contraseña;
+                }
+            }
+        }
+
+        public void AdicionarClienteRepositorio(string nombre, string apellido, DateTime fechaNac, int cedula,
+            string correo, string contraseña) {
+            int c = this.clientes.Count + 1;
+            this.clientes.Add(new string[] {c.ToString(),nombre,apellido,fechaNac.Date.ToString("d"),cedula.ToString()
+            ,correo,contraseña});
+        }
+
+        public void AdicionarEmpleadoRepositorio(string nombre, string apellido, DateTime fechaNac, int cedula, string cargo,
+            string concesionario) {
+            int id = vendedores.Count + 1;
+            this.vendedores.Add(new string[] { nombre,apellido,cedula.ToString(),cargo,fechaNac.Date.ToString("d"),
+            "nombre"+"."+id+"@myautomovil.com","sv7yshj8im",id.ToString(),concesionario});
+        }
+
+        public void EliminarEmpleadoRepositorio(int codigo) {
+            for (int i = 0; i < this.vendedores.Count; i++) {
+                if (Int32.Parse(this.vendedores[i][7]) == codigo) {
+                    this.vendedores.RemoveAt(i);
+                }
+            }
+        }
+
+        public void ActualizarEmpleadoRepositorio(int codigo, string nombre, string apellido, DateTime fechaNac,
+            int cedula, string cargo, string correo, string contraseña, string concesionario)
+        {
+            for (int i = 0; i < this.vendedores.Count; i++)
+            {
+                if (Int32.Parse(this.vendedores[i][7]) == codigo)
+                {
+                    this.vendedores[i][0] = nombre;
+                    this.vendedores[i][1] = apellido;
+                    this.vendedores[i][2] = cedula.ToString();
+                    this.vendedores[i][3] = cargo;
+                    this.vendedores[i][4] = fechaNac.Date.ToString("d");
+                    this.vendedores[i][5] = correo;
+                    this.vendedores[i][6] = contraseña;
+                    this.vendedores[i][8] = concesionario;
+                }
+            }
+        }
+
+        public List<string[]> RecuperarEmpleadosRepositorio() {
+            return this.vendedores;
+        }
+
+        public List<string[]> RecuperarEmpleadosRepositorio(string nombreConcesionario) {
+            List<string[]> aux = new List<string[]>();
+            for (int i = 0; i < this.vendedores.Count; i++)
+            {
+                if (Int32.Parse(this.vendedores[i][8]).Equals(nombreConcesionario))
+                {
+                    aux.Add(this.vendedores[i]);
+                }
+            }
+            return aux;
+        }
+
 
         /*
          * Metodo para consultar marcas de la base de datos fake que retornara todos las marcas

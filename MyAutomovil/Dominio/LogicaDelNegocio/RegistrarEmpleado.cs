@@ -2,10 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Persistencia;
 
 namespace Dominio.LogicaDelNegocio
 {
-    class RegistrarEmpleado
+    class RegistrarEmpleado : DBFake
     {
         List<Vendedor> vendedores;
 
@@ -29,6 +30,8 @@ namespace Dominio.LogicaDelNegocio
                     /*
                     excepcion, ya existe el vendedor    
                  */
+                    Console.WriteLine("Ya existe el vendedor");
+
                 }
                 else
                 {
@@ -37,6 +40,7 @@ namespace Dominio.LogicaDelNegocio
                 
                     excepcion ya se ha creado el vendedor
                  */
+                    AdicionarEmpleadoRepositorio(nombre,apellido,fechanacimiento,cedula,cargo,nombreConcesionario);
                     System.Console.WriteLine("El empleado ha sido creado");
                 }
             }
@@ -45,6 +49,7 @@ namespace Dominio.LogicaDelNegocio
                     Creamos el cliente en la base de datos 
                     lanzamos excepcion indica que el cliente ya fue creado
                  */
+                AdicionarEmpleadoRepositorio(nombre, apellido, fechanacimiento, cedula, cargo, nombreConcesionario);
                 System.Console.WriteLine("El empleado ha sido creado");
             }
         }
@@ -60,13 +65,15 @@ namespace Dominio.LogicaDelNegocio
             /*
              eliminar empleado en DB con sentencia delete
              */
+            EliminarEmpleadoRepositorio(codigo);
         }
-        public void ActualizarEmpleado(string nombre, string apellido, int cedula, string cargo, DateTime fechanacimiento,
-            Concesionario concesionario,string correo,string contraseña)
+        public void ActualizarEmpleado(int codigo,string nombre, string apellido, int cedula, string cargo, DateTime fechanacimiento,
+            string concesionario,string correo,string contraseña)
         {
             /*
              actualizar empleado con sentencia update
              */
+            ActualizarEmpleadoRepositorio(codigo,nombre,apellido,fechanacimiento,cedula,cargo,correo,contraseña,concesionario);
         }
 
         public List<Vendedor> ConsultarEmpleado(int cedula, string nombre,string apellido,string nombreConcesionario)
@@ -115,24 +122,38 @@ namespace Dominio.LogicaDelNegocio
         public List<Vendedor> RecuperarEmpleados()
         {
             List<Vendedor> vendedoresAux = new List<Vendedor>();
-            /*
-             recuperar datos de la DB
-             */
+            List<string[]>vendedoresAux2 = RecuperarEmpleadosRepositorio();
+            if (vendedoresAux2.Count > 0)
+            {
+                for (int i = 0; i < vendedoresAux2.Count; i++)
+                {
+                    vendedoresAux.Add(new Vendedor(vendedoresAux2[i][0], vendedoresAux2[i][1], Int32.Parse(vendedoresAux2[i][2]),
+                        vendedoresAux2[i][3], DateTime.Parse(vendedoresAux2[i][4]), vendedoresAux2[i][5], vendedoresAux2[i][6],
+                        Int32.Parse(vendedoresAux2[i][7]), vendedoresAux2[i][8]));
+                }
+            }
+            else {
+                Console.WriteLine("NO se pudo recuperar los empleados");
+                return null;
+            }
             return vendedoresAux;
         }
 
         /*
          Busca un objeto concesionario
              */
-        private Concesionario RecuperarConcesionario(string nombreconcesionario)
+        private Concesionario RecuperarConcesionario(string nombreConcesionario)
         {
-            Concesionario c = null;
-
-            /*
-            aqui viene la extraccion de la DB del concesionario
-
-            c = new Concesionario();
-             */
+            Concesionario c;
+            string[] aux = RecuperarConcesionarioRepositorio(nombreConcesionario);
+            if (aux == null)
+            {
+                return null;
+            }
+            else
+            {
+                c = new Concesionario(Int32.Parse(aux[0]), aux[1], aux[2], aux[3], aux[4], aux[5]);
+            }
             return c;
         }
 

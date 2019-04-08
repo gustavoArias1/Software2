@@ -26,11 +26,11 @@ namespace Dominio.LogicaDelNegocio
             }*/
 
             /*AQUI EMPIEZAN LAS PRUEBAS DE REGISTRAR VEHICULOS*/
-            RegistrarVehiculo v = new RegistrarVehiculo();
-            List<Vehiculo> va = v.ConsultarVehiculo(new List<string> { "casautos", "", "425", "452638738", "", "", "" });
-            for (int i = 0; i < va.Count; i++) {
-                Console.WriteLine(va[i].Placa + " " + va[i].Marca + " " + va[i].Modelo + " " + va[i].Precio);
-            }
+            //RegistrarVehiculo v = new RegistrarVehiculo();
+            //List<Vehiculo> va = v.ConsultarVehiculo(new List<string> { "casautos", "", "425", "452638738", "", "", "" });
+            //for (int i = 0; i < va.Count; i++) {
+            //    Console.WriteLine(va[i].Placa + " " + va[i].Marca + " " + va[i].Modelo + " " + va[i].Precio);
+            //}
         }
     }
 }
