@@ -16,7 +16,7 @@ namespace Dominio.LogicaDelNegocio
     class SolicitarSoporte : DBFake
     {
         public List<Reclamo> reclamos = new List<Reclamo>();
-        public List<Reclamo> recalmosSolucionados = new List<Reclamo>();
+        public List<Reclamo> reclamosSolucionados = new List<Reclamo>();
 
         /*
          context SolicitarSoporte :: AdicionarReclamo
@@ -96,7 +96,7 @@ namespace Dominio.LogicaDelNegocio
         {
             foreach (string[] x in ConsultarSolucionRepositorio())
             {
-                recalmosSolucionados.Add(new Reclamo(Int32.Parse(x[0]), x[1], x[2], x[3], Int32.Parse(x[4]), x[5], Int32.Parse(x[6])));
+                reclamosSolucionados.Add(new Reclamo(Int32.Parse(x[0]), x[1], x[2], x[3], Int32.Parse(x[4]), x[5], Int32.Parse(x[6])));
             }
         }
 
@@ -111,16 +111,16 @@ namespace Dominio.LogicaDelNegocio
          */
         public Reclamo ConsultarSolucion(int idReclamo)
         {
-            recalmosSolucionados.Clear();
+            reclamosSolucionados.Clear();
             ConsularSolucion();
             Reclamo reclamo = null;
             try
             {
-                for (int i = 0; i < recalmosSolucionados.Count; i++)
+                for (int i = 0; i < reclamosSolucionados.Count; i++)
                 {
-                    if (recalmosSolucionados[i].IdReclamo.Equals(idReclamo))
+                    if (reclamosSolucionados[i].IdReclamo.Equals(idReclamo))
                     {
-                        reclamo = recalmosSolucionados[i];
+                        reclamo = reclamosSolucionados[i];
                     }
                 }
             }
@@ -145,7 +145,6 @@ namespace Dominio.LogicaDelNegocio
         {
             Reclamo reclamoaux = ConsultarReclamo(idReclamo);
             AdicionarReclamoSolucionRepositorio(reclamoaux.IdReclamo, reclamoaux.TipoReclamo, reclamoaux.Concesionario, reclamoaux.Descripcion, reclamoaux.IdCliente, solucionReclamo, idAministrador);
-
         }
     }
 }
