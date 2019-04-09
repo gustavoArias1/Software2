@@ -72,6 +72,8 @@ namespace Dominio.LogicaDelNegocio
             if (us == null)
             {
                 //Excepcion no existe el correo
+              
+                
             }
             else {
                 /*

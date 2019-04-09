@@ -58,9 +58,9 @@ namespace Persistencia
 
         public void AdicionarVehiculoRepositorio(string placa, string nombreMarca, string nombreModelo, string año,
             string chasis, string color, double precio) {
-            Console.WriteLine("oshe");
+          //  Console.WriteLine("oshe");
             vehiculos.Add(new string[] { placa, nombreMarca, nombreModelo, año, chasis, color, precio.ToString() });
-            Console.WriteLine("tamaño: " + vehiculos.Count);
+           // Console.WriteLine("tamaño: " + vehiculos.Count);
         }
 
         public void EliminarVehiculoRepositorio(string placa) {
@@ -336,30 +336,45 @@ namespace Persistencia
             reclamosSolucionados.Add(new string[] { Convert.ToString(idReclamo), tipoReclamo, concesionario, descripcion, Convert.ToString(idCliente), solucionReclamo, Convert.ToString(idAdministrador) });
         }
 
-
+        /*
+         * Metodo para adicionar un modelo a la base de datos DBfake
+         * @ Yherson Blandon
+         * @ version 4.0 08/04/2019
+         */
         public void AdicionarModelosRepositorio(string nombreModelo, string nombreMarca, int numeroPuertas, string cilindraje,
            string transmision)
         {
             modelos.Add(new string[] { nombreModelo, nombreMarca, Convert.ToString (numeroPuertas), cilindraje, transmision });
         }
 
+
+        /*
+         * Metodo para actualizar un modelo a la base de datos DBfake
+         * @ Yherson Blandon
+         * @ version 4.0 08/04/2019
+         */
         public void ActualizarModelosRepositorio(string nombreModelo, string nombreMarca, int numeroPuertas, string cilindraje,
            string transmision)
         {
             for (int i = 0; i < modelos.Count; i++)
             {
-                if (modelos[i].GetValue(0).Equals(nombreModelo) && modelos[i].GetValue(0).Equals(nombreMarca))
+                if (modelos[i].GetValue(0).Equals(nombreModelo) && modelos[i].GetValue(1).Equals(nombreMarca))
                 {
+                    modelos[i].SetValue(nombreModelo, 0);
                     modelos[i].SetValue(nombreMarca, 1);
-                    modelos[i].SetValue(nombreModelo, 2);
-                    modelos[i].SetValue(numeroPuertas, 3);
-                    modelos[i].SetValue(cilindraje, 4);
-                    modelos[i].SetValue(transmision, 5);
+                    modelos[i].SetValue(Convert.ToString(numeroPuertas), 2);
+                    modelos[i].SetValue(cilindraje, 3);
+                    modelos[i].SetValue(transmision, 4);
                    
                 }
             }
         }
 
+        /*
+         * Metodo para eliminar un modelo de la base de datos DBfake
+         * @ Yherson Blandon
+         * @ version 4.0 08/04/2019
+         */
         public void EliminarModeloRepositorio(string nombreModelo)
         {
             for (int i = 0; i < modelos.Count; i++)
@@ -371,6 +386,11 @@ namespace Persistencia
             }
         }
 
+        /*
+         * Metodo para consultar todos los modelos de la base de datos DBfake
+         * @ Yherson Blandon
+         * @ version 4.0 08/04/2019
+         */
         public List<string[]> ConsultarModelosRepositorio()
         {
 

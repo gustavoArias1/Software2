@@ -7,7 +7,7 @@ using Persistencia;
 namespace Dominio.LogicaDelNegocio
 {
 
-   
+
     /*
     * La clase registrar modelo hara operaciones dml sobre las modelos del sistema realizando verificaciones de datos
     * @ Yherson Blandon
@@ -15,7 +15,7 @@ namespace Dominio.LogicaDelNegocio
     */
     class RegistrarModelo : DBFake
     {
-        List<Modelo> modelos = new List<Modelo>();
+        public List<Modelo> modelos = new List<Modelo>();
 
 
         /*
@@ -28,19 +28,23 @@ namespace Dominio.LogicaDelNegocio
        post: ConsultarModelo(nombreModelo, nombreMarca) or  self@!nombreModelo.Exception or self@!nombreMarca.Exception or self@!numeroPuertas.Exception
        or self@!cilindraje.Exception or self@!transmision.Exception 
        */
-        public void AdicionarModelo(string nombreModelo,string nombreMarca,int numeroPuertas,string cilindraje,string transmision)
+        public void AdicionarModelo(string nombreModelo, string nombreMarca, int numeroPuertas, string cilindraje, string transmision)
         {
-            AdicionarModelosRepositorio(nombreModelo, nombreMarca, numeroPuertas, cilindraje, transmision);
-           Modelo modelo = new Modelo(nombreModelo, nombreMarca, transmision,numeroPuertas, cilindraje);
-            if (modelos.Contains(modelo))
-            {
-                //exception
-            }
-            else
-            {
-                modelos.Add(modelo);
-            }
+            // AdicionarModelosRepositorio(nombreModelo, nombreMarca, numeroPuertas, cilindraje, transmision);
+            modelos.Clear();
+            ConsultarModelov();
+            Modelo modelo = new Modelo(nombreModelo, nombreMarca, numeroPuertas, cilindraje, transmision);
 
+            for (int i = 0; i < modelos.Count; i++)
+            {
+                if (modelos[i].Equals(nombreModelo) && modelos[i].Equals(nombreMarca))
+                {
+                    Console.WriteLine("el modelo ya existe en la base de datos");
+
+                }
+
+            }
+            AdicionarModelosRepositorio(modelo.Nombremodelo, modelo.Nombremodelo, modelo.NumeroPuertas, modelo.Cilindraje, modelo.Transmision);
         }
 
         /*
@@ -55,44 +59,79 @@ namespace Dominio.LogicaDelNegocio
         */
         public void ActualizarModelo(string nombreModelo, string nombreMarca, int numeroPuertas, string cilindraje, string transmision)
         {
-            ActualizarModelosRepositorio(nombreModelo, nombreMarca, numeroPuertas, cilindraje, transmision);
+            modelos.Clear();
+            ConsultarModelov();
+            Modelo modelo = new Modelo(nombreModelo, nombreMarca, numeroPuertas, cilindraje, transmision);
+            Boolean existe = false;
+
+            for (int i = 0; i < modelos.Count; i++)
+            {
+                if (modelos[i].Nombremodelo.Equals(nombreModelo) && modelos[i].NombreMarca.Equals(nombreMarca) )
+                {
+                    existe = true;
+
+                }
+            
+            }
+            if (existe)
+            {
+                ActualizarModelosRepositorio(nombreModelo, nombreMarca, numeroPuertas, cilindraje, transmision);
+                Console.WriteLine("El cliente ha sido Actualizado");
+            }
+            else
+            {
+                Console.WriteLine(" no existe marca o modelo en la base de datos");
+            }
         }
+     
 
+        
 
-        /*
-         * El metodo ConsultarModelo consulta una modelo especifico de la base de datos en caso de que no exista mostrara un mensaje de error
-         * @ Yherson Blandon
-         * @ version 2.0 04/04/2019
-         context RegistrarModelo :: ConsultarModelo
-         pre: nombreModelo != null and nombreMarca =! null
-         post: ConsultarModelo(nombreModelo, nombreMarca) or self@!nombreModelo.Exception or self@!nombreMarca.Exception
-         */
-        public Modelo ConsultarModelo(string nombreModelo,string nombreMarca)
+            /*
+             * El metodo ConsultarModelo consulta una modelo especifico de la base de datos en caso de que no exista mostrara un mensaje de error
+             * @ Yherson Blandon
+             * @ version 2.0 04/04/2019
+             context RegistrarModelo :: ConsultarModelo
+             pre: nombreModelo != null and nombreMarca =! null
+             post: ConsultarModelo(nombreModelo, nombreMarca) or self@!nombreModelo.Exception or self@!nombreMarca.Exception
+             */
+            public Modelo ConsultarModelo(string nombreModelo, string nombreMarca)
         {
-       
+
             // acceso a la base de datos para extraer modelos
-             Modelo modelo = null;
+            modelos.Clear();
+            ConsultarModelo(nombreModelo,nombreMarca);
+            Modelo modelo = null;
             try
             {
                 for (int i = 0; i < modelos.Count; i++)
                 {
-                    if ((modelos[i].Nombremodelo.Equals(nombreModelo)&& (modelos[i].NombreMarca.Equals(nombreMarca))))
-                    {                                                  
-                         modelo = modelos[i];
+                    if ((modelos[i].Nombremodelo.Equals(nombreModelo) ))
+                    {
+                        modelo = modelos[i];
                     }
-                        
+
                 }
             }
             catch (Exception exc)
             {
-                //exception
-               
+                Console.WriteLine(exc);
+
             }
             if (modelo == null)
             {
-                //exception
+                Console.WriteLine("campo vacio");
             }
             return modelo;
+        }
+
+        public void ConsultarModelov()
+        {
+            modelos.Clear();
+            foreach (string[] x in ConsultarModelosRepositorio())
+            {
+                modelos.Add(new Modelo((x[0]), x[1], Int32.Parse(x[2]), x[3], x[4]));
+            }
         }
 
 
@@ -107,23 +146,18 @@ namespace Dominio.LogicaDelNegocio
         public void Eliminarmodelo(string nombreModelo)
         {
             EliminarModeloRepositorio(nombreModelo);
+            Console.WriteLine("modelo eliminado");
         }
 
-        public List<Modelo> RecuperarModelos(string nombreModelo)
+        public void RecuperarModelos()
         {
-            /*
-            List<Modelo> aux = new List<Modelo>();
-            List<string[]> modeloAux = RecuperarModelosRepositorio();
-            if (modeloAux.Count > 0)
-            {
-                for (int i = 0; i < modeloAux.Count; i++)
-                {
-                    aux.Add(new Modelo(modeloAux[i][0], modeloAux[i][0], modeloAux[i][0], int.Parse(modeloAux[i][0]),
-                        modeloAux[i][0], modeloAux[i][0]));
-                }
-            }*/
-            return null;
-        }
 
+            List<Modelo> aux = new List<Modelo>();
+            foreach (string[] x in ConsultarModelosRepositorio())
+            {
+                this.modelos.Add(new Modelo((x[0]), x[1], Int32.Parse(x[3]), x[4], x[5]));
+            }
+
+        }
     }
 }

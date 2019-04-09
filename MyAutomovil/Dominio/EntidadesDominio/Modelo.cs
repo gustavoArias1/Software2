@@ -8,25 +8,26 @@ namespace Dominio.EntidadesDominio
     {
         private string nombremodelo;
         private string nombreMarca;
-        private string transmision;
         private int numeroPuertas;
         private string cilindraje;
+        private string transmision;
 
-        public Modelo(string nombremodelo, string nombreMarca, string transmision, int numeroPuertas, string cilindraje)
+        public Modelo(string nombremodelo, string nombreMarca,int numeroPuertas, string cilindraje, string transmision)
         {
             this.nombremodelo = nombremodelo;
             this.nombreMarca = nombreMarca;
-            this.transmision = transmision;
             this.numeroPuertas = numeroPuertas;
             this.cilindraje = cilindraje;
+            this.transmision = transmision;
         }
 
         public string Nombremodelo { get => nombremodelo; set => nombremodelo = value; }
         public string NombreMarca { get => nombreMarca; set => nombreMarca = value; }
-        public string Transmision { get => transmision; set => transmision = value; }
         public int NumeroPuertas { get => numeroPuertas; set => numeroPuertas = value; }
         public string Cilindraje { get => cilindraje; set => cilindraje = value; }
+        public string Transmision { get => transmision; set => transmision = value; }
+
     }
 
-    
+
 }
