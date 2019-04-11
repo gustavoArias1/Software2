@@ -27,17 +27,15 @@ namespace Dominio.LogicaDelNegocio
             {
                 if (contraseña.Equals(us.Contraseña))
                 {
-                    /*
-                    Enviamos la pag principal    
-                 */
+                    Console.WriteLine("usuario recuperado");
                 }
                 else
                 {
-                    //Excepcion contraseña erronea
+                    Console.WriteLine("contraseña incorrecta");
                 }
             }
             else {
-                //usuario no existe
+                Console.WriteLine("usuario no existente");
             }
         }
 
@@ -51,10 +49,13 @@ namespace Dominio.LogicaDelNegocio
        */
         public Usuario RecuperarUsuario(string usuario) {
             Usuario u = null;
-            /*
-             consultamos por el usuario
-             devuelvo datos de un usuario y lo creamos
-             */
+
+            if (u!= null)
+            {
+                Console.WriteLine("revise su correo electronico para recuperar el usuario");
+            }
+            
+             
             return u;
         }
 
@@ -71,16 +72,12 @@ namespace Dominio.LogicaDelNegocio
             Usuario us = RecuperarUsuario(correo);
             if (us == null)
             {
-                //Excepcion no existe el correo
-              
-                
+                Console.WriteLine("el correo no existe en la base de datos");
+
+
             }
             else {
-                /*
-                 Enviar correo electronico
-
-                Enviar interfaz Autenticar Usuario
-                 */
+                Console.WriteLine("revise su correo electronico para recuperar la contraseña");
             }
         }
 
