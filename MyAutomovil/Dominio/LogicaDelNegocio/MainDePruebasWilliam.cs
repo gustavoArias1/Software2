@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 using Dominio.EntidadesDominio;
+using Persistencia;
 
 namespace Dominio.LogicaDelNegocio
 {
     class MainDePruebasWilliam
     {
         public static void Main(string[] args) {
+            ConexionBaseDatos CB = new ConexionBaseDatos();
+            CB.Conectar();
+            CB.Insertar();
+
             /*AQUI EMPIEZAN LAS PRUEBAS DE REGISTRAR VEHICULOS*/
             RegistrarVehiculo v = new RegistrarVehiculo();
             List<Vehiculo> va = v.ConsultarVehiculo(new List<string> { "casautos", "", "425", "452638738", "", "", "" });
