@@ -57,7 +57,6 @@ namespace Persistencia
             modelos.Add(new string[] { "Mazda", "speed", "4", "1600", "Automatica" });
             modelos.Add(new string[] { "Audi", "A4", "4", "2000", "Automatica" });
             modelos.Add(new string[] { "Mazda", "X5", "3", "1800", "Manual" });
-            usuarios.Add(new string[]);
         }
 
         public void AdicionarVehiculoRepositorio(string placa, string nombreMarca, string nombreModelo, string año,

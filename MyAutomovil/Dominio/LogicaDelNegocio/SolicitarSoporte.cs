@@ -92,9 +92,9 @@ namespace Dominio.LogicaDelNegocio
          context ConsultarReclamo :: ConsultarSolucion
          post: ConsultarSolucion()
          */
-        public void ConsularSolucion()
+        public void ConsultarSolucion(string concesionario)
         {
-            foreach (string[] x in ConsultarSolucionRepositorio())
+            foreach (string[] x in ConsultarSolucionRepositorio(concesionario))
             {
                 reclamosSolucionados.Add(new Reclamo(Int32.Parse(x[0]), x[1], x[2], x[3], Int32.Parse(x[4]), x[5], Int32.Parse(x[6])));
             }
@@ -109,10 +109,10 @@ namespace Dominio.LogicaDelNegocio
          pre: idReclamo != null
          post: ConsultarSolucion(idReclamo) or self@!idReclamo.Exception
          */
-        public Reclamo ConsultarSolucion(int idReclamo)
+        public Reclamo ConsultarSolucion(int idReclamo, string concesionario)
         {
             reclamosSolucionados.Clear();
-            ConsularSolucion();
+            ConsultarSolucion(concesionario);
             Reclamo reclamo = null;
             try
             {
@@ -141,7 +141,7 @@ namespace Dominio.LogicaDelNegocio
          * @ version 1.0 07/05/2019
          context RegistrarReclamo :: SoclucionarReclamos
          pre: ConsultarReclamo(idReclamo)*/
-        public void SolucionarReclamo(int idReclamo, string solucionReclamo, int idAministrador)
+        public void SolucionarReclamo(string concesionario, int idReclamo, string solucionReclamo, int idAministrador)
         {
             Reclamo reclamoaux = ConsultarReclamo(idReclamo);
             AdicionarReclamoSolucionRepositorio(reclamoaux.IdReclamo, reclamoaux.TipoReclamo, reclamoaux.Concesionario, reclamoaux.Descripcion, reclamoaux.IdCliente, solucionReclamo, idAministrador);
