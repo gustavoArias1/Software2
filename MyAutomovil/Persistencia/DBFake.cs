@@ -13,6 +13,8 @@ namespace Persistencia
         List<String[]> modelos;
         List<string[]> clientes;
         List<string[]> vendedores;
+        List<string[]> usuarios;
+
 
         public DBFake()
         {
@@ -23,8 +25,9 @@ namespace Persistencia
             this.reclamosSolucionados = new List<string[]>();
             this.clientes = new List<string[]>();
             this.vendedores = new List<string[]>();
-            
+            this.usuarios = new List<string[]>();
             this.modelos = new List<string[]>();
+            
             this.Llenar();
         }
 
@@ -54,6 +57,7 @@ namespace Persistencia
             modelos.Add(new string[] { "Mazda", "speed", "4", "1600", "Automatica" });
             modelos.Add(new string[] { "Audi", "A4", "4", "2000", "Automatica" });
             modelos.Add(new string[] { "Mazda", "X5", "3", "1800", "Manual" });
+            usuarios.Add(new string[]);
         }
 
         public void AdicionarVehiculoRepositorio(string placa, string nombreMarca, string nombreModelo, string año,
@@ -321,9 +325,17 @@ namespace Persistencia
          * @ Manuel Galvis
          * @ version 1.0 07/04/2019
          */
-        public List<string[]> ConsultarSolucionRepositorio()
+        public List<string[]> ConsultarSolucionRepositorio(string concesionario)
         {
-            return reclamosSolucionados;
+            List<string[]> reclamosSolucionadosAux = new List<string[]>();
+            for (int i = 0; i < reclamosSolucionados.Count; i++)
+            {
+                if (reclamosSolucionados[i][2] == concesionario)
+                {
+                    reclamosSolucionadosAux.Add(reclamosSolucionados[i]);
+                }
+            }
+            return reclamosSolucionadosAux;
         }
 
         /*
