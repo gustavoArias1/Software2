@@ -15,7 +15,7 @@ namespace Dominio.LogicaDelNegocio
         @ version 1.0 05/04/2019
         Adicionar un vehiculo 
         context: RegistrarEmpleado::AdicionarEmpleado(nombre:string,apellido:string,cedula:int,cargo:string,fechaNacimiento:DateTime)
-        post: vendedores.Count() = vendedores.count() + 1
+        post: RecuperarEmpleados().Count  = RecuperarEmpleados().Count + 1
         */
         public void AdicionarEmpleado(string nombre,string apellido, int cedula,string cargo, DateTime fechanacimiento,
             string nombreConcesionario)
@@ -57,8 +57,9 @@ namespace Dominio.LogicaDelNegocio
         * @William vasquez
             @ version 1.0 05/04/2019
             Adicionar un vehiculo 
-            context: RegistrarEmpleado::ActualizarEmpleado(codigo:int)
-            post: vendedores.Count() = vendedores.count() + 1
+            context: RegistrarEmpleado::EliminarEmpleado(codigo:int)
+            pre: ConsultarEmpleado haya sido previamente invocado
+            post: se eliminar un empleado de la DB, RecuperarEmpleados.Count  = RecuperarEmpleados.Count - 1
         */
         public void EliminarEmpleado(int codigo)
         {
@@ -67,6 +68,16 @@ namespace Dominio.LogicaDelNegocio
              */
             EliminarEmpleadoRepositorio(codigo);
         }
+
+       /*
+        * @William vasquez
+            @ version 1.0 05/04/2019
+            Actualzar Empleado 
+            context: RegistrarEmpleado::ActualizarEmpleado(codigo:int, nombre:string,apellido:string,cedula:int,cergo:string,
+            fechaNacimiento:date,concesionario:string,correo:string,contraseña:string)
+            pre: ConsultarEmpleado haya sido previamente invocado
+            post: se actualiza un empleado 
+        */
         public void ActualizarEmpleado(int codigo,string nombre, string apellido, int cedula, string cargo, DateTime fechanacimiento,
             string concesionario,string correo,string contraseña)
         {
@@ -76,6 +87,14 @@ namespace Dominio.LogicaDelNegocio
             ActualizarEmpleadoRepositorio(codigo,nombre,apellido,fechanacimiento,cedula,cargo,correo,contraseña,concesionario);
         }
 
+        /*
+      * @William vasquez
+          @ version 1.0 05/04/2019
+          Actualzar Empleado 
+          context: RegistrarEmpleado::ConsultarEmpleado(codigo:int, nombre:string,apellido:string,concesionario:string)
+          pre: RecuperarConcesionario(concesionario:string) != null
+          post: se envia una lista de empleado con las coincidencias
+      */
         public List<Vendedor> ConsultarEmpleado(int cedula, string nombre,string apellido,string nombreConcesionario)
         {   /*
             @vendedoresAux lista que retornaremos con los empleados
@@ -106,6 +125,13 @@ namespace Dominio.LogicaDelNegocio
             return vendedoresAux;
         }
 
+        /*
+    * @William vasquez
+        @ version 1.0 05/04/2019
+        Actualzar Empleado 
+        context: RegistrarEmpleado::ConsultarEmpleado(concesionario:string)
+        post: se envia una lista de empleado con las coincidencias
+    */
         public List<Vendedor> ConsultarEmpleado(string nombreConcesionario)
         {
             Concesionario concesionario = RecuperarConcesionario(nombreConcesionario);
