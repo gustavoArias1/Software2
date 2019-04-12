@@ -8,19 +8,22 @@ namespace Dominio.LogicaDelNegocio
 {
     class RegistrarCompraUsado : DBFake
     {
-        public void AdicionarCompra(string nombreConcesionario, DateTime fechaCompra, string precioCompra, string placa,
+        public void AdicionarCompra(string nombreConcesionario, DateTime fechaCompra, double precioCompra, string placa,
             int codigoProveedor)
         {
             Compra aux = new Compra(nombreConcesionario, fechaCompra, precioCompra, placa, codigoProveedor);
             Concesionario c = RecuperarConcesionario(nombreConcesionario);
-            c.compras = c.RecuperarCompras();
-            if (c.compras.Contains(aux))
+            if (c != null)
             {
-                Console.WriteLine("ya existe una factura con estos datos");
-            }
-            else
-            {
-
+                c.compras = c.RecuperarCompras();
+                if (c.compras.Contains(aux))
+                {
+                    Console.WriteLine("ya existe una factura con estos datos");
+                }
+                else
+                {
+                    AdicionarCompraRepositorio(nombreConcesionario, fechaCompra, precioCompra, placa, codigoProveedor);
+                }
             }
         }
 
@@ -37,9 +40,23 @@ namespace Dominio.LogicaDelNegocio
             }
             return c;
         }
-        public void ConsultarCompra(string codigo)
+        public List<Compra> ConsultarCompra(int codigoCompra,string concesionario)
         {
-
+            List<Compra> aux = new List<Compra>();
+            Concesionario c = RecuperarConcesionario(concesionario);
+            if (c != null)
+            {
+                c.compras = c.RecuperarCompras();
+                if(c.compras.Count> 0 )
+                    for (int i = 0; i < c.compras.Count; i++)
+                    {
+                        if(c.compras[i].NombreConcesionario.Equals(concesionario) && c.compras[i].Codigo == codigoCompra)
+                        {
+                            aux.Add(c.compras[i]);
+                        }
+                    }
+            }
+            return aux;
         }
 
     }

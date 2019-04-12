@@ -14,6 +14,7 @@ namespace Persistencia
         List<string[]> clientes;
         List<string[]> vendedores;
         List<string[]> usuarios;
+        List<string[]> compras;
 
 
         public DBFake()
@@ -57,6 +58,8 @@ namespace Persistencia
             modelos.Add(new string[] { "Mazda", "speed", "4", "1600", "Automatica" });
             modelos.Add(new string[] { "Audi", "A4", "4", "2000", "Automatica" });
             modelos.Add(new string[] { "Mazda", "X5", "3", "1800", "Manual" });
+            compras.Add(new string[] { "1", "casautos","16/8/2017","526728782", "HEX56","1"});
+            compras.Add(new string[] { "2","casautos", "16/8/2017", "538828782", "HYU76", "2" });
         }
 
         public void AdicionarVehiculoRepositorio(string placa, string nombreMarca, string nombreModelo, string año,
@@ -417,7 +420,23 @@ namespace Persistencia
         }
 
 
-    
+        public void AdicionarCompraRepositorio(string nombreConcesionario, DateTime fechaCompra, double precioCompra, string placa,
+            int codigoProveedor)
+        {
+            this.compras.Add(new string[] {Convert.ToString(this.compras.Count+1), nombreConcesionario,fechaCompra.Date.ToString("d"),precioCompra.ToString(),placa,
+                codigoProveedor.ToString()});
+        }
+
+        public List<string[]> RecuperarComprasRepositorio(string concesionario) {
+            List<string[]> aux = new List<string[]>();
+            for (int i = 0; i < this.compras.Count; i++)
+            {
+                if (this.compras[i][1].Equals(concesionario)) {
+                    aux.Add(this.compras[i]);
+                }
+            }
+            return aux;
+        }
 
     }
 }

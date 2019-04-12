@@ -82,7 +82,16 @@ namespace Dominio.EntidadesDominio
          
           */
         public List<Compra> RecuperarCompras(){
-            List<Compra> compras = new List<Compra>();
+            List<Compra> comprasAux = new List<Compra>();
+            List<string[]> aux = RecuperarComprasRepositorio(this.nombreConcesionario);
+            if (aux.Count > 0)
+            {
+                for (int i = 0; i < aux.Count; i++)
+                {
+                    comprasAux.Add(new Compra(aux[i][0], DateTime.Parse(aux[i][1]), Double.Parse(aux[i][2]),
+                        aux[i][3], Int32.Parse(aux[i][4])));
+                }
+            }
             return compras;
         }
      
@@ -109,7 +118,7 @@ namespace Dominio.EntidadesDominio
             if(compras.Count >  0 ){
                 foreach(Compra c in compras){
                     //fecha de adquisicion de l vehiculo a un proveedor
-                    string fecha = c.Fecha.Date.ToString("d");
+                    string fecha = c.FechaCompra.Date.ToString("d");
                     //tomamos el mes
                     string [] fechaList = fecha.Split('/');
                     // tomamos la fecha del dia
