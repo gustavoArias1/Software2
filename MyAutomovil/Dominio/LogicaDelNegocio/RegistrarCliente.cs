@@ -10,6 +10,14 @@ namespace Dominio.LogicaDelNegocio
     {
         public List<Cliente> clientes;
 
+        /*
+         William Andres Vasquez Sanabria 
+         Versión 1.0
+         context: RegistrarCliente: AdcionarCliente(nombre:string,apellido:string,cedula:int,fechadenacimiento:date,correo:string,
+         contraseña:string):void
+         pre: RecuperarClientes.Count > 0, clientes.Contains(cliente) != true
+         pro: Cliente es agregado en DB, RecuperarClientes.Count  = RecuperarClientes.Count + 1
+             */
         public void AdicionarCliente (string nombre, string apellido, int cedula, DateTime fechaDeNacimiento, 
             string correo, string contraseña)
         {
@@ -35,6 +43,14 @@ namespace Dominio.LogicaDelNegocio
             }
         }
 
+        /*
+           William Andres Vasquez Sanabria 
+           Versión 1.0
+           context: RegistrarCliente: ActualizarCliente(nombre:string,apellido:string,cedula:int,fechadenacimiento:date,correo:string,
+           contraseña:string,codigo:int):void
+           pre: ConsultarCliente haya sido invocado previamente
+           pro: Cliente es actualizado en DB
+           */
         public void ActualizarCliente(int codigo,string nombre, string apellido,  DateTime fechaDeNacimiento, int cedula,
             string correo, string contraseña)
         {
@@ -42,11 +58,19 @@ namespace Dominio.LogicaDelNegocio
             System.Console.WriteLine("El cliente ha sido Actualizado");
         }
 
+        /*
+           William Andres Vasquez Sanabria 
+           Versión 1.0
+           context: ConsultarCliente: ActualizarCliente(nombre:string,apellido:string,cedula:int):void
+           pre: RecuperarClientes() > 0, 
+           pro: Cliente es actualizado en DB
+           */
+
         public List<Cliente> ConsultarCliente(string nombre, string apellido, int cedula)
         {
             List<Cliente> clientesAux = new List<Cliente>();
             clientes = RecuperarClientes();
-            if (clientes != null)
+            if (clientes.Count > 0)
             {
                 for (int i = 0; i < clientes.Count; i++)
                 {
@@ -67,6 +91,14 @@ namespace Dominio.LogicaDelNegocio
             }
             return clientesAux;
         }
+
+        /*
+         William Andres Vasquez Sanabria 
+         Versión 1.0
+         context: EliminarCliente: ActualizarCliente(codigo:int):void
+         pre: ConsultarCliente haya sido invocado previamente
+         pro: Cliente es eliminado en DB , RecuperarClientes.Count  = RecuperarClientes.Count - 1
+         */
 
         public void EliminarCliente(int codigo)
         {
@@ -90,7 +122,6 @@ namespace Dominio.LogicaDelNegocio
             }
             else {
                 Console.WriteLine("No se encontraron Clientes");
-                return null;
             }
             return clientesAux;
         }
