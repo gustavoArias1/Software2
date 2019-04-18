@@ -106,6 +106,7 @@
     <Content Include="Views\AutenticarEnElSistema\Index.cshtml" />
     <Content Include="Views\AutenticarEnElSistema\RecuperarContraseña.cshtml" />
     <Content Include="Views\RegistarCliente\AdicionarCliente.cshtml" />
+    <Content Include="Views\RegistarCliente\ActualizarCliente.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
