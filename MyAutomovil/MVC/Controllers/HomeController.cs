@@ -6,10 +6,14 @@ using System.Web.Mvc;
 
 namespace MVC.Controllers
 {
-    public class HomeController : Controller
+    public class AutenticarEnElSistemaController : Controller
     {
-        // GET: Home
+        // GET: AutenticarEnElSistema
         public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult RecuperarContraseña()
         {
             return View();
         }
