@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="css\styles.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +113,7 @@
     <Content Include="Views\RegistrarEmpleado\AdicionarEmpleado.cshtml" />
     <Content Include="Views\RegistrarEmpleado\ActualizarEmpleado.cshtml" />
     <Content Include="Views\RegistrarMarca\AdicionarMarca.cshtml" />
+    <Content Include="Views\RegistarCliente\ConsultarCliente.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
