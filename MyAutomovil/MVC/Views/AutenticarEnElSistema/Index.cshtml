@@ -16,39 +16,43 @@
 </head>
 
 <body>
-    <div class="jumbotron  jumbotron-fluid" align ="center" style="border: 1px dashed rgb(66, 133, 244); background-color: rgb(0, 0, 0);">
-        <h1 class="display-3" style="color: rgb(255, 255, 255); font-family: &quot;Comic Sans MS&quot;, cursive, sans-serif;" contenteditable="true" spellcheckker="false">MI AUTOMÓVIL</h1>
+    <div class="jumbotron  jumbotron-fluid" align="center" style="border: 1px dashed rgb(66, 133, 244); background-color: rgb(0, 0, 0);">
+        <h1 class="display-3" style="color: rgb(255, 255, 255); font-family: &quot;Comic Sans MS&quot;, cursive, sans-serif;" contenteditable="false" spellcheckker="false">MI AUTOMÓVIL</h1>
     </div>
     <div class="container">
         <div align="center">
             <h2> Login</h2>
         </div>
-        <div class="form-group" style="">
-            <label>Usuario:</label><input type="text" class="form-control">
-        </div>
-        <div class="form-group" style="">
-            <label>Contraseña</label><input type="text" class="form-control">
-            <a href="/AutenticarEnElSistema/RecuperarContraseña" style="font-family: &quot;Comic Sans MS&quot;, cursive, sans-serif;"> Recuperar contraseña</a>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                <div class="form-group" style="">
+                    <label>Usuario:</label><input type="text" class="form-control">
+                </div>
+                <div class="form-group" style="">
+                    <label>Contraseña</label><input type="text" class="form-control">
+                    <a href="/AutenticarEnElSistema/RecuperarContraseña" style="font-family: &quot;Comic Sans MS&quot;, cursive, sans-serif;"> Recuperar contraseña</a>
+                </div>
+            </div>
+            <div class="col-sm-3"></div>
         </div>
         <div class="container" style="">
             <div class="row">
-                <div class="col-sm-5" align="center">
-                    <button type="button" class="btn btn-primary" style="">Ingresar</button>
-                </div>
-                <div class="col-sm-2">
-                    <br>
-                </div>
-                <div class="col-sm-5" align="center">
-                    <button type="button" class="btn btn-primary" style="">Registrarse</button>
-                </div>
+                <div class="col-sm-3"></div>
+                <button type="button" class="btn btn-dark col-sm-2" style="">Ingresar</button>
+                <div class="col-sm-2"><br /></div>
+                <button type="button" class="btn btn-dark col-sm-2" style="">Registrarse</button>
+                <div class="col-sm-3"></div>
             </div>
-        </div>
-
-        <footer class="footer" style="color: rgb(0, 0, 0);">
-            <p>© WYMAY SOLUTIONS 2019</p>
-        </footer>
-
+            </div>
+        <br>
+        <br>
     </div> <!-- /container -->
+    <footer class="footer" style="background-color : #000000; color:#ffffff">
+        <br>
+        <br>
+        <p>© WYMAY SOLUTIONS 2019</p>
+    </footer>
 
 </body>
 </html>
