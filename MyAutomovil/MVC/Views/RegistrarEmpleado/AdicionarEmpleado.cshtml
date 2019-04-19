@@ -7,7 +7,7 @@
 
 <html>
 <head>
-    <title>Actualizar cliente</title>
+    <title>Adicionar empleado</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -40,7 +40,7 @@
                 </li>
             </ul>
         </nav>
-        <h3 class="text-muted">Registrar cliente</h3>
+        <h3 class="text-muted">Registrar empleado</h3>
     </div>
     <br />
     <br />
@@ -48,7 +48,7 @@
         <div>
             <div class="row">
                 <div class="col-sm-12" align="center">
-                    <h2>Actualizar cliente</h2>
+                    <h2>Adicionar empleado</h2>
                 </div>
             </div>
             <div class="row">
@@ -79,16 +79,35 @@
                                 <div class="col-sm-12">
                                     <input class="col-sm-12" id="datepicker" />
                                     <script>
-                                    $('#datepicker').datepicker({
-                                        uiLibrary: 'bootstrap4'
-                                    });
+                                        $('#datepicker').datepicker({
+                                            uiLibrary: 'bootstrap4'
+                                        });
                                     </script>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="correoCliente">Correo</label>
+                                <label class="col-md-4 control-label" for="correoCliente">Cargo</label>
                                 <div class="col-sm-12">
                                     <input id="correo" name="correo" type="text" placeholder="" class="form-control input-md">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="concesionarioEmpleado">Concesionario</label>
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <input id="concesionarioEmpleado" name="concesionarioEmpleado" class="form-control" placeholder="" type="text">
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                Seleccionar
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right">
+                                                <li><a href="#">Option one</a></li>
+                                                <li><a href="#">Option two</a></li>
+                                                <li><a href="#">Option three</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
