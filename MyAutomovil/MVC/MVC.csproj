@@ -114,6 +114,7 @@
     <Content Include="Views\RegistrarEmpleado\ActualizarEmpleado.cshtml" />
     <Content Include="Views\RegistrarMarca\AdicionarMarca.cshtml" />
     <Content Include="Views\RegistarCliente\ConsultarCliente.cshtml" />
+    <Content Include="Views\RegistrarMarca\ActualizarMarca.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
