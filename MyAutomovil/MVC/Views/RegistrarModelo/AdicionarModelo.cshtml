@@ -7,7 +7,7 @@
 
 <html>
 <head>
-    <title>Actualizar marca</title>
+    <title>Adicionar modelo</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -41,7 +41,7 @@
                 </li>
             </ul>
         </nav>
-        <h3 class="text-muted">Registrar marca</h3>
+        <h3 class="text-muted">Registrar modelo</h3>
     </div>
     <br />
     <br />
@@ -49,24 +49,56 @@
         <div>
             <div class="row">
                 <div class="col-sm-12" align="center">
-                    <h2>Actualizar marca</h2>
+                    <h2>Adicionar modelo</h2>
                 </div>
             </div>
+            <br />
             <div class="row">
                 <div class="col-sm-3"></div>
                 <div class="col-sm-6">
                     <form class="form-horizontal">
                         <fieldset>
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="cedulaCliente">Nombre</label>
-                                <div class="col-sm-12">
-                                    <input id="nombreMarca" name="nombreMarca" type="text" placeholder="" class="form-control input-md">
+                                <label class="col-md-4 control-label" for="nombreMarcaModelo">Marca</label>
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <input id="nombreMarcaModelo" name="nombreMarcaModelo" class="form-control" placeholder="" type="text">
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                Seleccionar
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right">
+                                                <li><a href="#">Option one</a></li>
+                                                <li><a href="#">Option two</a></li>
+                                                <li><a href="#">Option three</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="paisMarca">Pais</label>
+                                <label class="col-md-4 control-label" for="nombreModelo">Modelo</label>
                                 <div class="col-sm-12">
-                                    <input id="paisMarca" name="paisMarca" type="text" placeholder="" class="form-control input-md">
+                                    <input id="nombreModelo" name="nombreModelo" type="text" placeholder="" class="form-control input-md">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="numeroPuertas">Numero de puertas</label>
+                                <div class="col-sm-12">
+                                    <input id="numeroPuertas" name="numeroPuertas" type="text" placeholder="" class="form-control input-md">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="cilindraje">Cilindraje</label>
+                                <div class="col-sm-12">
+                                    <input id="cilindraje" name="cilindraje" type="text" placeholder="" class="form-control input-md">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="transmision">Transmision</label>
+                                <div class="col-sm-12">
+                                    <input id="transmision" name="transmision" type="text" placeholder="" class="form-control input-md">
                                 </div>
                             </div>
                         </fieldset>

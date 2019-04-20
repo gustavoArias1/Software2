@@ -96,8 +96,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegistarClienteController.cs" />
+    <Compile Include="Controllers\RegistrarConcesionarioController.cs" />
     <Compile Include="Controllers\RegistrarEmpleadoController.cs" />
     <Compile Include="Controllers\RegistrarMarcaController.cs" />
+    <Compile Include="Controllers\RegistrarModeloController.cs" />
+    <Compile Include="Controllers\RegistrarVehiculoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -115,6 +118,12 @@
     <Content Include="Views\RegistrarMarca\AdicionarMarca.cshtml" />
     <Content Include="Views\RegistarCliente\ConsultarCliente.cshtml" />
     <Content Include="Views\RegistrarMarca\ActualizarMarca.cshtml" />
+    <Content Include="Views\RegistrarModelo\AdicionarModelo.cshtml" />
+    <Content Include="Views\RegistrarModelo\ActualizarModelo.cshtml" />
+    <Content Include="Views\RegistrarConcesionario\AdicionarConcesionario.cshtml" />
+    <Content Include="Views\RegistrarConcesionario\ActualizarConcesionario.cshtml" />
+    <Content Include="Views\RegistrarVehiculo\AdicionarVehiculo.cshtml" />
+    <Content Include="Views\RegistrarVehiculo\ActualizarVehiculo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
