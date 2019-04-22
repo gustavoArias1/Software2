@@ -124,6 +124,10 @@
     <Content Include="Views\RegistrarConcesionario\ActualizarConcesionario.cshtml" />
     <Content Include="Views\RegistrarVehiculo\AdicionarVehiculo.cshtml" />
     <Content Include="Views\RegistrarVehiculo\ActualizarVehiculo.cshtml" />
+    <Content Include="Views\RegistrarConcesionario\ConsultarConcesionario.cshtml" />
+    <Content Include="Views\RegistrarMarca\ConsultarMarca.cshtml" />
+    <Content Include="Views\RegistrarEmpleado\ConsultarEmpleado.cshtml" />
+    <Content Include="Views\RegistrarModelo\ConsultarModelo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

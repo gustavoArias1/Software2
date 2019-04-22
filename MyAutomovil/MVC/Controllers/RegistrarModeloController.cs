@@ -18,5 +18,10 @@ namespace MVC.Controllers
         {
             return View();
         }
+
+        public ActionResult ConsultarModelo()
+        {
+            return View();
+        }
     }
 }
