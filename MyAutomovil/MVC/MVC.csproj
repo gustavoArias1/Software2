@@ -128,6 +128,7 @@
     <Content Include="Views\RegistrarMarca\ConsultarMarca.cshtml" />
     <Content Include="Views\RegistrarEmpleado\ConsultarEmpleado.cshtml" />
     <Content Include="Views\RegistrarModelo\ConsultarModelo.cshtml" />
+    <Content Include="Views\RegistrarVehiculo\ConsultarVehiculo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
