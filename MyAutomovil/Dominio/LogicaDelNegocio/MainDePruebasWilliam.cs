@@ -11,7 +11,7 @@ namespace Dominio.LogicaDelNegocio
         public static void Main(string[] args) {
             ConexionBaseDatos CB = new ConexionBaseDatos();
             CB.Conectar();
-            CB.Insertar();
+ 
 
             /*AQUI EMPIEZAN LAS PRUEBAS DE REGISTRAR VEHICULOS*/
             RegistrarVehiculo v = new RegistrarVehiculo();

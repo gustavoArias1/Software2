@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Dominio.EntidadesDominio;
+using Persistencia;
+
 
 namespace Dominio.LogicaDelNegocio
 {
@@ -9,28 +11,10 @@ namespace Dominio.LogicaDelNegocio
     {
         public static void Main(string[] args)
         {
-            System.Console.WriteLine("holaaaa");
-            //RegistrarConcesionario r = new RegistrarConcesionario();
-            //r.RecuperarConcesionarios();
-            //System.Console.WriteLine(r.Concesionarios[0].Administrador);
+            RegistrarCliente r = new RegistrarCliente();
+            DateTime date = DateTime.Now;
+            r.AdicionarCliente("Gustavo","Andres",12123123,date,"gus@sdasd","chupelo");
 
-            /*AQUI EMPIEZAN LAS PRUEBAS DE MARCAS*/
-            //RegistrarMarca marca = new RegistrarMarca();
-            //marca.ConsultarMarca();
-            //marca.AdicionarMarca("Toyota", "Japon");
-            //marca.EliminarMarca("Toyota");
-            //marca.ActualizarMarca("Toyota", "Colombia");
-            /*for (int i = 0; i < marca.marcas.Count; i++)
-            {
-                Console.WriteLine(marca.marcas[i].Nombre + " " +marca.marcas[i].Pais);
-            }*/
-
-            /*AQUI EMPIEZAN LAS PRUEBAS DE REGISTRAR VEHICULOS*/
-            //RegistrarVehiculo v = new RegistrarVehiculo();
-            //List<Vehiculo> va = v.ConsultarVehiculo(new List<string> { "casautos", "", "425", "452638738", "", "", "" });
-            //for (int i = 0; i < va.Count; i++) {
-            //    Console.WriteLine(va[i].Placa + " " + va[i].Marca + " " + va[i].Modelo + " " + va[i].Precio);
-            //}
         }
     }
 }

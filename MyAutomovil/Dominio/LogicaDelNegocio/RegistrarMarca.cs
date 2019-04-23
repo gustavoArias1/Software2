@@ -11,9 +11,18 @@ namespace Dominio.LogicaDelNegocio
      * @ Manuel Galvis
      * @ version 2.0 04/04/2019
      */
-    class RegistrarMarca : DBFake
+    class RegistrarMarca:ConexionBaseDatos
     {
         public List<Marca> marcas = new List<Marca>();
+
+        public RegistrarMarca()
+        {
+            
+            Conectar();
+        }
+
+
+        //public ConexionBaseDatos CB = new ConexionBaseDatos();
 
         /*
          * El metodo AdicionarMarca agrega una nueva marca en la base de datos consultando si dicha marca no existe.
@@ -49,6 +58,7 @@ namespace Dominio.LogicaDelNegocio
         public void EliminarMarca(string nombreMarca)
         {
             Marca marca = ConsultarMarca(nombreMarca);
+            
             if (marcas.Contains(marca))
             {
                 for (int i = 0; i < marcas.Count; i++)
@@ -136,10 +146,19 @@ namespace Dominio.LogicaDelNegocio
          post: ConsultarMarca()*/
         public void ConsultarMarca()
         {
-            foreach (string[] x in ConsultarMarcasRepositorio())
+           
+            string Nombre = "";
+            string Pais = "";
+            List<string[]> lista =ConsultarMarcasRepositorio();
+
+            for (int i = 0; i < lista.Count; i++)
             {
-                marcas.Add(new Marca(x[0], x[1]));
+                Nombre = (string)lista[i].GetValue(0);
+                Pais = (string)lista[i].GetValue(1);
+                marcas.Add(new Marca(Nombre, Pais));
             }
+            
+            
         }
     }
 }

@@ -6,9 +6,16 @@ using Persistencia;
 
 namespace Dominio.LogicaDelNegocio
 {
-    class RegistrarCliente : DBFake
+    class RegistrarCliente : ConexionBaseDatos
     {
         public List<Cliente> clientes;
+
+        public RegistrarCliente()
+        {
+            Conectar();
+        }
+
+
 
         /*
          William Andres Vasquez Sanabria 
@@ -40,6 +47,7 @@ namespace Dominio.LogicaDelNegocio
                 
                 AdicionarClienteRepositorio(nombre, apellido, fechaDeNacimiento, cedula, correo, contraseña);
                 System.Console.WriteLine("El cliente ha sido creado");
+                
             }
         }
 
@@ -54,7 +62,7 @@ namespace Dominio.LogicaDelNegocio
         public void ActualizarCliente(int codigo,string nombre, string apellido,  DateTime fechaDeNacimiento, int cedula,
             string correo, string contraseña)
         {
-            ActualizarClienteRepositorio(codigo, nombre, apellido,  fechaDeNacimiento, cedula, correo, contraseña);
+            //ActualizarClienteRepositorio(codigo, nombre, apellido,  fechaDeNacimiento, cedula, correo, contraseña);
             System.Console.WriteLine("El cliente ha sido Actualizado");
         }
 
@@ -102,7 +110,7 @@ namespace Dominio.LogicaDelNegocio
 
         public void EliminarCliente(int codigo)
         {
-            EliminarClienteRepositorio(codigo);
+            //EliminarClienteRepositorio(codigo);
             System.Console.WriteLine("El cliente ha sido eliminado");
         }
 
