@@ -111,21 +111,552 @@ namespace Persistencia
             {
                 Conexion.Open();
             }
-            string query = "INSERT INTO cliente ( Nombre, Apellido,  FechaDeNacimiento, Cedula, Correo, Contraseña) VALUES('" + Nombre + "','" + Apellido + "','" + FechaDeNacimiento + "','" + Cedula + "','" + Correo + "','" + Contraseña + "')";
+            string Fecha = Convert.ToString(FechaDeNacimiento);
+
+            string query = "INSERT INTO cliente ( Nombre, Apellido,  Fecha, Cedula, Correo, Contraseña) VALUES('" + Nombre + "','" + Apellido + "','" + FechaDeNacimiento + "','" + Cedula + "','" + Correo + "','" + Contraseña + "')";
             MySqlCommand my = new MySqlCommand(query, Conexion);
             my.ExecuteNonQuery();
             Conexion.Close();
 
         }
 
+        
         public List<string[]> RecuperarClientesRepositorio()
         {
-            return null;
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+            List<string[]> listaClientes = new List<string[]>();
+            String Codigo = "";
+            string Nombre = "";
+            string Apellido = "";
+            string Fecha = "";
+            string Cedula = "";
+            string Correo = "";
+            string Contraseña = "";
+            string query = "SELECT * FROM cliente";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            MySqlDataReader reader = my.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Codigo = Convert.ToString(reader["Codigo"]);
+                Nombre = Convert.ToString(reader["Nombre"]);
+                Apellido = Convert.ToString(reader["Apellido"]);
+                Fecha = Convert.ToString(reader["Fecha"]);
+                Cedula = Convert.ToString(reader["Cedula"]);
+                Correo = Convert.ToString(reader["Correo"]);
+                Contraseña = Convert.ToString(reader["Contraseña"]);
+                listaClientes.Add(new string[] { Codigo,Nombre, Apellido,Fecha,Cedula,Correo,Contraseña });
+
+            }
+
+            Conexion.Close();
+            return listaClientes;
+        }
+
+        public void EliminarClienteRepositorio(int Codigo)
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+
+            string query = "Delete from cliente where Codigo='" + Codigo + "'";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            Conexion.Close();
+        }
+
+        public void ActualizarClienteRepositorio(int codigo ,string Nombre, string Apellido, DateTime FechaDeNacimiento, int Cedula, string Correo, string Contraseña)
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+
+            string Fecha = Convert.ToString(FechaDeNacimiento);
+            string query = "update cliente set Nombre='" + Nombre + "',Apellido='" + Apellido + "' ,Fecha='" + Fecha + "',Cedula='" + Cedula + "',Correo='" + Correo + "',Contraseña='" + Contraseña + "'where Codigo='" + codigo + "'";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            Conexion.Close();
+        }
+
+
+
+     //..............................Concesionarios..............................................//
+
+        public List<string[]> ConsultarConcesionariosRepositorio()
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+            List<string[]> listaConcesionarios = new List<string[]>();
+            string Codigo;
+            string NombreConcesionario = "";
+            string CodigoAdministrador = "";
+            string Direccion = "";
+            string Telefono = "";
+            string Ciudad = "";
+            string query = "SELECT * FROM concesionario";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            MySqlDataReader reader = my.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Codigo = Convert.ToString(reader["Codigo"]);
+                NombreConcesionario = Convert.ToString(reader["NombreConcesionario"]);
+                CodigoAdministrador = Convert.ToString(reader["CodigoAdministrador"]);
+                Direccion = Convert.ToString(reader["Direccion"]);
+                Telefono = Convert.ToString(reader["Telefono"]);
+                Ciudad = Convert.ToString(reader["Ciudad"]);
+                listaConcesionarios.Add(new string[] { Codigo, NombreConcesionario,CodigoAdministrador, Direccion, Telefono, Ciudad});
+
+            }
+
+            Conexion.Close();
+            return listaConcesionarios;
+        }
+
+        public void AdicionarConcesionarioRepositorio(string NombreConcesionario, int CodigoAdministrador, string Direccion, string Telefono, string Ciudad)
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+            string query = "INSERT INTO concesionario (NombreConcesionario,CodigoAdministrador,Direccion,Telefono,Ciudad) VALUES('" + NombreConcesionario + "','" + CodigoAdministrador + "','" + Direccion + "','" + Telefono + "','" + Ciudad+ "')";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            Conexion.Close();
+        }
+
+        public void EliminarConcesionarioRepositorio(string NombreConcesionario)
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+
+            string query = "Delete from concesionario where NombreConcesionario='" + NombreConcesionario + "'";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            Conexion.Close();
+        }
+
+        public void ActualizarConcesionarioRepositorio(string Codigo, string NombreConcesionario, int CodigoAdministrador, string Direccion, string Telefono, string Ciudad)
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+
+            string query = "update concesionario set NombreConcesionario='" + NombreConcesionario + "',CodigoAdministrador='" + CodigoAdministrador + "' ,Direccion='" + Direccion + "',Telefono='" + Telefono + "',Ciudad='" + Ciudad + "'where Codigo='" + Codigo + "'";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            Conexion.Close();
+        }
+
+        public string[] RecuperarConcesionarioRepositorio(string Nombre)
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+            
+            string query = "SELECT * FROM concesionario where NombreConcesionario='"+Nombre+"'";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            MySqlDataReader reader = my.ExecuteReader();
+            string[] Concesionario = new string[6];
+
+            while (reader.Read())
+            {
+                string Codigo = Convert.ToString(reader["Codigo"]);
+                string NombreConcesionario = Convert.ToString(reader["NombreConcesionario"]);
+                string CodigoAdministrador = Convert.ToString(reader["CodigoAdministrador"]);
+                string Direccion = Convert.ToString(reader["Direccion"]);
+                string Telefono = Convert.ToString(reader["Telefono"]);
+                string Ciudad = Convert.ToString(reader["Ciudad"]);
+                Concesionario = new string[]{ Codigo, NombreConcesionario, CodigoAdministrador, Direccion, Telefono, Ciudad };
+
+
+            }
+
+            Conexion.Close();
+            return Concesionario;
+
+
+  
+        }
+
+        //..................................Crud empleado................................................//
+
+        public List<string[]> RecuperarEmpleadosRepositorio()
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+            List<string[]> listaEmpleados = new List<string[]>();
+            string Codigo = "";
+            string Nombre = "";
+            string Apellido = "";
+            string Fecha = "";
+            string Cargo = "";
+            string Cedula = "";
+            string Correo = "";
+            string Contraseña = "";
+            string Concesionario = "";
+            string query = "SELECT * FROM vendedores";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            MySqlDataReader reader = my.ExecuteReader();
+
+            while (reader.Read())
+            {
+
+                Codigo = Convert.ToString(reader["Codigo"]);
+                Nombre = Convert.ToString(reader["Nombre"]);
+                Apellido = Convert.ToString(reader["Apellido"]);
+                
+                Cedula = Convert.ToString(reader["Cedula"]);
+                if (Cedula.Length > 10)
+                {
+                    Cedula = Cedula.Substring(0, 9);
+                }
+                Cargo = Convert.ToString(reader["Cargo"]);
+                Fecha = Convert.ToString(reader["FechaNacimiento"]);
+                Correo = Convert.ToString(reader["Correo"]);
+                Contraseña = Convert.ToString(reader["Contraseña"]);
+                Concesionario = Convert.ToString(reader["Concesionario"]);
+
+                listaEmpleados.Add(new string[] {  Nombre, Apellido, Cedula,Cargo,Fecha, Correo, Contraseña,Codigo,Concesionario });
+
+            }
+
+            Conexion.Close();
+            return listaEmpleados;
+        }
+
+        public void ActualizarEmpleadoRepositorio(int Codigo, string Nombre, string Apellido, DateTime FechaNacimiento, int Cedula, string Cargo, string Correo, string Contraseña, string Concesionario)
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+
+            string Fecha = Convert.ToString(FechaNacimiento);
+            string query = "update vendedores set Nombre='" + Nombre + "',Apellido='" + Apellido + "' ,FechaNacimiento='" + Fecha + "',Cargo='" + Cargo + "',Cedula='" + Cedula + "',Correo='" + Correo + "',Contraseña='" + Contraseña + "',Concesionario='" + Concesionario + "'where Codigo='" + Codigo + "'";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            Conexion.Close();
+        }
+
+        public void EliminarEmpleadoRepositorio(int Codigo)
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+
+            string query = "delete from vendedores where Codigo='"+Codigo+"'";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            Conexion.Close();
+        }
+
+        public void AdicionarEmpleadoRepositorio(string Nombre, string Apellido, DateTime FechaNacimiento, int Cedula, string Cargo, string NombreConcesionario)
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+
+            string Fecha = Convert.ToString(FechaNacimiento);
+            string query = "Insert Into vendedores (Nombre,Apellido,Cedula,Cargo,FechaNacimiento,Correo,Contraseña,Concesionario) values ('"+Nombre+ "','" + Apellido + "','" + Cedula + "','" + Cargo + "','" + Fecha + "','correo@falta','contraseñafalta','" + NombreConcesionario + "')";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            Conexion.Close();
+        }
+
+
+
+        public List<string[]> RecuperarEmpleadosRepositorio(string NombreConcesionario)
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+            List<string[]> listaEmpleados = new List<string[]>();
+            string Codigo = "";
+            string Nombre = "";
+            string Apellido = "";
+            string Fecha = "";
+            string Cargo = "";
+            string Cedula = "";
+            string Correo = "";
+            string Contraseña = "";
+            string Concesionario = "";
+            string query = "SELECT * FROM vendedores where concesionario='"+NombreConcesionario+"'";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            MySqlDataReader reader = my.ExecuteReader();
+
+            while (reader.Read())
+            {
+
+                Codigo = Convert.ToString(reader["Codigo"]);
+                Nombre = Convert.ToString(reader["Nombre"]);
+                Apellido = Convert.ToString(reader["Apellido"]);
+
+                Cedula = Convert.ToString(reader["Cedula"]);
+                if (Cedula.Length > 10)
+                {
+                    Cedula = Cedula.Substring(0, 9);
+                }
+                Cargo = Convert.ToString(reader["Cargo"]);
+                Fecha = Convert.ToString(reader["FechaNacimiento"]);
+                Correo = Convert.ToString(reader["Correo"]);
+                Contraseña = Convert.ToString(reader["Contraseña"]);
+                Concesionario = Convert.ToString(reader["Concesionario"]);
+
+                listaEmpleados.Add(new string[] { Nombre, Apellido, Cedula, Cargo, Fecha, Correo, Contraseña, Codigo, Concesionario });
+
+            }
+
+            Conexion.Close();
+            return listaEmpleados;
+        }
+
+        //..............................CrudModelo...............................................//
+
+       public List<string[]> ConsultarModelosRepositorio()
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+            List<string[]> listaModelos = new List<string[]>();
+            string NombreModelo = "";
+            string NombreMarca = "";
+            string NumeroPuertas = "";
+            string Cilindraje = "";
+            string Transmision = "";
+
+            string query = "SELECT * FROM modelo";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            MySqlDataReader reader = my.ExecuteReader();
+
+            while (reader.Read())
+            {
+                NombreModelo = Convert.ToString(reader["NombreModelo"]);
+                NombreMarca= Convert.ToString(reader["NombreMarca"]);
+                NumeroPuertas= Convert.ToString(reader["NumeroPuertas"]);
+                Cilindraje = Convert.ToString(reader["NumeroPuertas"]);
+                Transmision = Convert.ToString(reader["NumeroPuertas"]);
+
+                listaModelos.Add(new string[] { NombreModelo, NombreMarca,NumeroPuertas,Cilindraje,Transmision });
+            }
+
+            Conexion.Close();
+
+            return listaModelos;
+        }
+
+        public void EliminarModeloRepositorio(string NombreModelo)
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+
+            string query = "delete from modelo where NombreModelo='" + NombreModelo + "'";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            Conexion.Close();
+        }
+
+        public void ActualizarModelosRepositorio(string NombreModelo, string nombreMarca, int NumeroPuertas, string Cilindraje, string Transmision)
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+
+            string query = "update modelo set NumeroPuertas='" + NumeroPuertas + "',Cilindraje='" + Cilindraje + "' ,Transmision='" + Transmision + "'where NombreModelo='" + NombreModelo + "'";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            Conexion.Close();
+        }
+
+        public void AdicionarModelosRepositorio(string NombreModelo, string NombreMarca, int  NumeroPuertas, string Cilindraje, string Transmision)
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+
+            string query = "INSERT INTO modelo (NombreModelo,NombreMarca,NumeroPuertas,Cilindraje,Transmision) values('"+NombreModelo+ "','" + NombreMarca + "','" + NumeroPuertas + "','" + Cilindraje + "','" + Transmision + "')";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            Conexion.Close();
+        }
+
+        //..................................CRUD RECLAMO..................................................//
+
+        public List<string[]> ConsultarReclamosRepositorio()
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+            List<string[]> listaReclamos = new List<string[]>();
+            string TipoReclano = "";
+            string Concesionario = "";
+            string Descripcion = "";
+            string SolucionReclamo = "";
+            string IdReclamo = "";
+            string IdCliente= "";
+            string IdAdministrador = "";
+
+
+            string query = "SELECT * FROM reclamo";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            MySqlDataReader reader = my.ExecuteReader();
+
+            while (reader.Read())
+            {
+                TipoReclano = Convert.ToString(reader["TipoReclamo"]);
+                Concesionario = Convert.ToString(reader["Concesionario"]);
+                Descripcion = Convert.ToString(reader["Descripcion"]);
+                SolucionReclamo = Convert.ToString(reader["SolucionReclamo"]);
+                IdReclamo = Convert.ToString(reader["IdReclamo"]);
+                IdCliente = Convert.ToString(reader["IdCliente"]);
+                IdAdministrador = Convert.ToString(reader["IdAdministrador"]);
+
+
+
+
+                listaReclamos.Add(new string[] {IdReclamo, TipoReclano, Concesionario, Descripcion,IdCliente });
+            }
+
+            Conexion.Close();
+
+            return listaReclamos;
+        }
+
+        public List<string[]> ConsultarSolucionRepositorio(string concesionario)
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+            List<string[]> listaReclamos = new List<string[]>();
+            string TipoReclano = "";
+            string Concesionario = "";
+            string Descripcion = "";
+            string SolucionReclamo = "";
+            string IdReclamo = "";
+            string IdCliente = "";
+            string IdAdministrador = "";
+
+
+            string query = "SELECT * FROM reclamo where Concesionario='"+concesionario+"'";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            MySqlDataReader reader = my.ExecuteReader();
+
+            while (reader.Read())
+            {
+                TipoReclano = Convert.ToString(reader["TipoReclamo"]);
+                Concesionario = Convert.ToString(reader["Concesionario"]);
+                Descripcion = Convert.ToString(reader["Descripcion"]);
+                SolucionReclamo = Convert.ToString(reader["SolucionReclamo"]);
+                IdReclamo = Convert.ToString(reader["IdReclamo"]);
+                IdCliente = Convert.ToString(reader["IdCliente"]);
+                IdAdministrador = Convert.ToString(reader["IdAdministrador"]);
+
+
+
+
+                listaReclamos.Add(new string[] { IdReclamo, TipoReclano, Concesionario, Descripcion, IdCliente,SolucionReclamo,IdAdministrador });
+            }
+
+            Conexion.Close();
+
+            return listaReclamos;
+        }
+
+
+        public int  ConsultarAdministrador(string Concesionario)
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+            int CodigoAdministrador = 0;
+            string query = "select CodigoAdministrador from concesionario where NombreConcesionario='"+Concesionario+"'";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            MySqlDataReader reader = my.ExecuteReader();
+
+            while (reader.Read())
+            {
+                CodigoAdministrador = Convert.ToInt32(reader["CodigoAdministrador"]);
+            }
+
+            Conexion.Close();
+            return CodigoAdministrador;
+        }
+
+        public void AdicionarReclamoRepositorio(int IdReclamo, string TipoReclamo, string Concesionario, string Descripcion, int IdCliente)
+        {
+            int CodigoAdministrador = ConsultarAdministrador(Concesionario);
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+
+            
+            string query = "INSERT INTO reclamo (TipoReclamo,Concesionario,Descripcion,SolucionReclamo,Idcliente,IdAdministrador) values('" + TipoReclamo + "','" + Concesionario + "','" + Descripcion + "','----------','" + IdCliente + "','"+CodigoAdministrador+"')";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            Conexion.Close();
+        }
+
+        public void AdicionarReclamoSolucionRepositorio(int  IdReclamo, string TipoReclamo, string Concesionario, string Descripcion, int  IdCliente, string solucionReclamo, int idAministrador)
+        {
+            int CodigoAdministrador = ConsultarAdministrador(Concesionario);
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+
+
+            string query = "INSERT INTO reclamo (TipoReclamo,Concesionario,Descripcion,SolucionReclamo,Idcliente,IdAdministrador) values('" + TipoReclamo + "','" + Concesionario + "','" + Descripcion + "','"+solucionReclamo+"','" + IdCliente + "','" + CodigoAdministrador + "')";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            Conexion.Close();
         }
 
 
 
 
 
+        public List<string[]> RecuperarVehiculosRepositorio(string nombreConcesionario)
+        {
+            return null;
+        }
+
+        public List<string[]> RecuperarComprasRepositorio(string nombreConcesionario)
+        {
+            return null;
+        }
     }
 }

@@ -4,11 +4,12 @@ using System.Text;
 using Persistencia;
 namespace Dominio.EntidadesDominio
 {
-    public class Concesionario :DBFake
+    public class Concesionario :ConexionBaseDatos
     {
+
         private int codigo; 
         private string nombreConcesionario;
-        private string nombreAdministrador;
+        private int CodigoAdministrador;
         private string direccion;
         private string telefono;
         private string ciudad;
@@ -16,18 +17,25 @@ namespace Dominio.EntidadesDominio
         public List<Vehiculo> vehiculos = null;
         public List<Compra> compras = null;
 
-        public Concesionario(string nombreConcesionario, string administrador, string direccion, string telefono, string ciudad)
+        public int Codigo { get => codigo; set => codigo = value; }
+        public string NombreConcesionario { get => nombreConcesionario; set => nombreConcesionario = value; }
+        public int CodigoAdministrador1 { get => CodigoAdministrador; set => CodigoAdministrador = value; }
+        public string Direccion { get => direccion; set => direccion = value; }
+        public string Telefono { get => telefono; set => telefono = value; }
+        public string Ciudad { get => ciudad; set => ciudad = value; }
+
+        public Concesionario(string nombreConcesionario, int CodigoAdministrador, string direccion, string telefono, string ciudad)
         {
             this.nombreConcesionario = nombreConcesionario;
-            this.nombreAdministrador = administrador;
+            this.CodigoAdministrador = CodigoAdministrador;
             this.direccion = direccion;
             this.telefono = telefono;
             this.ciudad = ciudad;
         }
-        public Concesionario(int codigo, string nombreConcesionario, string administrador, string direccion, string telefono, string ciudad)
+        public Concesionario(int codigo, string nombreConcesionario, int CodigoAdministrador, string direccion, string telefono, string ciudad)
         {
             this.nombreConcesionario = nombreConcesionario;
-            this.nombreAdministrador = administrador;
+            this.CodigoAdministrador = CodigoAdministrador;
             this.direccion = direccion;
             this.telefono = telefono;
             this.ciudad = ciudad;
@@ -35,14 +43,10 @@ namespace Dominio.EntidadesDominio
             this.vendedores = new List<Vendedor>();
         }
 
-        public int Codigo { get => codigo; set => codigo = value; }
-        public string NombreConcesionario { get => nombreConcesionario; set => nombreConcesionario = value; }
-        public string Direccion { get => direccion; set => direccion = value; }
-        public string Telefono { get => telefono; set => telefono = value; }
-        public string Ciudad { get => ciudad; set => ciudad = value; }
-        public string Administrador { get => nombreAdministrador; set => nombreAdministrador = value; }
+       
 
         public List<Vendedor> RecuperarEmpleados() {
+            Conectar();
             List<Vendedor> vendedoresAux = new List<Vendedor>();
             List<string[]> vendedoresAux2 = RecuperarEmpleadosRepositorio(this.NombreConcesionario);
             if (vendedoresAux2.Count > 0) {
@@ -62,6 +66,7 @@ namespace Dominio.EntidadesDominio
 
         public List<Vehiculo> RecuperarVehiculos()
         {
+            Conectar();
             List<Vehiculo> vehiculos = new List<Vehiculo>();
             List<string[]> vehiculosAux = RecuperarVehiculosRepositorio(this.nombreConcesionario);
             if (vehiculosAux.Count > 0)
@@ -82,6 +87,7 @@ namespace Dominio.EntidadesDominio
          
           */
         public List<Compra> RecuperarCompras(){
+            Conectar();
             List<Compra> comprasAux = new List<Compra>();
             List<string[]> aux = RecuperarComprasRepositorio(this.nombreConcesionario);
             if (aux.Count > 0)

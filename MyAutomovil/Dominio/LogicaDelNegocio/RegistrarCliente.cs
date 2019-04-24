@@ -59,10 +59,10 @@ namespace Dominio.LogicaDelNegocio
            pre: ConsultarCliente haya sido invocado previamente
            pro: Cliente es actualizado en DB
            */
-        public void ActualizarCliente(int codigo,string nombre, string apellido,  DateTime fechaDeNacimiento, int cedula,
+        public void ActualizarCliente(int codigo,string nombre, string apellido, int cedula, DateTime fechaDeNacimiento, 
             string correo, string contraseña)
         {
-            //ActualizarClienteRepositorio(codigo, nombre, apellido,  fechaDeNacimiento, cedula, correo, contraseña);
+            ActualizarClienteRepositorio(codigo, nombre, apellido,  fechaDeNacimiento, cedula, correo, contraseña);
             System.Console.WriteLine("El cliente ha sido Actualizado");
         }
 
@@ -110,7 +110,7 @@ namespace Dominio.LogicaDelNegocio
 
         public void EliminarCliente(int codigo)
         {
-            //EliminarClienteRepositorio(codigo);
+            EliminarClienteRepositorio(codigo);
             System.Console.WriteLine("El cliente ha sido eliminado");
         }
 
@@ -120,12 +120,38 @@ namespace Dominio.LogicaDelNegocio
         public List<Cliente> RecuperarClientes() {
             List<Cliente> clientesAux = new List<Cliente>();
             List<string[]> aux = RecuperarClientesRepositorio();
+
+            int Codigo = 0;
+            string Nombre = "";
+            string Apellido = "";
+            DateTime Fecha;
+            int Cedula = 0;
+            string Correo = "";
+            string Contraseña = "";
             if (aux.Count > 0)
             {
                 for (int i = 0; i < aux.Count; i++)
                 {
-                    clientesAux.Add(new Cliente(Int32.Parse(aux[i][0]),aux[i][1], aux[i][2], DateTime.Parse(aux[i][3]), 
-                        Int32.Parse(aux[i][4]), aux[i][5], aux[i][6]));
+                    
+
+                    String Codigo2 = (string)aux[i].GetValue(0);
+                    String Cedula2 =(string)aux[i].GetValue(4);
+                    if (Cedula2.Length > 10)
+                    {
+                        Cedula2 = Cedula2.Substring(0, 9);
+                    }
+                    String Fecha2=(string)aux[i].GetValue(3);
+                    Codigo = Convert.ToInt32(Codigo2);
+                    Nombre = (string)aux[i].GetValue(1);
+                    Apellido= (string)aux[i].GetValue(2);
+                    Fecha = Convert.ToDateTime(Fecha2);
+                    Cedula= Int32.Parse(Cedula2);
+                    Correo=(string)aux[i].GetValue(5);
+                    Contraseña = (string)aux[i].GetValue(6);
+
+
+                    
+                    clientesAux.Add(new Cliente(Nombre,Apellido,Fecha,Cedula,Correo,Contraseña));
                 }
             }
             else {

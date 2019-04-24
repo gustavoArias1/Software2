@@ -13,9 +13,15 @@ namespace Dominio.LogicaDelNegocio
     * @ Yherson Blandon
     * @ version 2.0 04/04/2019
     */
-    class RegistrarModelo : DBFake
+    class RegistrarModelo : ConexionBaseDatos
     {
         public List<Modelo> modelos = new List<Modelo>();
+
+        public RegistrarModelo()
+        {
+            Conectar();
+        }
+
 
 
         /*
@@ -34,18 +40,26 @@ namespace Dominio.LogicaDelNegocio
             modelos.Clear();
             ConsultarModelov();
             Modelo modelo = new Modelo(nombreModelo, nombreMarca, numeroPuertas, cilindraje, transmision);
-
+            Boolean existe=false;
             for (int i = 0; i < modelos.Count; i++)
             {
-                if (modelos[i].Equals(nombreModelo) && modelos[i].Equals(nombreMarca))
+                if (modelos[i].Nombremodelo.Equals(nombreModelo) && modelos[i].NombreMarca.Equals(nombreMarca))
                 {
-                    Console.WriteLine("el modelo ya existe en la base de datos");
+                    existe = true;
 
                 }
 
             }
-            AdicionarModelosRepositorio(modelo.Nombremodelo, modelo.Nombremodelo, modelo.NumeroPuertas, modelo.Cilindraje, modelo.Transmision);
-             
+            if (!existe)
+            {
+                AdicionarModelosRepositorio(nombreModelo, nombreMarca, numeroPuertas, cilindraje, transmision);
+            }
+            else
+            {
+                Console.WriteLine("el modelo ya existe en la base de datos");
+
+            }
+
         }
 
         /*
@@ -156,7 +170,7 @@ namespace Dominio.LogicaDelNegocio
             List<Modelo> aux = new List<Modelo>();
             foreach (string[] x in ConsultarModelosRepositorio())
             {
-                this.modelos.Add(new Modelo((x[0]), x[1], Int32.Parse(x[3]), x[4], x[5]));
+                this.modelos.Add(new Modelo((x[0]), x[1], Int32.Parse(x[2]), x[3], x[4]));
             }
 
         }

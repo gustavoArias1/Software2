@@ -13,10 +13,16 @@ namespace Dominio.LogicaDelNegocio
      * @ version 1.0 05/04/2019
      context SolicitarSoporte inv: SolucionarReclamo pre ConsultarReclamo()
      */
-    class SolicitarSoporte : DBFake
+    class SolicitarSoporte : ConexionBaseDatos
     {
         public List<Reclamo> reclamos = new List<Reclamo>();
         public List<Reclamo> reclamosSolucionados = new List<Reclamo>();
+
+        public SolicitarSoporte()
+        {
+            Conectar();
+        }
+
 
         /*
          context SolicitarSoporte :: AdicionarReclamo

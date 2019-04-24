@@ -28,15 +28,14 @@ namespace Persistencia
             this.vendedores = new List<string[]>();
             this.usuarios = new List<string[]>();
             this.modelos = new List<string[]>();
-            
             this.Llenar();
         }
 
         public void Llenar()
         {
-            concesionario.Add(new string[] { "1", "casautos", "gustavo andres", "calle 10 # 34-09", "43234234", "manizales" });
-            concesionario.Add(new string[] { "2", "sadasadsasdd", "sasdasdasd", "sasdasdasd", "sasdasdasd", "sasdasdasd" });
-            concesionario.Add(new string[] { "3", "sadasasdasdasdasdd", "sasdasdasd", "sasdasdasd", "sasdasdasd", "sasdasdasd" });
+            concesionario.Add(new string[] { "1", "casautos", "123", "calle 10 # 34-09", "43234234", "manizales" });
+            concesionario.Add(new string[] { "2", "sadasadsasdd", "124", "sasdasdasd", "sasdasdasd", "sasdasdasd" });
+            concesionario.Add(new string[] { "3", "sadasasdasdasdasdd", "125", "sasdasdasd", "sasdasdasd", "sasdasdasd" });
             marcas.Add(new string[] { "Mazda", "Japon" });
             marcas.Add(new string[] { "Nissan", "Japon" });
             marcas.Add(new string[] { "Toyota", "Japon" });
@@ -58,8 +57,8 @@ namespace Persistencia
             modelos.Add(new string[] { "Mazda", "speed", "4", "1600", "Automatica" });
             modelos.Add(new string[] { "Audi", "A4", "4", "2000", "Automatica" });
             modelos.Add(new string[] { "Mazda", "X5", "3", "1800", "Manual" });
-            compras.Add(new string[] { "1", "casautos","16/8/2017","526728782", "HEX56","1"});
-            compras.Add(new string[] { "2","casautos", "16/8/2017", "538828782", "HYU76", "2" });
+            //compras.Add(new string[] { "1", "casautos","16/8/2017","526728782", "HEX56","1"});
+            //compras.Add(new string[] { "2","casautos", "16/8/2017", "538828782", "HYU76", "2" });
         }
 
         public void AdicionarVehiculoRepositorio(string placa, string nombreMarca, string nombreModelo, string año,

@@ -12,10 +12,15 @@ namespace Dominio.LogicaDelNegocio
      @ Gustavo Andres Arias Loaiza
      @ version 2.0 04/04/2019
      */
-    class RegistrarConcesionario : DBFake
+    class RegistrarConcesionario : ConexionBaseDatos
     {
         public List<Concesionario> Concesionarios = new List<Concesionario>();
         string concecionario = "";
+
+        public RegistrarConcesionario()
+        {
+            Conectar();
+        }
 
 
 
@@ -26,11 +31,11 @@ namespace Dominio.LogicaDelNegocio
          * pre : !Concesionarios.contains(concesionario)
          * post: Consultar(nombreConcesionario)
          */
-        public void AdicionarConcesionario(string nombreConcesionario, String administrador, string direccion, string telefono, string ciudad)
+        public void AdicionarConcesionario(string nombreConcesionario, int CodigoAdministrador, string direccion, string telefono, string ciudad)
         {
             RecuperarConcesionarios();
             Boolean existe = false;
-            Concesionario concesionario = new Concesionario (nombreConcesionario, administrador, direccion,telefono,ciudad);
+            Concesionario concesionario = new Concesionario (nombreConcesionario, CodigoAdministrador, direccion,telefono,ciudad);
              
             for(int i=0; i<Concesionarios.Count; i++)
             {
@@ -44,7 +49,7 @@ namespace Dominio.LogicaDelNegocio
 
             if (!existe)
             {
-                AdicionarConcesionarioRepositorio(this.Concesionarios.Count + 1, nombreConcesionario, administrador, direccion, telefono, ciudad);
+                AdicionarConcesionarioRepositorio(nombreConcesionario, CodigoAdministrador, direccion, telefono, ciudad);
             }
            
         }
@@ -92,7 +97,7 @@ namespace Dominio.LogicaDelNegocio
          *pre :  Consultar(nombreConcesionario) and nombreConcesionario !=null
          *post : Consultar(nombreConcesionario) 
          */
-        public void ActualizarConcesionario(int codigo,string nombreConcesionario, string administrador, string direccion,
+        public void ActualizarConcesionario(int codigo,string nombreConcesionario, int CodigoAdministrador, string direccion,
             string telefono, string ciudad)
         {
             Concesionarios.Clear();
@@ -111,7 +116,7 @@ namespace Dominio.LogicaDelNegocio
             if (existe)
             {
 
-                ActualizarConcesionarioRepositorio(codigo.ToString(), nombreConcesionario, administrador, direccion, telefono, ciudad);
+                ActualizarConcesionarioRepositorio(codigo.ToString(), nombreConcesionario, CodigoAdministrador, direccion, telefono, ciudad);
                 System.Console.WriteLine("si existe");
             }
 
@@ -175,10 +180,9 @@ namespace Dominio.LogicaDelNegocio
         public void RecuperarConcesionarios()
         {
             
-            //llamado al metodo de persitencia que obiene la lista de concesionarios
             foreach (string[] x in ConsultarConcesionariosRepositorio())
             {
-                   this.Concesionarios.Add(new Concesionario(Int32.Parse(x[0]), x[1], x[2], x[3], x[4], x[5]));
+                   this.Concesionarios.Add(new Concesionario(Int32.Parse(x[0]), x[1], Int32.Parse(x[2]), x[3], x[4], x[5]));
             }
   
         }

@@ -11,9 +11,12 @@ namespace Dominio.LogicaDelNegocio
     {
         public static void Main(string[] args)
         {
-            RegistrarCliente r = new RegistrarCliente();
             DateTime date = DateTime.Now;
-            r.AdicionarCliente("Gustavo","Andres",12123123,date,"gus@sdasd","chupelo");
+            SolicitarSoporte s = new SolicitarSoporte();
+
+
+
+
 
         }
     }

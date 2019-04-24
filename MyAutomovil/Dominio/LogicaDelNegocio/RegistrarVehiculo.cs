@@ -345,7 +345,7 @@ namespace Dominio.LogicaDelNegocio
             }
             else
             {
-                c = new Concesionario(Int32.Parse(aux[0]), aux[1], aux[2], aux[3], aux[4], aux[5]);
+                c = new Concesionario(Int32.Parse(aux[0]), aux[1], Int32.Parse(aux[2]), aux[3], aux[4], aux[5]);
             }
             return c;
         }

@@ -6,9 +6,15 @@ using Persistencia;
 
 namespace Dominio.LogicaDelNegocio
 {
-    class RegistrarEmpleado : DBFake
+    class RegistrarEmpleado : ConexionBaseDatos
     {
+        
         List<Vendedor> vendedores;
+
+        public RegistrarEmpleado()
+        {
+            Conectar();
+        }
 
         /*
         * @William vasquez
@@ -168,7 +174,7 @@ namespace Dominio.LogicaDelNegocio
         /*
          Busca un objeto concesionario
              */
-        private Concesionario RecuperarConcesionario(string nombreConcesionario)
+        public Concesionario RecuperarConcesionario(string nombreConcesionario)
         {
             Concesionario c;
             string[] aux = RecuperarConcesionarioRepositorio(nombreConcesionario);
@@ -178,7 +184,7 @@ namespace Dominio.LogicaDelNegocio
             }
             else
             {
-                c = new Concesionario(Int32.Parse(aux[0]), aux[1], aux[2], aux[3], aux[4], aux[5]);
+                c = new Concesionario(Int32.Parse(aux[0]), aux[1], Int32.Parse(aux[2]), aux[3], aux[4], aux[5]);
             }
             return c;
         }
