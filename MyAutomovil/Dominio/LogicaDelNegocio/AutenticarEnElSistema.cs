@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Dominio.EntidadesDominio;
+using Persistencia;
 
 namespace Dominio.LogicaDelNegocio
 {
@@ -10,8 +11,17 @@ namespace Dominio.LogicaDelNegocio
    * @ Yherson Blandon
    * @ version 3.0 05/04/2019
    */
-    class AutenticarEnElSistema
+    class AutenticarEnElSistema:ConexionBaseDatos
     {
+
+        public List<Usuario> Usuarios = new List<Usuario>();
+
+        public AutenticarEnElSistema()
+        {
+
+            Conectar();
+        }
+
         /*
        * El metodo AutenticarUsuario confirma la existencia en la base de datos consultando si dicho usuario existe.
        * @ Yherson Blandon
@@ -20,22 +30,48 @@ namespace Dominio.LogicaDelNegocio
        pre: AutenticarUsuario(usuario, contraseña) and usuario != null and contraseña != null 
        post: AutenticarUsuario(usuario, contraseña) or  self@!usuario.Exception or self@!contraseña.Exception 
        */
-        public void AutenticarUsuario (string usuario, string contraseña)
+        public void AutenticarUsuario (string Usuario, string Contraseña)
         {
-            Usuario us = RecuperarUsuario(usuario);
-            if (us != null)
+            Usuarios.Clear();
+            RecuperarUsuarios();
+            Boolean usuarioexiste = false;
+            Boolean contraseñaexiste = false;
+            if (Usuario.Length>0 & Contraseña.Length>0)
             {
-                if (contraseña.Equals(us.Contraseña))
+                for(int i=0; i<Usuarios.Count; i++)
                 {
-                    Console.WriteLine("usuario recuperado");
+                    if (Usuarios[i].User.Equals(Usuario))
+                    {
+                        usuarioexiste = true;
+                        if (Usuarios[i].Contraseña.Equals(Contraseña))
+                        {
+                            contraseñaexiste = true;
+                        }
+                       
+                    }
+                    
+                }
+                if (usuarioexiste)
+                {
+                    if (contraseñaexiste)
+                    {
+                        Console.WriteLine("INGRESO EXITOSO");
+                    }
+                    else
+                    {
+                        Console.WriteLine("EXCEPCION contraseña incorrecta");
+
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("contraseña incorrecta");
+                    Console.WriteLine("EXCEPCION contraseña usuario incorrecto");
+
                 }
             }
-            else {
-                Console.WriteLine("usuario no existente");
+            else
+            {
+                Console.WriteLine("Excepcion Campos vacios");
             }
         }
 
@@ -69,18 +105,52 @@ namespace Dominio.LogicaDelNegocio
        */
         public void RecuperarContraseña(string correo)
         {
-            Usuario us = RecuperarUsuario(correo);
-            if (us == null)
+            Usuarios.Clear();
+            RecuperarUsuarios();
+            Boolean existe = false;
+            if (correo.Length > 0)
             {
-                Console.WriteLine("el correo no existe en la base de datos");
+                for (int i=0; i<Usuarios.Count; i++){
+                    if (Usuarios[i].User.Equals(correo))
+                    {
+                        existe = true;
+                    }
+                   
+                }
+                if (existe)
+                {
+                    Console.WriteLine("REVISE SU CORREO PARA NUEVA CONTRASEÑA");
 
+                }
+                else
+                {
+                    Console.WriteLine("Excepcion usuario inexistente");
+
+                }
 
             }
-            else {
-                Console.WriteLine("revise su correo electronico para recuperar la contraseña");
+            else
+            {
+                Console.WriteLine("Excepcion Campo vacio");
             }
         }
 
+
+        public void RecuperarUsuarios()
+        {
+            string Usuario = "";
+            string Contraseña = "";
+            string Tipo = "";
+            List<string[]> lista = ConsultarUsuariosRepositorio();
+
+            for (int i = 0; i < lista.Count; i++)
+            {
+                Usuario= (string)lista[i].GetValue(0);
+                Contraseña = (string)lista[i].GetValue(1);
+                Tipo=(string)lista[i].GetValue(2);
+                Usuarios.Add(new Usuario(Usuario, Contraseña,Tipo));
+            }
+        }
 
     }
 }

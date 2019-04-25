@@ -646,13 +646,177 @@ namespace Persistencia
         }
 
 
+        //...................................Autenticar..............................................................//
+
+        public List<string[]> ConsultarUsuariosRepositorio()
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+            List<string[]> listaUsuarios = new List<string[]>();
+            string Usuario = "";
+            string Contraseña= "";
+            string Tipo = "";
+            string query = "SELECT * FROM usuarios";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            MySqlDataReader reader = my.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Usuario = Convert.ToString(reader["User"]);
+                Contraseña = Convert.ToString(reader["Contraseña"]);
+                Tipo = Convert.ToString(reader["Tipo"]);
+
+                listaUsuarios.Add(new string[] { Usuario, Contraseña,Tipo });
+            }
+
+            Conexion.Close();
+
+            return listaUsuarios;
+        }
+
+        //..................................Vehiculos.....................................................//
+
+
+        public List<string[]> RecuperarVehiculosRepositorio()
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+            List<string[]> listaVehiculos = new List<string[]>();
+            string Placa = "";
+            string Marca = "";
+            string Modelo = "";
+            string Año = "";
+            string Numerochasis = "";
+            string Color = "";
+            string Concesionario = "";
+            string Precio = "";
+
+
+
+            string query = "SELECT * FROM vehiculos ";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            MySqlDataReader reader = my.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Placa = Convert.ToString(reader["Placa"]);
+                Marca = Convert.ToString(reader["Marca"]);
+                Modelo = Convert.ToString(reader["Modelo"]);
+                Año = Convert.ToString(reader["Año"]);
+                Numerochasis = Convert.ToString(reader["NumeroChasis"]);
+                Color = Convert.ToString(reader["Color"]);
+                Concesionario = Convert.ToString(reader["Concesionario"]);
+                Precio = Convert.ToString(reader["Precio"]);
+
+
+
+
+
+                listaVehiculos.Add(new string[] { Placa, Marca, Modelo, Año, Numerochasis, Color, Concesionario,Precio });
+            }
+
+            Conexion.Close();
+
+            return listaVehiculos;
+        }
+
+        public void EliminarVehiculoRepositorio(string Placa)
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+
+            string query = "delete from vehiculos where Placa='" + Placa + "'";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            Conexion.Close();
+        }
+
+        public void ActualizarVehiculosRepositorio(string placa, string marca, string modelo, string año, string numeroChasis, string color,string Concesionario, double precio)
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+
+            string Precio2 = Convert.ToString(precio);
+            string query = "update vehiculos set Marca='" + marca + "', Modelo='" + modelo + "' ,Año='" + año + "',NumeroChasis='" + numeroChasis + "',Color='" + color + "',Concesionario='" + Concesionario + "',Precio='"+Precio2+"' where Placa='" + placa + "' ";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            Conexion.Close();
+        }
+
+        public void AdicionarVehiculoRepositorio(string placa, string marca, string modelo, string año, string numeroChasis, string color,string concesionario, double precio)
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+
+            string Precio2 = Convert.ToString(precio);
+            string query = "INSERT INTO vehiculos (Placa,Marca,Modelo,Año,NumeroChasis,Color,Concesionario,Precio) values('" + placa + "','" + marca + "','" + modelo + "','" + año + "','" + numeroChasis + "','" + color + "','" + concesionario + "','" + Precio2 + "')";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            Conexion.Close();
+        }
 
 
 
         public List<string[]> RecuperarVehiculosRepositorio(string nombreConcesionario)
         {
-            return null;
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+            List<string[]> listaVehiculos = new List<string[]>();
+            string Placa = "";
+            string Marca = "";
+            string Modelo = "";
+            string Año = "";
+            string Numerochasis = "";
+            string Color = "";
+            string Concesionario = "";
+            string Precio = "";
+
+
+
+            string query = "SELECT * FROM vehiculos where Concesionario='"+nombreConcesionario+"' ";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            MySqlDataReader reader = my.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Placa = Convert.ToString(reader["Placa"]);
+                Marca = Convert.ToString(reader["Marca"]);
+                Modelo = Convert.ToString(reader["Modelo"]);
+                Año = Convert.ToString(reader["Año"]);
+                Numerochasis = Convert.ToString(reader["NumeroChasis"]);
+                Color = Convert.ToString(reader["Color"]);
+                Concesionario = Convert.ToString(reader["Concesionario"]);
+                Precio = Convert.ToString(reader["Precio"]);
+
+
+
+
+
+                listaVehiculos.Add(new string[] { Placa, Marca, Modelo, Año, Numerochasis, Color, Concesionario, Precio });
+            }
+
+            Conexion.Close();
+
+            return listaVehiculos;
         }
+
+        //...................................CompraUsado................................................//
+
 
         public List<string[]> RecuperarComprasRepositorio(string nombreConcesionario)
         {
