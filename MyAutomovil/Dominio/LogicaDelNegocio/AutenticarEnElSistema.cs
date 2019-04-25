@@ -30,12 +30,13 @@ namespace Dominio.LogicaDelNegocio
        pre: AutenticarUsuario(usuario, contraseña) and usuario != null and contraseña != null 
        post: AutenticarUsuario(usuario, contraseña) or  self@!usuario.Exception or self@!contraseña.Exception 
        */
-        public void AutenticarUsuario (string Usuario, string Contraseña)
+        public Boolean AutenticarUsuario (string Usuario, string Contraseña)
         {
             Usuarios.Clear();
             RecuperarUsuarios();
             Boolean usuarioexiste = false;
             Boolean contraseñaexiste = false;
+            Boolean Autenticado = false;
             if (Usuario.Length>0 & Contraseña.Length>0)
             {
                 for(int i=0; i<Usuarios.Count; i++)
@@ -56,6 +57,7 @@ namespace Dominio.LogicaDelNegocio
                     if (contraseñaexiste)
                     {
                         Console.WriteLine("INGRESO EXITOSO");
+                        Autenticado = true;
                     }
                     else
                     {
@@ -73,6 +75,7 @@ namespace Dominio.LogicaDelNegocio
             {
                 Console.WriteLine("Excepcion Campos vacios");
             }
+            return Autenticado;
         }
 
         /*

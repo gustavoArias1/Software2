@@ -59,7 +59,7 @@ namespace Persistencia
             {
                 Conexion.Open();
             }
-            string query = "update table marca set Nombre='" + Nombre + "',Pais='"+Pais+"' where Nombre='"+Nombre+"'";
+            string query = "update marca set Pais='"+Pais+"' where Nombre='"+Nombre+"'";
             MySqlCommand my = new MySqlCommand(query, Conexion);
             my.ExecuteNonQuery();
             Conexion.Close();
@@ -820,7 +820,48 @@ namespace Persistencia
 
         public List<string[]> RecuperarComprasRepositorio(string nombreConcesionario)
         {
-            return null;
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+            List<string[]> listaCompras = new List<string[]>();
+            string Placa = "";
+            string Marca = "";
+            string Modelo = "";
+            string Año = "";
+            string Numerochasis = "";
+            string Color = "";
+            string Concesionario = "";
+            string Precio = "";
+
+
+
+            string query = "SELECT * FROM compras where Concesionario='" + nombreConcesionario + "' ";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            MySqlDataReader reader = my.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Placa = Convert.ToString(reader["Placa"]);
+                Marca = Convert.ToString(reader["Marca"]);
+                Modelo = Convert.ToString(reader["Modelo"]);
+                Año = Convert.ToString(reader["Año"]);
+                Numerochasis = Convert.ToString(reader["NumeroChasis"]);
+                Color = Convert.ToString(reader["Color"]);
+                Concesionario = Convert.ToString(reader["Concesionario"]);
+                Precio = Convert.ToString(reader["Precio"]);
+
+
+
+
+
+                listaCompras.Add(new string[] { Placa, Marca, Modelo, Año, Numerochasis, Color, Concesionario, Precio });
+            }
+
+            Conexion.Close();
+
+            return listaCompras;
         }
 
         public void AdicionarCompraRepositorio(string nombreConcesionario, DateTime fechaCompra, double precioCompra, string placa, int codigoProveedor)

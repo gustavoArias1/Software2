@@ -11,7 +11,9 @@ namespace Dominio.LogicaDelNegocio
     {
         public static void Main(string[] args)
         {
-
+            ConexionBaseDatos CB = new ConexionBaseDatos();
+            CB.Conectar();
+            CB.ActualizarMarcaRepositorio("Aliquam Rutrum Associates", "Colombia");
         }
     }
 }
