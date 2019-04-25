@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -21,7 +22,13 @@ namespace MVC.Controllers
 
         public ActionResult ConsultarEmpleado()
         {
-            return View();
+            Fachada f = new Fachada();
+            return View(f.RecuperarConcesionarios());
+        }
+
+        public PartialViewResult RecuperarEmpleados() {
+            Fachada f = new Fachada();
+            return PartialView("_Empleados",f.RecuperarEmpleados());
         }
     }
 }

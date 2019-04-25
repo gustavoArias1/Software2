@@ -1,0 +1,18 @@
+﻿@model List<MVC.Models.Vendedor>
+
+<div class="container" id="contenedorEmpleados">
+    @foreach (var vendedor in Model)
+    {
+    <div class="row border-bottom border-secundary m-2 p-2">
+        <br />
+        <div class="col-sm-6 align-center ">
+            <p>@vendedor.Apellido  @vendedor.Nombre @vendedor.Cargo @vendedor.Concesionario</p>
+        </div>
+        <div class="col-sm-3"></div>
+        <button class="col-sm-1 btn btn-success">Crear</button>
+        <div class="col-sm-1"></div>
+        <button class="col-sm-1 btn btn-success">Eliminar</button>
+        <br/>
+    </div>
+    }
+</div>

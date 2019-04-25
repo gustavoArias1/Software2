@@ -3,6 +3,7 @@
     Layout = null;
 }
 
+
 <!DOCTYPE html>
 <head>
     <title>Login</title>
@@ -13,6 +14,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link href="~/css/styles.css" rel="stylesheet" type="text/css" />
 
@@ -63,20 +65,25 @@
                 <div class="form-group">
                     <label for="sel1">Seleccione el concesionario:</label>
                     <select class="form-control" id="selectorConcesionario">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                        @foreach (var c in Model)
+                        {
+                            <option>@c</option>
+                        }
                     </select>
                 </div>
             </div>
             <div class="col-sm-4 btn-group-inline">
-                <button type="button" class="btn btn-dark mb-2 ">Listar Todos</button>
-                <button type="button" class="btn btn-success mb-2 ">@Html.ActionLink("Adicionar", "AdicionarEmpleado", null, new { @class = "myclass" })</button>
+                @Ajax.ActionLink("Listar todos", "RecuperarEmpleados",null, new AjaxOptions()
+           {
+               HttpMethod = "GET",
+               InsertionMode = InsertionMode.Replace,
+               UpdateTargetId = "contenedorEmpleados",
+           }, new { @class = "btn btn-success mb-2" })
+               @Html.ActionLink("Adicionar", "AdicionarEmpleado", null, new { @class = "btn btn-success mb-2 " })
             </div>
         </div>
     </div>
-    <div class="container" id="contenedorClientes">
+    <div  id="contenedorEmpleados">
 
     </div>
     <br />
