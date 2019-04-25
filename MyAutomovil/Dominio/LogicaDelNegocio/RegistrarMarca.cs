@@ -31,11 +31,12 @@ namespace Dominio.LogicaDelNegocio
          pre: !ConsultarMarca(nombreMarca) and nombreMarca != null and pais != null
          post: ConsultarMarca(nombreMarca) or self@pre.ConsultarMarca(nombreMarca) or self@!nombreMarca.Exception or self@!pais.Exception
          */
-        public void AdicionarMarca(string nombreMarca,string pais)
+        public Boolean AdicionarMarca(string nombreMarca,string pais)
         {
             marcas.Clear();
             ConsultarMarca();
             Boolean Existe = false;
+            Boolean RegistroMarca = false;
             Marca marca = new Marca(nombreMarca, pais);
             for (int i = 0; i < marcas.Count; i++)
             {
@@ -48,12 +49,15 @@ namespace Dominio.LogicaDelNegocio
             if (!Existe)
             {
                 AdicionarMarcaRepositorio(marca.Nombre, marca.Pais);
+                RegistroMarca = true;
+
 
             }
             else
             {
                 Console.WriteLine("Excepcion marca existente");
             }
+            return RegistroMarca;
         }
 
         /*
