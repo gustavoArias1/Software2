@@ -6,9 +6,15 @@ using Persistencia;
 
 namespace Dominio.LogicaDelNegocio
 {
-    class RegistrarVehiculo : DBFake
+    class RegistrarVehiculo : ConexionBaseDatos
     {
         List<Vehiculo> vehiculos = null;
+
+        public RegistrarVehiculo()
+        {
+            Conectar();
+        }
+
 
         /*
      * @William vasquez
@@ -20,7 +26,7 @@ namespace Dominio.LogicaDelNegocio
          */
         public void AdicionarVehiculo(string marca,string modelo,string año,string color,string numeroChasis,string placa,string concesionario,double precio)
         {
-            AdicionarVehiculoRepositorio(placa, marca, modelo, año, numeroChasis, color, precio);
+            AdicionarVehiculoRepositorio(placa, marca, modelo, año, numeroChasis, color,concesionario, precio);
         }
         /*
         * @William vasquez
@@ -33,7 +39,7 @@ namespace Dominio.LogicaDelNegocio
             */
         public void ActualizarVehiculo(string marca, string modelo, string año, string color, string numeroChasis, string placa, string concesionario,double precio)
         {
-            ActualizarVehiculosRepositorio(placa, marca, modelo, año, numeroChasis, color, precio);
+            ActualizarVehiculosRepositorio(placa, marca, modelo, año, numeroChasis, color,concesionario, precio);
         }
         /*
          * Contenido del parametro filtros

@@ -17,7 +17,6 @@ namespace Dominio.LogicaDelNegocio
 
         public RegistrarMarca()
         {
-            
             Conectar();
         }
 
