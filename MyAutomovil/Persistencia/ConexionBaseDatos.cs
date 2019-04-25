@@ -501,7 +501,7 @@ namespace Persistencia
                 Conexion.Open();
             }
 
-            string query = "INSERT INTO modelo (NombreModelo,NombreMarca,NumeroPuertas,Cilindraje,Transmision) values('"+NombreModelo+ "','" + NombreMarca + "','" + NumeroPuertas + "','" + Cilindraje + "','" + Transmision + "')";
+            string query = "INSERT INTO modelo (NombreModelo,NombreMarca,Transmision,NumeroPuertas,Cilindraje) values('" + NombreModelo+ "','" + NombreMarca + "','" + Transmision + "','" + NumeroPuertas + "','" + Cilindraje + "')";
             MySqlCommand my = new MySqlCommand(query, Conexion);
             my.ExecuteNonQuery();
             Conexion.Close();
@@ -825,15 +825,10 @@ namespace Persistencia
                 Conexion.Open();
             }
             List<string[]> listaCompras = new List<string[]>();
-            string Placa = "";
-            string Marca = "";
-            string Modelo = "";
-            string Año = "";
-            string Numerochasis = "";
-            string Color = "";
-            string Concesionario = "";
-            string Precio = "";
-
+            string fechaCompra="";
+            string precioCompra = "";
+            string placa = "";
+            string codigoProveedor;
 
 
             string query = "SELECT * FROM compras where Concesionario='" + nombreConcesionario + "' ";
@@ -843,19 +838,11 @@ namespace Persistencia
 
             while (reader.Read())
             {
-                Placa = Convert.ToString(reader["Placa"]);
-                Marca = Convert.ToString(reader["Marca"]);
-                Modelo = Convert.ToString(reader["Modelo"]);
-                Año = Convert.ToString(reader["Año"]);
-                Numerochasis = Convert.ToString(reader["NumeroChasis"]);
-                Color = Convert.ToString(reader["Color"]);
-                Concesionario = Convert.ToString(reader["Concesionario"]);
-                Precio = Convert.ToString(reader["Precio"]);
-
-
-
-
-
+                fechaCompra = Convert.ToString(reader["FechaCompra"]);
+                precioCompra = Convert.ToString(reader["PrecioCompra"]);
+                placa = Convert.ToString(reader["Placa"]);
+                codigoProveedor = Convert.ToString(reader["CodigoProveedor"]);
+          
                 listaCompras.Add(new string[] { Placa, Marca, Modelo, Año, Numerochasis, Color, Concesionario, Precio });
             }
 
