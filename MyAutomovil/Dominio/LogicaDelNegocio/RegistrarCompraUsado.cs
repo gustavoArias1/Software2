@@ -6,8 +6,13 @@ using Persistencia;
 
 namespace Dominio.LogicaDelNegocio
 {
-    class RegistrarCompraUsado : DBFake
+    class RegistrarCompraUsado : ConexionBaseDatos
     {
+
+        public RegistrarCompraUsado()
+        {
+            Conectar();
+        }
         public void AdicionarCompra(string nombreConcesionario, DateTime fechaCompra, double precioCompra, string placa,
             int codigoProveedor)
         {

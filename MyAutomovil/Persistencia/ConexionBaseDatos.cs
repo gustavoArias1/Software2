@@ -822,5 +822,11 @@ namespace Persistencia
         {
             return null;
         }
+
+        public void AdicionarCompraRepositorio(string nombreConcesionario, DateTime fechaCompra, double precioCompra, string placa, int codigoProveedor)
+        {
+
+        }
+
     }
 }

@@ -35,15 +35,25 @@ namespace Dominio.LogicaDelNegocio
         {
             marcas.Clear();
             ConsultarMarca();
+            Boolean Existe = false;
             Marca marca = new Marca(nombreMarca, pais);
             for (int i = 0; i < marcas.Count; i++)
             {
                 if (marcas[i].Nombre.Equals(nombreMarca))
                 {
-                    Console.WriteLine("La marca ya se encuentra regitrada");
+                    Existe = true;
                 }
+
             }
-            AdicionarMarcaRepositorio(marca.Nombre, marca.Pais);
+            if (!Existe)
+            {
+                AdicionarMarcaRepositorio(marca.Nombre, marca.Pais);
+
+            }
+            else
+            {
+                Console.WriteLine("Excepcion marca existente");
+            }
         }
 
         /*
