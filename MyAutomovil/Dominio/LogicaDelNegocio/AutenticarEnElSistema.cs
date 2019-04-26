@@ -11,7 +11,7 @@ namespace Dominio.LogicaDelNegocio
    * @ Yherson Blandon
    * @ version 3.0 05/04/2019
    */
-    class AutenticarEnElSistema:ConexionBaseDatos
+   public class AutenticarEnElSistema:ConexionBaseDatos
     {
 
         public List<Usuario> Usuarios = new List<Usuario>();

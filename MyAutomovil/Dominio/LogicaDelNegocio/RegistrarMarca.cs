@@ -11,7 +11,7 @@ namespace Dominio.LogicaDelNegocio
      * @ Manuel Galvis
      * @ version 2.0 04/04/2019
      */
-    class RegistrarMarca:ConexionBaseDatos
+    public class RegistrarMarca:ConexionBaseDatos
     {
         public List<Marca> marcas = new List<Marca>();
 
@@ -31,7 +31,7 @@ namespace Dominio.LogicaDelNegocio
          pre: !ConsultarMarca(nombreMarca) and nombreMarca != null and pais != null
          post: ConsultarMarca(nombreMarca) or self@pre.ConsultarMarca(nombreMarca) or self@!nombreMarca.Exception or self@!pais.Exception
          */
-        public Boolean AdicionarMarca(string nombreMarca,string pais)
+        public  Boolean AdicionarMarca(string nombreMarca,string pais)
         {
             marcas.Clear();
             ConsultarMarca();
@@ -43,6 +43,7 @@ namespace Dominio.LogicaDelNegocio
                 if (marcas[i].Nombre.Equals(nombreMarca))
                 {
                     Existe = true;
+                    Console.WriteLine("Marca Existente");
                 }
 
             }
@@ -50,12 +51,15 @@ namespace Dominio.LogicaDelNegocio
             {
                 AdicionarMarcaRepositorio(marca.Nombre, marca.Pais);
                 RegistroMarca = true;
+                Console.WriteLine("Se adiciono la Marca");
 
 
             }
             else
             {
+                RegistroMarca = false;
                 Console.WriteLine("Excepcion marca existente");
+
             }
             return RegistroMarca;
         }
@@ -68,8 +72,9 @@ namespace Dominio.LogicaDelNegocio
          pre: ConsultarMarca(nombreMarca)
          post: !ConsultarMarca(nombreMarca) or self@pre.ConsultarMarca(nombreMarca)
          */
-        public void EliminarMarca(string nombreMarca)
+        public Boolean EliminarMarca(string nombreMarca)
         {
+            Boolean Eliminado = false;
             Marca marca = ConsultarMarca(nombreMarca);
             
             if (marcas.Contains(marca))
@@ -78,14 +83,19 @@ namespace Dominio.LogicaDelNegocio
                 {
                     if (marcas[i].Nombre.Equals(marca.Nombre))
                     {
+                        Eliminado = true;
                         EliminarMarcaRepositorio(nombreMarca);
                     }
+
                 }
             }
             else
             {
-                Console.WriteLine("La marca no existe");  
+                Eliminado = false;
+                Console.WriteLine("La marca no existe");
+
             }
+            return Eliminado;
         }
 
         /*
@@ -96,8 +106,9 @@ namespace Dominio.LogicaDelNegocio
          pre: ConsultarMarca(nombreMarca) and nombreMarca != null and pais != null
          post: ConsultarMarca(nombreMarca) or self@!nombreMarca.Exception or self@!pais.Exception
          */
-        public void ActualizarMarca(string nombreMarca, string pais)
+        public Boolean ActualizarMarca(string nombreMarca, string pais)
         {
+            Boolean Actualizado = false;
             marcas.Clear();
             ConsultarMarca();
             Marca marca = new Marca(nombreMarca, "");
@@ -105,17 +116,21 @@ namespace Dominio.LogicaDelNegocio
             {
                 if (marcas[i].Nombre.Equals(nombreMarca))
                 {
+                    Actualizado = true;
                     marca.Pais = pais;
                 }
             }
             if (marca.Pais == "")
             {
+                Actualizado = false;
                 Console.WriteLine("La marca no exite");
             }
             else
             {
+                Actualizado = true;
                 ActualizarMarcaRepositorio(nombreMarca, pais);
             }
+            return Actualizado;
         }
 
         /*

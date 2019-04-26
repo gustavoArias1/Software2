@@ -6,9 +6,9 @@ using Persistencia;
 
 namespace Dominio.LogicaDelNegocio
 {
-    class RegistrarCliente : ConexionBaseDatos
+    public class RegistrarCliente : ConexionBaseDatos
     {
-        public List<Cliente> clientes;
+        public List<Cliente> clientes = new List<Cliente>();
 
         public RegistrarCliente()
         {
@@ -25,7 +25,7 @@ namespace Dominio.LogicaDelNegocio
          pre: RecuperarClientes.Count > 0, clientes.Contains(cliente) != true
          pro: Cliente es agregado en DB, RecuperarClientes.Count  = RecuperarClientes.Count + 1
              */
-        public void AdicionarCliente (string nombre, string apellido, int cedula, DateTime fechaDeNacimiento, 
+        public void AdicionarCliente(string nombre, string apellido, int cedula, DateTime fechaDeNacimiento,
             string correo, string contraseña)
         {
             clientes = RecuperarClientes();
@@ -39,17 +39,18 @@ namespace Dominio.LogicaDelNegocio
                 }
                 else
                 {
-                    AdicionarClienteRepositorio(nombre, apellido,   fechaDeNacimiento, cedula, correo, contraseña);
+                    AdicionarClienteRepositorio(nombre, apellido, fechaDeNacimiento, cedula, correo, contraseña);
                     System.Console.WriteLine("El cliente ha sido creado");
                 }
             }
-            else {
-                
+            else
+            {
+
                 AdicionarClienteRepositorio(nombre, apellido, fechaDeNacimiento, cedula, correo, contraseña);
                 System.Console.WriteLine("El cliente ha sido creado");
-                
+
             }
-        }
+        } 
 
         /*
            William Andres Vasquez Sanabria 
@@ -59,12 +60,37 @@ namespace Dominio.LogicaDelNegocio
            pre: ConsultarCliente haya sido invocado previamente
            pro: Cliente es actualizado en DB
            */
-        public void ActualizarCliente(int codigo,string nombre, string apellido, int cedula, DateTime fechaDeNacimiento, 
+        public Boolean ActualizarCliente(int codigo, string nombre, string apellido, int cedula, DateTime fechaDeNacimiento,
             string correo, string contraseña)
         {
-            ActualizarClienteRepositorio(codigo, nombre, apellido,  fechaDeNacimiento, cedula, correo, contraseña);
-            System.Console.WriteLine("El cliente ha sido Actualizado");
+            Boolean Actualizado = false;
+            Boolean existe = false;
+            clientes.Clear();
+            clientes=RecuperarClientes();
+            for (int i = 0; i < clientes.Count; i++)
+            {
+
+                if (clientes[i].Codigo.Equals(codigo))   {
+                    existe = true;
+                    break;
+                }
+            
+            }
+            if (existe)
+            {
+                Actualizado = true;
+                ActualizarClienteRepositorio(codigo, nombre, apellido, fechaDeNacimiento, cedula, correo, contraseña);
+                System.Console.WriteLine("El cliente ha sido Actualizado");
+            }
+            else
+            {
+                Actualizado = false;
+                System.Console.WriteLine("El cliente no ha sido Actualizado");
+
+            }
+            return Actualizado;
         }
+
 
         /*
            William Andres Vasquez Sanabria 
@@ -151,7 +177,7 @@ namespace Dominio.LogicaDelNegocio
 
 
                     
-                    clientesAux.Add(new Cliente(Nombre,Apellido,Fecha,Cedula,Correo,Contraseña));
+                    clientesAux.Add(new Cliente(Codigo,Nombre,Apellido,Fecha,Cedula,Correo,Contraseña));
                 }
             }
             else {
