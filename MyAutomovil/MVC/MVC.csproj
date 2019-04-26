@@ -109,8 +109,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Fachada.cs" />
-    <Compile Include="Models\Modelos.cs" />
+    <Compile Include="Models\FachadaW.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -26,7 +26,7 @@ namespace MVC.Controllers
         }
         
         public PartialViewResult RecuperarEmpleados() {
-            MVC.Models.Fachada f = new MVC.Models.Fachada();
+            MVC.Models.FachadaW f = new MVC.Models.FachadaW();
             return PartialView("_Empleados",f.RecuperarEmpleados());
         }
 
