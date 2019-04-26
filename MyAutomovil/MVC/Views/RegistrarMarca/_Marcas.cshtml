@@ -11,7 +11,7 @@
                 <p>@marca.nombreMarca.ToUpper()  -  @marca.pais.ToUpper() </p>
             </div>
             <div class="col-sm-3"></div>
-            @Html.ActionLink("Actualizar", "ActualizarMarca", routeValues: new { id = marca.nombreMarca }, htmlAttributes: new { @class = "col-sm-1 btn btn-success" })
+            @Html.ActionLink("Actualizar", "ActualizarMarca", null, htmlAttributes: new { @class = "col-sm-1 btn btn-success" })
             <div class="col-sm-1"></div>
             @Html.ActionLink("Eliminar", "EliminarMarca",routeValues: new { id = marca.nombreMarca } , htmlAttributes: new
        { @class = "col -sm-1 btn btn-success", onclick = "return confirm" + "('Esta seguro de que quiere eliminar esta Marca?');" })
