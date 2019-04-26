@@ -1,4 +1,5 @@
-﻿
+﻿@model MVC.Models.Cliente
+
 @{
     Layout = null;
 }
@@ -58,19 +59,19 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="cedulaCliente">Cedula</label>
                                 <div class="col-sm-12">
-                                    <input id="cedulaCliente" name="cedulaCliente" type="text" placeholder="" class="form-control input-md">
+                                    <input id="cedulaCliente" name="cedulaCliente" type="text" placeholder="" class="form-control input-md" value= @Model.Cedula.ToString()>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="nombreCliente">Nombre</label>
                                 <div class="col-sm-12">
-                                    <input id="nombreCliente" name="nombreCliente" type="text" placeholder="" class="form-control input-md">
+                                    <input id="nombreCliente" name="nombreCliente" type="text" placeholder="" class="form-control input-md value" value=@Model.Nombre>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="apellidoCliente">Apellido</label>
                                 <div class="col-sm-12">
-                                    <input id="apellidoCliente" name="apellidoCliente" type="text" placeholder="" class="form-control input-md">
+                                    <input id="apellidoCliente" name="apellidoCliente" type="text" placeholder="" class="form-control input-md" value=@Model.Apellido>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -87,7 +88,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="correoCliente">Correo</label>
                                 <div class="col-sm-12">
-                                    <input id="correoCliente" name="correoCliente" type="text" placeholder="" class="form-control input-md">
+                                    <input id="correoCliente" name="correoCliente" type="text" placeholder="" class="form-control input-md" value=@Model.Correo>
                                 </div>
                             </div>
                             <div class="form-group">

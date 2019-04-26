@@ -27,6 +27,15 @@ namespace MVC.Controllers
         public PartialViewResult RecuperarEmpleados() {
             Fachada f = new Fachada();
             return PartialView("_Empleados",f.RecuperarEmpleados());
-        }*/
+        }
+
+        public ActionResult ConsultarEmpleado2() {
+            return View();
+        }
+
+        public ActionResult ConsultarEmpleado3()
+        {
+            return View();
+        }
     }
 }
