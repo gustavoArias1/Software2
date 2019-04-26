@@ -6,10 +6,10 @@ using Persistencia;
 
 namespace Dominio.LogicaDelNegocio
 {
-    class RegistrarEmpleado : ConexionBaseDatos
+   public  class RegistrarEmpleado : ConexionBaseDatos
     {
         
-        List<Vendedor> vendedores;
+        List<Vendedor> vendedores = new List<Vendedor>();
 
         public RegistrarEmpleado()
         {
@@ -67,12 +67,32 @@ namespace Dominio.LogicaDelNegocio
             pre: ConsultarEmpleado haya sido previamente invocado
             post: se eliminar un empleado de la DB, RecuperarEmpleados.Count  = RecuperarEmpleados.Count - 1
         */
-        public void EliminarEmpleado(int codigo)
+        public Boolean EliminarEmpleado(int codigo)
         {
-            /*
-             eliminar empleado en DB con sentencia delete
-             */
-            EliminarEmpleadoRepositorio(codigo);
+           Boolean eliminado = false;
+           Boolean existe = false;
+            vendedores.Clear();
+            vendedores = RecuperarEmpleados();
+            for (int i = 0; i < vendedores.Count ; i++)
+            {
+                if (vendedores[i].Codigo.Equals(codigo))
+                {
+                    existe = true;
+                }
+
+               
+            }
+            if (existe == true)
+            {
+                eliminado = true;
+                EliminarEmpleadoRepositorio(codigo);
+            }
+            if (!existe)
+            {
+                eliminado = false;
+                System.Console.WriteLine("codigo no es valido");
+            }
+            return eliminado;
         }
 
        /*
