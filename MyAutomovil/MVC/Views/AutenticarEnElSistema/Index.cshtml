@@ -1,7 +1,6 @@
-﻿
-@{
-    Layout = null;
-}
+﻿@model Fachada.IndexViewModel
+
+
 
 <!DOCTYPE html>
 <head>
@@ -16,44 +15,79 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 
-<body>
-    <div class="jumbotron  jumbotron-fluid" align="center" style="border: 1px dashed rgb(66, 133, 244); background-color: rgb(0, 0, 0);">
-        <h1 class="display-3" style="color: rgb(255, 255, 255); font-family: Comic Sans MS, cursive, sans-serif;" contenteditable="false" spellcheckker="false">MI AUTOMÓVIL</h1>
-    </div>
-    <div class="container">
-        <div align="center">
-            <h2> Login</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <body>
+        <div class="jumbotron  jumbotron-fluid" align="center" style="border: 1px dashed rgb(66, 133, 244); background-color: rgb(0, 0, 0);">
+            <h1 class="display-3" style="color: rgb(255, 255, 255); font-family: Comic Sans MS, cursive, sans-serif;" contenteditable="false" spellcheckker="false">MI AUTOMÓVIL</h1>
         </div>
+        <div class="container">
+            <div align="center">
+                <h2> Login</h2>
+            </div>
+        </div>
+        <hr />
         <div class="row">
             <div class="col-sm-3"></div>
             <div class="col-sm-6">
-                <div class="form-group" style="">
-                    <label>Usuario:</label><input type="text" class="form-control">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label>Usuario</label>
+                    @Html.EditorFor(model => model.user, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.user, "", new { @class = "text-danger" })
                 </div>
-                <div class="form-group" style="">
-                    <label>Contraseña</label><input type="text" class="form-control">
-                    <a href="/AutenticarEnElSistema/RecuperarContraseña" style="font-family:Comic Sans MS, cursive, sans-serif;"> Recuperar contraseña</a>
+                @{
+                    if (@ViewData["MensajeUsuario"] != null)
+                    {
+                        <p class="alert alert-danger"> @ViewData["MensajeUsuario"]</p>
+                    }
+                }
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    @Html.EditorFor(model => model.contraseña, new { htmlAttributes = new { @class = "form-control" , @type = "password" } })
+                    @Html.ValidationMessageFor(model => model.contraseña, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.ActionLink("¿Olvidaste tu contraseña?", "RecuperarContraseña")
                 </div>
             </div>
             <div class="col-sm-3"></div>
+            <div class="container" style="">
+                <div class="row">
+                    <div class="col-sm-3"></div>
+                    <input type="submit" value="Ingresar" class="btn btn-dark col-sm-2" />
+                    <div class="col-sm-2"><br /></div>
+                    <input type="submit" value="Registrarse" class="btn btn-dark col-sm-2" />
+                    <div class="col-sm-3"></div>
+                </div>
+            </div>
         </div>
-        <div class="container" style="">
-            <div class="row">
-                <div class="col-sm-3"></div>
-                <button type="button" class="btn btn-dark col-sm-2" style="">Ingresar</button>
-                <div class="col-sm-2"><br /></div>
-                <button type="button" class="btn btn-dark col-sm-2" style="">Registrarse</button>
-                <div class="col-sm-3"></div>
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                @{
+                    if (@ViewData["MensajeLogueo"] != null)
+                    {
+                        <p class="alert alert-danger"> @ViewData["MensajeLogueo"]</p>
+                    }
+                }
             </div>
-            </div>
-        <br>
-        <br>
-    </div> <!-- /container -->
+        </div>
+        <div class="col-sm-3"></div>
+    </body>
+    <br />
+    <br />
+    <br />
     <footer class="footer" style="background-color : #000000; color:#ffffff">
-        <br>
-        <br>
+        <br />
+        <br />
         <p>© WYMAY SOLUTIONS 2019</p>
+        <br />
+        <br />
     </footer>
-
-</body>
-</html>
+}

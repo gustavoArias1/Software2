@@ -11,7 +11,7 @@ namespace Dominio.LogicaDelNegocio
    * @ Yherson Blandon
    * @ version 3.0 05/04/2019
    */
-    class AutenticarEnElSistema:ConexionBaseDatos
+    public class AutenticarEnElSistema:ConexionBaseDatos
     {
 
         public List<Usuario> Usuarios = new List<Usuario>();
@@ -30,20 +30,21 @@ namespace Dominio.LogicaDelNegocio
        pre: AutenticarUsuario(usuario, contraseña) and usuario != null and contraseña != null 
        post: AutenticarUsuario(usuario, contraseña) or  self@!usuario.Exception or self@!contraseña.Exception 
        */
-        public void AutenticarUsuario (string Usuario, string Contraseña)
+        public Boolean AutenticarUsuario (string Usuario, string Contraseña)
         {
             Usuarios.Clear();
             RecuperarUsuarios();
             Boolean usuarioexiste = false;
             Boolean contraseñaexiste = false;
+            Boolean bandera;
             if (Usuario.Length>0 & Contraseña.Length>0)
             {
                 for(int i=0; i<Usuarios.Count; i++)
                 {
-                    if (Usuarios[i].User.Equals(Usuario))
+                    if (Usuarios[i].user.Equals(Usuario))
                     {
                         usuarioexiste = true;
-                        if (Usuarios[i].Contraseña.Equals(Contraseña))
+                        if (Usuarios[i].contraseña.Equals(Contraseña))
                         {
                             contraseñaexiste = true;
                         }
@@ -55,24 +56,25 @@ namespace Dominio.LogicaDelNegocio
                 {
                     if (contraseñaexiste)
                     {
-                        Console.WriteLine("INGRESO EXITOSO");
+                        bandera = true;
                     }
                     else
                     {
-                        Console.WriteLine("EXCEPCION contraseña incorrecta");
+                        bandera = false;
 
                     }
                 }
                 else
                 {
-                    Console.WriteLine("EXCEPCION contraseña usuario incorrecto");
+                    bandera = false;
 
                 }
             }
             else
             {
-                Console.WriteLine("Excepcion Campos vacios");
+                bandera = false;
             }
+            return bandera;
         }
 
         /*
@@ -111,7 +113,7 @@ namespace Dominio.LogicaDelNegocio
             if (correo.Length > 0)
             {
                 for (int i=0; i<Usuarios.Count; i++){
-                    if (Usuarios[i].User.Equals(correo))
+                    if (Usuarios[i].user.Equals(correo))
                     {
                         existe = true;
                     }
@@ -148,7 +150,7 @@ namespace Dominio.LogicaDelNegocio
                 Usuario= (string)lista[i].GetValue(0);
                 Contraseña = (string)lista[i].GetValue(1);
                 Tipo=(string)lista[i].GetValue(2);
-                Usuarios.Add(new Usuario(Usuario, Contraseña,Tipo));
+                Usuarios.Add(new Usuario { user = Usuario, contraseña = Contraseña, tipo = Tipo });
             }
         }
 
