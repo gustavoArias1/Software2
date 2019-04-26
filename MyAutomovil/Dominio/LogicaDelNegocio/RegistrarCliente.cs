@@ -127,6 +127,10 @@ namespace Dominio.LogicaDelNegocio
             return clientesAux;
         }
 
+        public List<Cliente> ConsultarCliente() {
+            return RecuperarClientes();
+        }
+
         /*
          William Andres Vasquez Sanabria 
          Versión 1.0
