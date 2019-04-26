@@ -21,6 +21,67 @@ namespace MVC.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult AdicionarModelo(AdicionarModeloViewModelo AdicionarModelo)
+        {
+            if (AdicionarModelo.nombreMarca == null)
+            {
+                ViewData["MensajeMarca"] = "Campo obligatorio";
+                return View();
+            }
+
+            if (AdicionarModelo.nombreModelo == null)
+            {
+                ViewData["MensajeModelo"] = "Campo obligatorio";
+                return View();
+            }
+
+            if (AdicionarModelo.numeroPuertas == null)
+            {
+                ViewData["MensajePuertas"] = "Campo obligatorio";
+                return View();
+            }
+
+            if (AdicionarModelo.cilindraje == null)
+            {
+                ViewData["MensajeCilindraje"] = "Campo obligatorio";
+                return View();
+            }
+
+            if (AdicionarModelo.transmision == null)
+            {
+                ViewData["MensajeTransmision"] = "Campo obligatorio";
+                return View();
+            }
+
+            Dominio.EntidadesDominio.Modelo Modelo = new Dominio.EntidadesDominio.Modelo
+            {
+                nombreMarca = AdicionarModelo.nombreMarca,
+                nombreModelo = AdicionarModelo.nombreModelo,
+                numeroPuertas = AdicionarModelo.numeroPuertas,
+                cilindraje=AdicionarModelo.cilindraje,
+                transmision=AdicionarModelo.transmision
+
+
+            };
+
+
+            if (_registrarModelo.AdicionarModelo(Modelo.nombreModelo,Modelo.nombreMarca,Modelo.numeroPuertas,Modelo.cilindraje,Modelo.transmision))
+            {
+
+                ViewData["MensajeExito"] = "Exito en la creacion de modelo";
+                return View();
+            }
+            else
+            {
+                ViewData["MensajeIngreso"] = "Error al adicionar modelo";
+                return View();
+            }
+
+
+        }
+
+
         public ActionResult ActualizarModelo(string nombreMarca, string nombreModelo)
         {
             nombreMarca = "Commodo LLC";
