@@ -12,7 +12,7 @@ namespace Dominio.LogicaDelNegocio
      @ Gustavo Andres Arias Loaiza
      @ version 2.0 04/04/2019
      */
-    class RegistrarConcesionario : ConexionBaseDatos
+    public class RegistrarConcesionario : ConexionBaseDatos
     {
         public List<Concesionario> Concesionarios = new List<Concesionario>();
         string concecionario = "";
@@ -31,8 +31,9 @@ namespace Dominio.LogicaDelNegocio
          * pre : !Concesionarios.contains(concesionario)
          * post: Consultar(nombreConcesionario)
          */
-        public void AdicionarConcesionario(string nombreConcesionario, int CodigoAdministrador, string direccion, string telefono, string ciudad)
+        public Boolean AdicionarConcesionario(string nombreConcesionario, int CodigoAdministrador, string direccion, string telefono, string ciudad)
         {
+            Boolean Adicionado = false;
             RecuperarConcesionarios();
             Boolean existe = false;
             Concesionario concesionario = new Concesionario (nombreConcesionario, CodigoAdministrador, direccion,telefono,ciudad);
@@ -41,6 +42,7 @@ namespace Dominio.LogicaDelNegocio
             {
                 if (Concesionarios[i].NombreConcesionario.Equals(nombreConcesionario))
                 {
+                    Adicionado = false;
                     System.Console.WriteLine("ERROR CONCESIONARIO YA REGISTRADO");
                     existe = true;
                 }
@@ -49,9 +51,10 @@ namespace Dominio.LogicaDelNegocio
 
             if (!existe)
             {
+                Adicionado = true;
                 AdicionarConcesionarioRepositorio(nombreConcesionario, CodigoAdministrador, direccion, telefono, ciudad);
             }
-           
+            return Adicionado;
         }
 
         /* Este metodo nos ayuda a obtener la infromacion de un concesionario especifico filtrado por el nombre

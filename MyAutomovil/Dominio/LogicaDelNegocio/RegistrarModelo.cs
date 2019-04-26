@@ -13,7 +13,7 @@ namespace Dominio.LogicaDelNegocio
     * @ Yherson Blandon
     * @ version 2.0 04/04/2019
     */
-    class RegistrarModelo : ConexionBaseDatos
+   public  class RegistrarModelo : ConexionBaseDatos
     {
         public List<Modelo> modelos = new List<Modelo>();
 
@@ -34,8 +34,9 @@ namespace Dominio.LogicaDelNegocio
        post: ConsultarModelo(nombreModelo, nombreMarca) or  self@!nombreModelo.Exception or self@!nombreMarca.Exception or self@!numeroPuertas.Exception
        or self@!cilindraje.Exception or self@!transmision.Exception 
        */
-        public void AdicionarModelo(string nombreModelo, string nombreMarca, int numeroPuertas, string cilindraje, string transmision)
+        public Boolean AdicionarModelo(string nombreModelo, string nombreMarca, int numeroPuertas, string cilindraje, string transmision)
         {
+            Boolean adicionado = false;
             // AdicionarModelosRepositorio(nombreModelo, nombreMarca, numeroPuertas, cilindraje, transmision);
             modelos.Clear();
             ConsultarModelov();
@@ -52,13 +53,16 @@ namespace Dominio.LogicaDelNegocio
             }
             if (!existe)
             {
+                adicionado = true;
                 AdicionarModelosRepositorio(nombreModelo, nombreMarca, numeroPuertas, cilindraje, transmision);
             }
             else
             {
+                adicionado = false;
                 Console.WriteLine("el modelo ya existe en la base de datos");
 
             }
+            return adicionado;
 
         }
 
