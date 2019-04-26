@@ -58,7 +58,7 @@ namespace MVC.Models
         public string Concesionario { get => concesionario; set => concesionario = value; }
     }
 
-    public class Cliente
+    /*public class Cliente
     {
         private int codigo;
         private string nombre;
@@ -98,6 +98,7 @@ namespace MVC.Models
         public int Cedula { get => cedula; set => cedula = value; }
         public string Correo { get => correo; set => correo = value; }
         public string Contraseña { get => contraseña; set => contraseña = value; }
-    }
+    }*/
+
 
 }
