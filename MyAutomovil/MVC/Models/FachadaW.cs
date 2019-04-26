@@ -51,7 +51,7 @@ namespace MVC.Models
             List<Cliente> aux2 = r.RecuperarClientes();
             for (int i = 0; i < aux2.Count; i++)
             {
-                if (cedula == aux2[i].Cedula)
+                if (cedula == aux2[i].cedula)
                 {
                     c = aux2[i];
                 }
