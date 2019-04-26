@@ -17,7 +17,7 @@ namespace MVC.Controllers
 
         public ActionResult ActualizarCliente(int id)
         {
-            Fachada f = new Fachada();
+            MVC.Models.Fachada f = new MVC.Models.Fachada();
             return View(f.retornarCliente(id));
         }
 
@@ -31,13 +31,13 @@ namespace MVC.Controllers
         }
         [HttpPost]
         public PartialViewResult ConsultarClienteF(string consultaCliente) {
-            Fachada f = new Fachada();
+            MVC.Models.Fachada f = new MVC.Models.Fachada();
             return PartialView("_Clientes", f.ConsultarCliente(consultaCliente));
         }
 
         
         public PartialViewResult ConsultarClienteF() {
-            Fachada f = new Fachada();
+            MVC.Models.Fachada f = new MVC.Models.Fachada();
             return PartialView("_Clientes",f.ConsultarCliente());
         }
     }
