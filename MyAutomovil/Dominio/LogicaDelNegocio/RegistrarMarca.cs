@@ -37,10 +37,10 @@ namespace Dominio.LogicaDelNegocio
             ConsultarMarca();
             Boolean Existe = false;
             Boolean RegistroMarca = false;
-            Marca marca = new Marca(nombreMarca, pais);
+            Marca marca = new Marca { nombreMarca = nombreMarca, pais = pais };
             for (int i = 0; i < marcas.Count; i++)
             {
-                if (marcas[i].Nombre.Equals(nombreMarca))
+                if (marcas[i].nombreMarca.Equals(nombreMarca))
                 {
                     Existe = true;
                     Console.WriteLine("Marca Existente");
@@ -49,7 +49,7 @@ namespace Dominio.LogicaDelNegocio
             }
             if (!Existe)
             {
-                AdicionarMarcaRepositorio(marca.Nombre, marca.Pais);
+                AdicionarMarcaRepositorio(marca.nombreMarca, marca.pais);
                 RegistroMarca = true;
                 Console.WriteLine("Se adiciono la Marca");
 
@@ -81,7 +81,7 @@ namespace Dominio.LogicaDelNegocio
             {
                 for (int i = 0; i < marcas.Count; i++)
                 {
-                    if (marcas[i].Nombre.Equals(marca.Nombre))
+                    if (marcas[i].nombreMarca.Equals(marca.nombreMarca))
                     {
                         Eliminado = true;
                         EliminarMarcaRepositorio(nombreMarca);
@@ -111,16 +111,16 @@ namespace Dominio.LogicaDelNegocio
             Boolean Actualizado = false;
             marcas.Clear();
             ConsultarMarca();
-            Marca marca = new Marca(nombreMarca, "");
+            Marca marca = new Marca { nombreMarca = nombreMarca, pais = "" };
             for (int i = 0; i < marcas.Count; i++)
             {
-                if (marcas[i].Nombre.Equals(nombreMarca))
+                if (marcas[i].nombreMarca.Equals(nombreMarca))
                 {
                     Actualizado = true;
-                    marca.Pais = pais;
+                    marca.pais = pais;
                 }
             }
-            if (marca.Pais == "")
+            if (marca.pais == "")
             {
                 Actualizado = false;
                 Console.WriteLine("La marca no exite");
@@ -150,7 +150,7 @@ namespace Dominio.LogicaDelNegocio
             {
                 for (int i = 0; i < marcas.Count; i++)
                 {
-                    if (marcas[i].Nombre.Equals(nombre))
+                    if (marcas[i].nombreMarca.Equals(nombre))
                     {
                         marca = marcas[i];
                     }
@@ -183,7 +183,7 @@ namespace Dominio.LogicaDelNegocio
             {
                 Nombre = (string)lista[i].GetValue(0);
                 Pais = (string)lista[i].GetValue(1);
-                marcas.Add(new Marca(Nombre, Pais));
+                marcas.Add(new Marca { nombreMarca = Nombre, pais = Pais });
             }
             
             

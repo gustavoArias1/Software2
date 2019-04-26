@@ -11,7 +11,9 @@ namespace Dominio.LogicaDelNegocio
     {
         public static void Main(string[] args)
         {
-          
+            ConexionBaseDatos conexion = new ConexionBaseDatos();
+            conexion.Conectar();
+            conexion.ActualizarUsuario("ac.eleifend@pede.ca", "HWY72FYY0FG");
             
         }
     }

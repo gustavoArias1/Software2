@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MVC.Models;
 
 namespace MVC.Controllers
 {
@@ -23,9 +24,9 @@ namespace MVC.Controllers
         {
             return View();
         }
-        /*
+        
         public PartialViewResult RecuperarEmpleados() {
-            Fachada f = new Fachada();
+            MVC.Models.FachadaW f = new MVC.Models.FachadaW();
             return PartialView("_Empleados",f.RecuperarEmpleados());
         }
 

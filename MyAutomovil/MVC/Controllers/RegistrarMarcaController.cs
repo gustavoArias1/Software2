@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fachada;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,15 +9,62 @@ namespace MVC.Controllers
 {
     public class RegistrarMarcaController : Controller
     {
-        // GET: RegistrarMarca
+        private Dominio.LogicaDelNegocio.RegistrarMarca _registrarMarca;
+
+        public RegistrarMarcaController()
+        {
+            _registrarMarca = new Dominio.LogicaDelNegocio.RegistrarMarca();
+        }
+
         public ActionResult AdicionarMarca()
         {
             return View();
         }
 
-        public ActionResult ActualizarMarca()
+        [HttpPost]
+        public ActionResult AdicionarMarca(AdicionarMarcaViewModel AdicionarMarca)
         {
-            return View();
+            if (AdicionarMarca.nombreMarca == null)
+            {
+                ViewData["MensajeMarca"] = "Campo obligatorio";
+                return View();
+            }
+
+            if (AdicionarMarca.pais == null)
+            {
+                ViewData["MensajePais"] = "Campo obligatorio";
+                return View();
+            }
+
+            Dominio.EntidadesDominio.Marca Marca = new Dominio.EntidadesDominio.Marca
+            {
+                nombreMarca = AdicionarMarca.nombreMarca,
+                pais = AdicionarMarca.pais
+            };
+            if(_registrarMarca.AdicionarMarca(Marca.nombreMarca, Marca.pais))
+            {
+
+                ViewData["MensajeExito"] = "Exito en la creacion de marca";
+                return View();
+            }
+            else
+            {
+                ViewData["MensajeIngreso"] = "Error al adicionar marca";
+                return View();
+            }
+            
+            
+        }
+
+        public ActionResult ActualizarMarca(string nombreMarca)
+        {
+            var entidadMarca = _registrarMarca.ConsultarMarca(nombreMarca);
+            ActualizarMarcaViewModel ActualuizarMarcaVm = new ActualizarMarcaViewModel
+            {
+                nombreMarca = entidadMarca.nombreMarca,
+                pais = entidadMarca.pais
+            };
+            return View(ActualuizarMarcaVm);
         }
 
         public ActionResult ConsultarMarca()

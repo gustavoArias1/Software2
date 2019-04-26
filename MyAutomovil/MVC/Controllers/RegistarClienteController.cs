@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Dominio.EntidadesDominio;
 
 namespace MVC.Controllers
 {
@@ -17,8 +18,8 @@ namespace MVC.Controllers
 
         public ActionResult ActualizarCliente(int id)
         {
-            Fachada f = new Fachada();
-            return View(f.retornarCliente(id));
+            FachadaW f = new FachadaW();
+                return View(f.retornarCliente(id));
         }
 
         public ActionResult ConsultarCliente()
@@ -31,13 +32,13 @@ namespace MVC.Controllers
         }
         [HttpPost]
         public PartialViewResult ConsultarClienteF(string consultaCliente) {
-            Fachada f = new Fachada();
+           FachadaW f = new FachadaW();
             return PartialView("_Clientes", f.ConsultarCliente(consultaCliente));
         }
 
         
         public PartialViewResult ConsultarClienteF() {
-            Fachada f = new Fachada();
+            FachadaW f = new FachadaW();
             return PartialView("_Clientes",f.ConsultarCliente());
         }
     }

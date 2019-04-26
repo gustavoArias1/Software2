@@ -50,5 +50,38 @@ namespace MVC.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult RecuperarContraseña(RecuperarContraseñaModel cambioContraseña)
+        {
+            if(cambioContraseña.user == null)
+            {
+                ViewData["MensajeUsuario"] = "Campo obligatorio";
+                return View();
+            }
+            if(cambioContraseña.contraseña == cambioContraseña.contraseña2)
+            {
+                Dominio.EntidadesDominio.Usuario entidadUsuario = new Dominio.EntidadesDominio.Usuario
+                {
+                    user = cambioContraseña.user,
+                    contraseña = cambioContraseña.contraseña
+                };
+                Boolean bandera = _autenticarEnElSistema.RecuperarContraseña(entidadUsuario.user, entidadUsuario.contraseña);
+                if (bandera == true)
+                {
+                    return RedirectToAction("/AutenticarseEnElSistema/Index", new { tipo = entidadUsuario.tipo });
+                }
+                else
+                {
+                    ViewData["MensajeLogueo"] = "Error en el ingreso de datos";
+                    return View();
+                }
+            }
+            else
+            {
+                ViewData["MensajeLogueo"] = "Ambas contraseñas deben ser iguales";
+                return View();
+            }
+        }
     }
 }

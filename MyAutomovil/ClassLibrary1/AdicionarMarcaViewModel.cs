@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Dominio.EntidadesDominio
+namespace Fachada
 {
-    public class Marca
+    public class AdicionarMarcaViewModel
     {
         public string nombreMarca { get; set; }
         public string pais { get; set; }
+
     }
 }

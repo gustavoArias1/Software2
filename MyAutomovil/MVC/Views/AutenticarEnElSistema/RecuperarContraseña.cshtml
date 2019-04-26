@@ -1,7 +1,6 @@
-﻿@model Fachada.IndexViewModel
+﻿@model Fachada.RecuperarContraseñaModel
 
 <!DOCTYPE html>
-<html>
 <head>
     <title>Recuperar contraseña</title>
     <meta charset="utf-8">
@@ -12,57 +11,112 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 
-<body>
-    <div class="jumbotron" align="center" style="text-decoration-color: rgb(0, 0, 0); color: rgb(255, 255, 255); background-color: rgb(0, 0, 0);" contenteditable="false" spellcheckker="false">
-        <h1 class="display-3" style="font-family: &quot;Comic Sans MS&quot;, cursive, sans-serif;">MI AUTOMÓVIL</h1>
-        <hr class="my-4">
-        <p class="lead"></p>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12" align="center">
-                <h2>Recuperar contraseña</h2>
-            </div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <body>
+        <div class="jumbotron" align="center" style="text-decoration-color: rgb(0, 0, 0); color: rgb(255, 255, 255); background-color: rgb(0, 0, 0);" contenteditable="false" spellcheckker="false">
+            <h1 class="display-3" style="font-family: &quot;Comic Sans MS&quot;, cursive, sans-serif;">MI AUTOMÓVIL</h1>
+            <hr class="my-4">
+            <p class="lead"></p>
         </div>
-        <br />
-        <div class="row">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-6">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group" style="">
-                    <label>Correo</label>
-                    @Html.EditorFor(model => model.user, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.user, "", new { @class = "text-danger" })
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12" align="center">
+                    <h2>Recuperar contraseña</h2>
                 </div>
             </div>
-            <div class="col-sm-3"></div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-6">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group" style="">
-                    <label>Correo</label>
-                    @Html.EditorFor(model => model.user, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.user, "", new { @class = "text-danger" })
+            <br />
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group" style="">
+                        <label>Correo</label>
+                        @Html.EditorFor(model => model.user, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.user, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                    @{
+                        if (@ViewData["MensajeUsuario"] != null)
+                        {
+                            <p class="alert alert-danger"> @ViewData["MensajeUsuario"]</p>
+                        }
+                    }
                 </div>
             </div>
-            <div class="col-sm-3"></div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12" align="center">
-                <a href="#" class="btn btn-primary btn-primary">Enviar contraseña</a>
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group" style="">
+                        <label>Contraseña</label>
+                        @Html.EditorFor(model => model.contraseña, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                        @Html.ValidationMessageFor(model => model.contraseña, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group" style="">
+                        <label>Confirmar contraseña</label>
+                        @Html.EditorFor(model => model.contraseña2, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                        @Html.ValidationMessageFor(model => model.contraseña2, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                    @{
+                        if (@ViewData["MensajeLogueo"] != null)
+                        {
+                            <p class="alert alert-danger"> @ViewData["MensajeLogueo"]</p>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group" style="">
+                        <label>Codigo de verificacion</label>
+                        @Html.EditorFor(model => model.codigoVerificacion, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.codigoVerificacion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+            <br />
+            <div class="container" style="">
+                <div class="row">
+                    <div class="col-sm-3"></div>
+                    <input type="submit" value="Actualizar la contraseña" class="btn btn-dark col-sm-2" />
+                    <div class="col-sm-2"><br /></div>
+                    <botton onclick="window.location.href='/AutenticarEnElSistema/Index'" class="btn btn-dark col-sm-2">Cancelar</botton>
+                    <div class="col-sm-3"></div>
+                </div>
             </div>
         </div>
-    </div> <!-- /container -->
-    <br />
-    <br />
-    <footer class="footer" style="background-color: #000000; color: #fafafa">
         <br />
         <br />
-        <p>© WYMAN SOLUTION 2019</p>
-        <br />
-        <br />
-    </footer>
-</body>
-</html>
+        <footer class="footer" style="background-color: #000000; color: #fafafa">
+            <br />
+            <br />
+            <p>© WYMAN SOLUTION 2019</p>
+            <br />
+            <br />
+        </footer>
+    </body>
+}
