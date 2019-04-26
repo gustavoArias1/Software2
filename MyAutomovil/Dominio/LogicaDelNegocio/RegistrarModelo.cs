@@ -118,7 +118,7 @@ namespace Dominio.LogicaDelNegocio
 
             // acceso a la base de datos para extraer modelos
             modelos.Clear();
-            ConsultarModelo(nombreModelo,nombreMarca);
+            RecuperarModelos();
             Modelo modelo = null;
             try
             {
