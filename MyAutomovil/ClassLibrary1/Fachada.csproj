@@ -45,7 +45,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActualizarMarcaViewModel.cs" />
+    <Compile Include="ActualizarModeloViewModel.cs" />
+    <Compile Include="AdicionarClienteViewModel.cs" />
+    <Compile Include="AdicionarConcesionarioViewModel.cs" />
     <Compile Include="AdicionarMarcaViewModel.cs" />
+    <Compile Include="AdicionarModeloViewModelo.cs" />
     <Compile Include="IndexViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecuperarContraseñaModel.cs" />

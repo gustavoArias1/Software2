@@ -25,30 +25,30 @@ namespace Dominio.LogicaDelNegocio
          pre: RecuperarClientes.Count > 0, clientes.Contains(cliente) != true
          pro: Cliente es agregado en DB, RecuperarClientes.Count  = RecuperarClientes.Count + 1
              */
-        public void AdicionarCliente(string nombre, string apellido, int cedula, DateTime fechaDeNacimiento,
+        public Boolean AdicionarCliente(string nombre, string apellido, int cedula, DateTime fechaDeNacimiento,
             string correo, string contraseña)
         {
             clientes = RecuperarClientes();
-            Cliente cliente = new Cliente(nombre, apellido, fechaDeNacimiento, cedula, correo, contraseña);
+            Cliente cliente = new Cliente { nombre = nombre, apellido = apellido, fechaDeNacimiento = fechaDeNacimiento, cedula = cedula, correo = correo, contraseña = contraseña };
             if (clientes.Count > 0)
 
             {
                 if (clientes.Contains(cliente))
                 {
                     //lanza execepcion indica que el cliente ya existe
-                    System.Console.WriteLine("El cliente ya existe");
+                    return false;
                 }
                 else
                 {
                     AdicionarClienteRepositorio(nombre, apellido, fechaDeNacimiento, cedula, correo, contraseña);
-                    System.Console.WriteLine("El cliente ha sido creado");
+                    return true;
                 }
             }
             else
             {
 
                 AdicionarClienteRepositorio(nombre, apellido, fechaDeNacimiento, cedula, correo, contraseña);
-                System.Console.WriteLine("El cliente ha sido creado");
+                return true;
 
             }
         } 
@@ -71,7 +71,7 @@ namespace Dominio.LogicaDelNegocio
             for (int i = 0; i < clientes.Count; i++)
             {
 
-                if (clientes[i].Codigo.Equals(codigo))   {
+                if (clientes[i].codigo.Equals(codigo))   {
                     existe = true;
                     break;
                 }
@@ -110,8 +110,8 @@ namespace Dominio.LogicaDelNegocio
             {
                 for (int i = 0; i < clientes.Count; i++)
                 {
-                    if (clientes[i].Nombre.Equals(nombre) || clientes[i].Apellido.Equals(apellido) ||
-                            clientes[i].Cedula == cedula)
+                    if (clientes[i].nombre.Equals(nombre) || clientes[i].apellido.Equals(apellido) ||
+                            clientes[i].cedula == cedula)
                     {
                         clientesAux.Add(clientes[i]);
                     }
@@ -181,9 +181,7 @@ namespace Dominio.LogicaDelNegocio
                     Correo=(string)aux[i].GetValue(5);
                     Contraseña = (string)aux[i].GetValue(6);
 
-
-                    
-                    clientesAux.Add(new Cliente(Codigo,Nombre,Apellido,Fecha,Cedula,Correo,Contraseña));
+                    clientesAux.Add(new Cliente { nombre = Nombre, apellido = Apellido, fechaDeNacimiento = Fecha, cedula = Cedula, correo = Correo, contraseña = Contraseña });
                 }
             }
             else {

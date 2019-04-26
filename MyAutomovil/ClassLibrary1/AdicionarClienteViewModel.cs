@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Dominio.EntidadesDominio
+namespace Fachada
 {
-    public class Cliente
+    public class AdicionarClienteViewModel
     {
         public int codigo { get; set; }
         public string nombre { get; set; }
@@ -13,5 +15,6 @@ namespace Dominio.EntidadesDominio
         public int cedula { get; set; }
         public string correo { get; set; }
         public string contraseña { get; set; }
+        public string contraseña2 { get; set; }
     }
 }

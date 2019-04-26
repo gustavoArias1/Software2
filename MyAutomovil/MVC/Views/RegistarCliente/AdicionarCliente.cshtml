@@ -1,8 +1,7 @@
-﻿
+﻿@model Fachada.AdicionarClienteViewModel
 
 <!DOCTYPE html>
 
-<html>
 <head>
     <title>Adicionar cliente</title>
     <meta charset="utf-8">
@@ -17,101 +16,194 @@
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 </head>
 
-<body style="background-color: #ffffff">
-    <nav class="navbar navbar-expand-md  navbar-dark" style="background-color: rgb(0, 0, 0);">
-        <a class="navbar-brand" href="#">Registrar cliente</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <br />
-    <br />
-    <div class="container">
-        <div>
-            <div class="row">
-                <div class="col-sm-12" align="center">
-                    <h2>Adicionar cliente</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <body style="background-color: #ffffff">
+        <nav class="navbar navbar-expand-md  navbar-dark" style="background-color: rgb(0, 0, 0);">
+            <a class="navbar-brand" href="#">Registrar cliente</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <br />
+        <br />
+        <div class="container">
+            <div>
+                <div class="row">
+                    <div class="col-sm-12" align="center">
+                        <h2>Adicionar cliente</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-6">
+                        <form class="form-horizontal">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="cedulaCliente">Cedula</label>
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="col-sm-12">
+                                        @Html.EditorFor(model => model.cedula, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.cedula, "", new { @class = "text-danger" })
+                                    </div>
+                                    @{
+                                        if (@ViewData["MensajeCedula"] != null)
+                                        {
+                                            <p class="alert alert-danger"> @ViewData["MensajeCedula"]</p>
+                                        }
+                                    }
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="nombreCliente">Nombre</label>
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="col-sm-12">
+                                        @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                                    </div>
+                                    @{
+                                        if (@ViewData["MensajeNombre"] != null)
+                                        {
+                                            <p class="alert alert-danger"> @ViewData["MensajeNombre"]</p>
+                                        }
+                                    }
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="apellidoCliente">Apellido</label>
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="col-sm-12">
+                                        @Html.EditorFor(model => model.apellido, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.apellido, "", new { @class = "text-danger" })
+                                    </div>
+                                    @{
+                                        if (@ViewData["MensajeApellido"] != null)
+                                        {
+                                            <p class="alert alert-danger"> @ViewData["MensajeApellido"]</p>
+                                        }
+                                    }
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="fechaNacimientoCliente">Fecha de nacimiento</label>
+                                    <div class="col-sm-12">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="col-sm-12">
+                                            @Html.EditorFor(model => model.fechaDeNacimiento, new { htmlAttributes = new { @class = "form-control", @id = "datepicker" } })
+                                            @Html.ValidationMessageFor(model => model.fechaDeNacimiento, "", new { @class = "text-danger" })
+                                        </div>
+                                        <script>
+                                            $('#datepicker').datepicker({
+                                                uiLibrary: 'bootstrap4'
+                                            });
+                                        </script>
+                                        @{
+                                            if (@ViewData["MensajeFecha"] != null)
+                                            {
+                                                <p class="alert alert-danger"> @ViewData["MensajeFecha"]</p>
+                                            }
+                                        }
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="correoCliente">Correo</label>
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="col-sm-12">
+                                        @Html.EditorFor(model => model.correo, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.correo, "", new { @class = "text-danger" })
+                                    </div>
+                                    @{
+                                        if (@ViewData["MensajeCorreo"] != null)
+                                        {
+                                            <p class="alert alert-danger"> @ViewData["MensajeCorreo"]</p>
+                                        }
+                                    }
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="contraseñaCliente">Contraseña</label>
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="col-sm-12">
+                                        @Html.EditorFor(model => model.contraseña, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                                        @Html.ValidationMessageFor(model => model.contraseña, "", new { @class = "text-danger" })
+                                    </div>
+                                    @{
+                                        if (@ViewData["MensajeContraseña"] != null)
+                                        {
+                                            <p class="alert alert-danger"> @ViewData["MensajeContraseña"]</p>
+                                        }
+                                    }
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="repetirContraseñaCliente">Repetir contraseña</label>
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="col-sm-12">
+                                        @Html.EditorFor(model => model.contraseña2, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                                        @Html.ValidationMessageFor(model => model.contraseña2, "", new { @class = "text-danger" })
+                                    </div>
+                                    @{
+                                        if (@ViewData["MensajeContraseña2"] != null)
+                                        {
+                                            <p class="alert alert-danger"> @ViewData["MensajeContraseña"]</p>
+                                        }
+                                    }
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                </div>
+                            </fieldset>
+                            <br />
+                            <br />
+                            <div class="row">
+                                <input type="submit" class="btn btn-success col-md-4" value="Guardar" />
+                                <div class="col-md-4"><br /></div>
+                                <button type="button" class="btn btn-danger col-md-4 ">@Html.ActionLink("Cancelar", "../AutenticarEnElSistema/Index", null, new { @class = "myclass" })</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-sm-3"></div>
                 </div>
             </div>
             <div class="row">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-6">
-                <form class="form-horizontal">
-                    <fieldset>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="cedulaCliente">Cedula</label>
-                            <div class="col-sm-12">
-                                <input id="cedulaCliente" name="cedulaCliente" type="text" placeholder="" class="form-control input-md">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="nombreCliente">Nombre</label>
-                            <div class="col-sm-12">
-                                <input id="nombreCliente" name="nombreCliente" type="text" placeholder="" class="form-control input-md">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="apellidoCliente">Apellido</label>
-                            <div class="col-sm-12">
-                                <input id="apellidoCliente" name="apellidoCliente" type="text" placeholder="" class="form-control input-md">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="fechaNacimientoCliente">Fecha de nacimiento</label>
-                            <div class="col-sm-12">
-                                <input class="col-sm-12" id="datepicker" />
-                                <script>
-                                    $('#datepicker').datepicker({
-                                        uiLibrary: 'bootstrap4'
-                                    });
-                                </script>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="correoCliente">Correo</label>
-                            <div class="col-sm-12">
-                                <input id="correoCliente" name="correoCliente" type="text" placeholder="" class="form-control input-md">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="contraseñaCliente">Contraseña</label>
-                            <div class="col-sm-12">
-                                <input id="contraseñaCliente" name="contraseñaCliente" type="password" placeholder="" class="form-control input-md">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="repetirContraseñaCliente">Contraseña</label>
-                            <div class="col-sm-12">
-                                <input id="repetirContraseñaCliente" name="repetirContraseñaCliente" type="password" placeholder="" class="form-control input-md">
-                            </div>
-                        </div>
-                    </fieldset>
-                    <br />
-                    <br />
-                    <div class="row">
-                        <button type="button" class="btn btn-success col-md-4">Guardar</button>
-                        <div class="col-md-4"><br /></div>
-                        <button type="button" class="btn btn-danger col-md-4">Cancelar</button>
-                    </div>
-                </form>
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                    @{
+                        if (@ViewData["MensajeIngreso"] != null)
+                        {
+                            <p class="alert alert-danger"> @ViewData["MensajeIngreso"]</p>
+                        }
+                    }
+                    @{
+                        if (@ViewData["MensajeError"] != null)
+                        {
+                            <p class="alert alert-danger"> @ViewData["MensajeError"]</p>
+                        }
+                    }
+                    @{
+                        if (@ViewData["MensajeError"] != null)
+                        {
+                            <p class="alert alert-danger"> @ViewData["MensajeError"]</p>
+                        }
+                    }
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </div>
             </div>
             <div class="col-sm-3"></div>
-            </div>
-        </div>
-    </div>
+    </body>
     <br />
     <br />
     <footer class="footer" style="background-color: #000000; color: #fafafa">
@@ -119,7 +211,8 @@
             <br />
             <br />
             <p>© WYMAN SOLUTION 2019</p>
+            <br />
+            <br />
         </div>
     </footer>
-</body>
-</html>
+}
