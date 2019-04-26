@@ -13,13 +13,24 @@ namespace Dominio.LogicaDelNegocio
         {
             Conectar();
         }
+
+        /*
+     * El metodo AdicionarCompra adiciona un nuevo registro de prospecto de compra en la base de datos.
+     * @ Yherson Blandon
+     * @ version 4.0 05/04/2019
+     context RegistrarComprarUsado :: AdicionarCompra
+      pre: AdicionarCompra(nombreConcesionario, fechaCompra, precioCompra, placa,codigoProveedor) and nombreConcesionario != null and fechaCompra!= null  and precioCompra !=null and placa !=null codigoProveedor
+       != null  transmision != null
+       post: AdicionarCompra(nombreConcesionario, fechaCompra, precioCompra, placa,codigoProveedor) or  self@!nombreConcesionario.Exception or self@!fechaCompra.Exception or self@!precioCompra.Exception
+       or self@!placa.Exception or self@!codigoProveedor.Exception 
+     */
         public void AdicionarCompra(string nombreConcesionario, DateTime fechaCompra, double precioCompra, string placa,
             int codigoProveedor)
         {
             Compra aux = new Compra(nombreConcesionario, fechaCompra, precioCompra, placa, codigoProveedor);
             Concesionario c = RecuperarConcesionario(nombreConcesionario);
             AdicionarCompraRepositorio(nombreConcesionario, fechaCompra, precioCompra, placa, codigoProveedor);
-
+         
             //if (c != null)
             //{
             //    c.compras = c.RecuperarCompras();
@@ -34,6 +45,15 @@ namespace Dominio.LogicaDelNegocio
             //}
         }
 
+
+        /*
+    * El metodo RecuperarConcesionario extrae la lista de compras realizadas en in determinado concesionario.
+    * @ Yherson Blandon
+    * @ version 4.0 05/04/2019
+    context RegistrarComprarUsado :: RecuperarConcecionario
+     pre: AdicionarCompra(nombreConcesionario) and nombreConcesionario != null 
+      post: AdicionarCompra(nombreConcesionario) or  self@!nombreConcesionario.Exception  
+    */
         public Concesionario RecuperarConcesionario(string nombreConcesionario) {
             Concesionario c;
             string[] aux = RecuperarConcesionarioRepositorio(nombreConcesionario);

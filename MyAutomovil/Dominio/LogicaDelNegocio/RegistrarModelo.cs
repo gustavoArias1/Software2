@@ -40,11 +40,11 @@ namespace Dominio.LogicaDelNegocio
             // AdicionarModelosRepositorio(nombreModelo, nombreMarca, numeroPuertas, cilindraje, transmision);
             modelos.Clear();
             ConsultarModelov();
-            Modelo modelo = new Modelo(nombreModelo, nombreMarca, numeroPuertas, cilindraje, transmision);
+            Modelo modelo = new Modelo { nombreModelo = nombreModelo, nombreMarca = nombreMarca, numeroPuertas = numeroPuertas, cilindraje = cilindraje, transmision = transmision };
             Boolean existe=false;
             for (int i = 0; i < modelos.Count; i++)
             {
-                if (modelos[i].Nombremodelo.Equals(nombreModelo) && modelos[i].NombreMarca.Equals(nombreMarca))
+                if (modelos[i].nombreModelo.Equals(nombreModelo) && modelos[i].nombreMarca.Equals(nombreMarca))
                 {
                     existe = true;
 
@@ -76,30 +76,29 @@ namespace Dominio.LogicaDelNegocio
         post: ConsultarModelo(nombreModelo, nombreMarca) or  self@!nombreModelo.Exception or self@!nombreMarca.Exception or self@!numeroPuertas.Exception
         or self@!cilindraje.Exception or self@!transmision.Exception 
         */
-        public void ActualizarModelo(string nombreModelo, string nombreMarca, int numeroPuertas, string cilindraje, string transmision)
+        public Boolean ActualizarModelo(string nombreModelo, string nombreMarca, int numeroPuertas, string cilindraje, string transmision)
         {
             modelos.Clear();
             ConsultarModelov();
-            Modelo modelo = new Modelo(nombreModelo, nombreMarca, numeroPuertas, cilindraje, transmision);
+            Modelo modelo = new Modelo { nombreModelo = nombreModelo, nombreMarca = nombreMarca, numeroPuertas = numeroPuertas, cilindraje =cilindraje, transmision = transmision };
             Boolean existe = false;
 
             for (int i = 0; i < modelos.Count; i++)
             {
-                if (modelos[i].Nombremodelo.Equals(nombreModelo) && modelos[i].NombreMarca.Equals(nombreMarca) )
+                if (modelos[i].nombreModelo.Equals(nombreModelo) && modelos[i].nombreMarca.Equals(nombreMarca) )
                 {
                     existe = true;
 
                 }
-            
             }
             if (existe)
             {
                 ActualizarModelosRepositorio(nombreModelo, nombreMarca, numeroPuertas, cilindraje, transmision);
-                Console.WriteLine("El cliente ha sido Actualizado");
+                return existe;
             }
             else
             {
-                Console.WriteLine(" no existe marca o modelo en la base de datos");
+                return existe;
             }
         }
      
@@ -125,7 +124,7 @@ namespace Dominio.LogicaDelNegocio
             {
                 for (int i = 0; i < modelos.Count; i++)
                 {
-                    if ((modelos[i].Nombremodelo.Equals(nombreModelo) ))
+                    if ((modelos[i].nombreModelo.Equals(nombreModelo) ))
                     {
                         modelo = modelos[i];
                     }
@@ -149,7 +148,7 @@ namespace Dominio.LogicaDelNegocio
             modelos.Clear();
             foreach (string[] x in ConsultarModelosRepositorio())
             {
-                modelos.Add(new Modelo((x[0]), x[1], Int32.Parse(x[2]), x[3], x[4]));
+                modelos.Add(new Modelo { nombreModelo = x[0], nombreMarca = x[1], numeroPuertas = Int32.Parse(x[2]), cilindraje = x[3], transmision = x[4]});
             }
         }
 
@@ -174,7 +173,7 @@ namespace Dominio.LogicaDelNegocio
             List<Modelo> aux = new List<Modelo>();
             foreach (string[] x in ConsultarModelosRepositorio())
             {
-                this.modelos.Add(new Modelo((x[0]), x[1], Int32.Parse(x[2]), x[3], x[4]));
+                this.modelos.Add(new Modelo { nombreModelo = x[0], nombreMarca = x[1], numeroPuertas = Int32.Parse(x[2]), cilindraje = x[3], transmision = x[4] });
             }
 
         }

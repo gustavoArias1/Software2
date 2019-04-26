@@ -103,6 +103,7 @@ namespace Dominio.LogicaDelNegocio
 
         public List<Cliente> ConsultarCliente(string nombre, string apellido, int cedula)
         {
+            Console.WriteLine("entroo");
             List<Cliente> clientesAux = new List<Cliente>();
             clientes = RecuperarClientes();
             if (clientes.Count > 0)

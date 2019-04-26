@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Dominio.EntidadesDominio;
+using MVC.Models;
 
 namespace MVC.Controllers
 {
@@ -58,18 +60,63 @@ namespace MVC.Controllers
 
         public ActionResult ActualizarMarca(string nombreMarca)
         {
+            nombreMarca = "Amet Industries";
             var entidadMarca = _registrarMarca.ConsultarMarca(nombreMarca);
-            ActualizarMarcaViewModel ActualuizarMarcaVm = new ActualizarMarcaViewModel
+            ActualizarMarcaViewModel ActualizarMarcaVm = new ActualizarMarcaViewModel
             {
                 nombreMarca = entidadMarca.nombreMarca,
                 pais = entidadMarca.pais
             };
-            return View(ActualuizarMarcaVm);
+            return View(ActualizarMarcaVm);
+        }
+
+        [HttpPost]
+        public ActionResult ActualizarMarca(ActualizarMarcaViewModel nuevaMarca)
+        {
+            if (nuevaMarca.nombreMarca == null)
+            {
+                ViewData["MensajeMarca"] = "Campos obligatorios";
+                return View();
+            }
+            else if (nuevaMarca.pais == null)
+            {
+                ViewData["MensajePais"] = "Campos obligatorios";
+                return View();
+            }
+            Dominio.EntidadesDominio.Marca marca = new Dominio.EntidadesDominio.Marca
+            {
+                nombreMarca = nuevaMarca.nombreMarca,
+                pais = nuevaMarca.pais
+            };
+            if (_registrarMarca.ActualizarMarca(marca.nombreMarca, marca.pais))
+            {
+                return RedirectToAction("ConsultarMarca");
+            }
+            else
+            {
+                ViewData["MensajeError"] = "Error al actualizar la marca";
+                return View();
+            }
         }
 
         public ActionResult ConsultarMarca()
         {
             return View();
+        }
+
+        public PartialViewResult ConsultarMarcaF()
+        {
+            FachadaW f = new FachadaW();
+            return PartialView("_Marcas", f.ConsultarMarca());
+        }
+
+        [HttpPost]
+        public PartialViewResult ConsultarMarcaF(string marcaId)
+        {
+            List<Marca> l = new List<Marca>();
+            FachadaW f = new FachadaW();
+            l.Add(f.ConsultarMarca(marcaId));
+            return PartialView("_Marcas",l );
         }
     }
 }
