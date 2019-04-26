@@ -99,7 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\AutenticarEnElSistemaController.cs" />
     <Compile Include="Controllers\RegistarClienteController.cs" />
     <Compile Include="Controllers\RegistrarConcesionarioController.cs" />
     <Compile Include="Controllers\RegistrarEmpleadoController.cs" />
@@ -147,6 +147,20 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary1\Fachada.csproj">
+      <Project>{95ce019f-0db9-49ce-b848-489c21a81e7f}</Project>
+      <Name>Fachada</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dominio\Dominio.csproj">
+      <Project>{61e18bc3-0d16-4ac0-950f-5004780620ef}</Project>
+      <Name>Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Persistencia\Persistencia.csproj">
+      <Project>{5c4b6b64-b158-4295-8109-9335e87dc543}</Project>
+      <Name>Persistencia</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

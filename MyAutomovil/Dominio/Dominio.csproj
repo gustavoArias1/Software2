@@ -9,7 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.11.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Persistencia\Persistencia.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Prueba\" />
   </ItemGroup>
 
 </Project>

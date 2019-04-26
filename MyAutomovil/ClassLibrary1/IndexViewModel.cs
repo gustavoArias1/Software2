@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Dominio.EntidadesDominio
+namespace Fachada
 {
-    public class Usuario
+    public class IndexViewModel
     {
         public string user { get; set; }
         public string contraseña { get; set; }
-        public string tipo { get; set; }
+        public char tipo { get; set; }
     }
 }

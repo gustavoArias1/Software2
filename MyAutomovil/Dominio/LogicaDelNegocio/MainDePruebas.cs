@@ -11,7 +11,8 @@ namespace Dominio.LogicaDelNegocio
     {
         public static void Main(string[] args)
         {
-
+          
+            
         }
     }
 }

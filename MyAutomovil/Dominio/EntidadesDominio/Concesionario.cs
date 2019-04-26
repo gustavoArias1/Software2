@@ -6,7 +6,10 @@ namespace Dominio.EntidadesDominio
 {
     public class Concesionario :ConexionBaseDatos
     {
-
+        public Concesionario()
+        {
+            Conectar();
+        }
         private int codigo; 
         private string nombreConcesionario;
         private int CodigoAdministrador;

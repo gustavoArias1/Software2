@@ -10,7 +10,7 @@ namespace Persistencia
         private MySqlConnection Conexion = new MySqlConnection();
         public void Conectar()
         {
-            Conexion.ConnectionString = "server = localhost;  database= MiAutomovil; uid=root; pwd=negro123;";
+            Conexion.ConnectionString = "server = localhost;  database= MiAutomovil; uid=root; pwd=manuel24.;";
             try
             {
                 Conexion.Open();
@@ -59,7 +59,7 @@ namespace Persistencia
             {
                 Conexion.Open();
             }
-            string query = "update table marca set Nombre='" + Nombre + "',Pais='"+Pais+"' where Nombre='"+Nombre+"'";
+            string query = "update marca set Pais='"+Pais+"' where Nombre='"+Nombre+"'";
             MySqlCommand my = new MySqlCommand(query, Conexion);
             my.ExecuteNonQuery();
             Conexion.Close();
@@ -501,7 +501,7 @@ namespace Persistencia
                 Conexion.Open();
             }
 
-            string query = "INSERT INTO modelo (NombreModelo,NombreMarca,NumeroPuertas,Cilindraje,Transmision) values('"+NombreModelo+ "','" + NombreMarca + "','" + NumeroPuertas + "','" + Cilindraje + "','" + Transmision + "')";
+            string query = "INSERT INTO modelo (NombreModelo,NombreMarca,Transmision,NumeroPuertas,Cilindraje) values('" + NombreModelo+ "','" + NombreMarca + "','" + Transmision + "','" + NumeroPuertas + "','" + Cilindraje + "')";
             MySqlCommand my = new MySqlCommand(query, Conexion);
             my.ExecuteNonQuery();
             Conexion.Close();
@@ -820,12 +820,49 @@ namespace Persistencia
 
         public List<string[]> RecuperarComprasRepositorio(string nombreConcesionario)
         {
-            return null;
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+            List<string[]> listaCompras = new List<string[]>();
+            string fechaCompra="";
+            string precioCompra = "";
+            string placa = "";
+            string codigoProveedor;
+
+
+            string query = "SELECT * FROM compras where Concesionario='" + nombreConcesionario + "' ";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            MySqlDataReader reader = my.ExecuteReader();
+
+            while (reader.Read())
+            {
+                fechaCompra = Convert.ToString(reader["FechaCompra"]);
+                precioCompra = Convert.ToString(reader["PrecioCompra"]);
+                placa = Convert.ToString(reader["Placa"]);
+                codigoProveedor = Convert.ToString(reader["CodigoProveedor"]);
+          
+                listaCompras.Add(new string[] { nombreConcesionario, fechaCompra, precioCompra, placa, codigoProveedor });
+            }
+
+            Conexion.Close();
+
+            return listaCompras;
         }
 
         public void AdicionarCompraRepositorio(string nombreConcesionario, DateTime fechaCompra, double precioCompra, string placa, int codigoProveedor)
         {
-
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+            string fecha = Convert.ToString(fechaCompra);
+            string Precio2 = Convert.ToString(precioCompra);
+            string query = "INSERT INTO compras (Concesionario,FechaCompra,PrecioCompra,Placa,CodigoProveedor) values('" + nombreConcesionario + "','" + fecha + "','" + Precio2 + "','" + placa + "','" + codigoProveedor + "')";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            Conexion.Close();
         }
 
     }
