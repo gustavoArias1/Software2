@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Dominio.EntidadesDominio;
+using MVC.Models;
 
 namespace MVC.Controllers
 {
@@ -35,6 +37,21 @@ namespace MVC.Controllers
         public ActionResult ConsultarMarca()
         {
             return View();
+        }
+
+        public PartialViewResult ConsultarMarcaF()
+        {
+            FachadaW f = new FachadaW();
+            return PartialView("_Marcas", f.ConsultarMarca());
+        }
+
+        [HttpPost]
+        public PartialViewResult ConsultarMarcaF(string marcaId)
+        {
+            List<Marca> l = new List<Marca>();
+            FachadaW f = new FachadaW();
+            l.Add(f.ConsultarMarca(marcaId));
+            return PartialView("_Marcas",l );
         }
     }
 }

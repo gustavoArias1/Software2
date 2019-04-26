@@ -185,8 +185,6 @@ namespace Dominio.LogicaDelNegocio
                 Pais = (string)lista[i].GetValue(1);
                 marcas.Add(new Marca { nombreMarca = Nombre, pais = Pais });
             }
-            
-            
         }
     }
 }

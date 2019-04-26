@@ -1,0 +1,24 @@
+﻿@model List<Dominio.EntidadesDominio.Marca>
+
+
+@Model.Count
+<div class="container" id="contenedorMarcasoo">
+    @foreach (var marca in Model)
+    {
+        <div class="row border-bottom border-secundary m-2 p-2">
+            <br />
+            <div class="col-sm-6 align-center ">
+                <p>@marca.nombreMarca.ToUpper()  -  @marca.pais.ToUpper() </p>
+            </div>
+            <div class="col-sm-3"></div>
+            @Html.ActionLink("Actualizar", "ActualizarMarca", routeValues: new { id = marca.nombreMarca }, htmlAttributes: new { @class = "col-sm-1 btn btn-success" })
+            <div class="col-sm-1"></div>
+            @Html.ActionLink("Eliminar", "EliminarMarca",routeValues: new { id = marca.nombreMarca } , htmlAttributes: new
+       { @class = "col -sm-1 btn btn-success", onclick = "return confirm" + "('Esta seguro de que quiere eliminar esta Marca?');" })
+
+            <br />
+        </div>
+    }
+</div>
+
+
