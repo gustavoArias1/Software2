@@ -843,7 +843,7 @@ namespace Persistencia
                 placa = Convert.ToString(reader["Placa"]);
                 codigoProveedor = Convert.ToString(reader["CodigoProveedor"]);
           
-                listaCompras.Add(new string[] { Placa, Marca, Modelo, Año, Numerochasis, Color, Concesionario, Precio });
+                listaCompras.Add(new string[] { nombreConcesionario, fechaCompra, precioCompra, placa, codigoProveedor });
             }
 
             Conexion.Close();
