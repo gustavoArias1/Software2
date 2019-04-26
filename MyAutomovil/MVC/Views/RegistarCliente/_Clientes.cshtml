@@ -1,0 +1,22 @@
+﻿@model List<MVC.Models.Cliente>
+
+
+
+<div class="container" id="contenedorEmpleados">
+    @foreach (var cliente in Model)
+    {
+        <div class="row border-bottom border-secundary m-2 p-2">
+            <br />
+            <div class="col-sm-6 align-center ">
+                <p>@cliente.Apellido.ToUpper()  -  @cliente.Nombre.ToUpper() - @cliente.Correo.ToUpper() - @cliente.Cedula  </p>
+            </div>
+            <div class="col-sm-3"></div>
+            @Html.ActionLink("Actualizar","ActualizarCliente", routeValues: new { id = cliente.Cedula}, htmlAttributes: new { @class = "col-sm-1 btn btn-success" })
+            <div class="col-sm-1"></div>
+            @Html.ActionLink("Eliminar", "EliminarCliente",routeValues: new { id = cliente.Cedula } , htmlAttributes: new
+       { @class = "col -sm-1 btn btn-success", onclick = "return confirm" + "('Esta seguro de que quiere eliminar este cliente?');" })
+       
+            <br />
+        </div>
+    }
+</div>

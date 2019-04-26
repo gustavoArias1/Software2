@@ -18,18 +18,20 @@ namespace Dominio.LogicaDelNegocio
         {
             Compra aux = new Compra(nombreConcesionario, fechaCompra, precioCompra, placa, codigoProveedor);
             Concesionario c = RecuperarConcesionario(nombreConcesionario);
-            if (c != null)
-            {
-                c.compras = c.RecuperarCompras();
-                if (c.compras.Contains(aux))
-                {
-                    Console.WriteLine("ya existe una factura con estos datos");
-                }
-                else
-                {
-                    AdicionarCompraRepositorio(nombreConcesionario, fechaCompra, precioCompra, placa, codigoProveedor);
-                }
-            }
+            AdicionarCompraRepositorio(nombreConcesionario, fechaCompra, precioCompra, placa, codigoProveedor);
+
+            //if (c != null)
+            //{
+            //    c.compras = c.RecuperarCompras();
+            //    if (c.compras.Contains(aux))
+            //    {
+            //        Console.WriteLine("ya existe una factura con estos datos");
+            //    }
+            //    else
+            //    {
+            //        AdicionarCompraRepositorio(nombreConcesionario, fechaCompra, precioCompra, placa, codigoProveedor);
+            //    }
+            //}
         }
 
         public Concesionario RecuperarConcesionario(string nombreConcesionario) {
