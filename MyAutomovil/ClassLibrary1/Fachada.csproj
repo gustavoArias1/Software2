@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActualizarMarcaViewModel.cs" />
+    <Compile Include="ActualizarModeloViewModel.cs" />
     <Compile Include="AdicionarMarcaViewModel.cs" />
     <Compile Include="IndexViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
