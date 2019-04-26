@@ -11,7 +11,7 @@ namespace Dominio.LogicaDelNegocio
    * @ Yherson Blandon
    * @ version 3.0 05/04/2019
    */
-    public class AutenticarEnElSistema:ConexionBaseDatos
+    public class AutenticarEnElSistema : ConexionBaseDatos
     {
 
         public List<Usuario> Usuarios = new List<Usuario>();
@@ -30,53 +30,24 @@ namespace Dominio.LogicaDelNegocio
        pre: AutenticarUsuario(usuario, contraseña) and usuario != null and contraseña != null 
        post: AutenticarUsuario(usuario, contraseña) or  self@!usuario.Exception or self@!contraseña.Exception 
        */
-        public Boolean AutenticarUsuario (string Usuario, string Contraseña)
+        public Boolean AutenticarUsuario(string Usuario, string Contraseña)
         {
             Usuarios.Clear();
             RecuperarUsuarios();
-            Boolean usuarioexiste = false;
-            Boolean contraseñaexiste = false;
-            Boolean bandera;
-            if (Usuario.Length>0 & Contraseña.Length>0)
+            Boolean bandera = false;
+            for (int i = 0; i < Usuarios.Count; i++)
             {
-                for(int i=0; i<Usuarios.Count; i++)
+                if (Usuarios[i].user.Equals(Usuario))
                 {
-                    if (Usuarios[i].user.Equals(Usuario))
-                    {
-                        usuarioexiste = true;
-                        if (Usuarios[i].contraseña.Equals(Contraseña))
-                        {
-                            contraseñaexiste = true;
-                        }
-                       
-                    }
-                    
-                }
-                if (usuarioexiste)
-                {
-                    if (contraseñaexiste)
+                    if (Usuarios[i].contraseña.Equals(Contraseña))
                     {
                         bandera = true;
                     }
-                    else
-                    {
-                        bandera = false;
-
-                    }
                 }
-                else
-                {
-                    bandera = false;
-
-                }
-            }
-            else
-            {
-                bandera = false;
             }
             return bandera;
         }
-
+        
         /*
        * El metodo RecuperarUsuario obtiene la informacion de la base de datos consultando si dicho usuario existe.
        * @ Yherson Blandon

@@ -10,7 +10,7 @@ namespace Persistencia
         private MySqlConnection Conexion = new MySqlConnection();
         public void Conectar()
         {
-            Conexion.ConnectionString = "server = localhost;  database= MiAutomovil; uid=root; pwd=negro123;";
+            Conexion.ConnectionString = "server = localhost;  database= MiAutomovil; uid=root; pwd=manuel24.;";
             try
             {
                 Conexion.Open();
