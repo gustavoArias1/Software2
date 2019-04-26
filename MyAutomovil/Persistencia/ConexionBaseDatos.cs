@@ -853,7 +853,16 @@ namespace Persistencia
 
         public void AdicionarCompraRepositorio(string nombreConcesionario, DateTime fechaCompra, double precioCompra, string placa, int codigoProveedor)
         {
-
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+            string fecha = Convert.ToString(fechaCompra);
+            string Precio2 = Convert.ToString(precioCompra);
+            string query = "INSERT INTO compras (Concesionario,FechaCompra,PrecioCompra,Placa,CodigoProveedor) values('" + nombreConcesionario + "','" + fecha + "','" + Precio2 + "','" + placa + "','" + codigoProveedor + "')";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            Conexion.Close();
         }
 
     }
