@@ -69,7 +69,7 @@ namespace MVC.Controllers
                 Boolean bandera = _autenticarEnElSistema.RecuperarContraseña(entidadUsuario.user, entidadUsuario.contraseña);
                 if (bandera == true)
                 {
-                    return RedirectToAction("RegistrarVehiculo/Index", new { tipo = entidadUsuario.tipo });
+                    return RedirectToAction("/AutenticarseEnElSistema/Index", new { tipo = entidadUsuario.tipo });
                 }
                 else
                 {
