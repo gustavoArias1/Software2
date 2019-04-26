@@ -31,6 +31,7 @@ namespace Dominio.LogicaDelNegocio
             clientes = RecuperarClientes();
             Cliente cliente = new Cliente(nombre, apellido, fechaDeNacimiento, cedula, correo, contraseña);
             if (clientes.Count > 0)
+
             {
                 if (clientes.Contains(cliente))
                 {
