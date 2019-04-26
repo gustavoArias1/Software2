@@ -109,6 +109,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Vendedor.cs" />
     <Compile Include="Models\Fachada.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -136,6 +137,7 @@
     <Content Include="Views\RegistrarModelo\ConsultarModelo.cshtml" />
     <Content Include="Views\RegistrarVehiculo\ConsultarVehiculo.cshtml" />
     <Content Include="Views\RegistrarEmpleado\_Empleados.cshtml" />
+    <Content Include="Views\RegistarCliente\_Clientes.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

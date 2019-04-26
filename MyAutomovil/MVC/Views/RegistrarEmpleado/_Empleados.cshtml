@@ -6,13 +6,16 @@
     <div class="row border-bottom border-secundary m-2 p-2">
         <br />
         <div class="col-sm-6 align-center ">
-            <p>@vendedor.Apellido  @vendedor.Nombre @vendedor.Cargo @vendedor.Concesionario</p>
+            <p>@vendedor.Apellido.ToUpper() - @vendedor.Nombre.ToUpper() - @vendedor.Cargo.ToUpper() - @vendedor.Concesionario.ToUpper()</p>
         </div>
         <div class="col-sm-3"></div>
-        <button class="col-sm-1 btn btn-success">Crear</button>
+        <button class="col-sm-1 btn btn-success">@Html.ActionLink("Actualizar", "ActualizarEmpleado",new { id = vendedor.Codigo})</button>
         <div class="col-sm-1"></div>
-        <button class="col-sm-1 btn btn-success">Eliminar</button>
-        <br/>
+        <button class="col-sm-1 btn btn-success">
+            @Html.ActionLink("Eliminar", "EliminarEmpleado",new { id = vendedor.Codigo},
+       new { onclick = "return confirm('Esta seguro de que quiere eliminar este empleado?');" })
+    </button>
+    <br />
     </div>
     }
 </div>

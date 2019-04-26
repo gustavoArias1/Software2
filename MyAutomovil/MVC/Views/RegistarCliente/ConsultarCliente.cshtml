@@ -14,6 +14,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <link href="~/css/styles.css" rel="stylesheet" type="text/css" />
 
 </head>
@@ -52,15 +53,28 @@
         <div class="row">
             <div class="col-sm-2"></div>
             <div class="col-sm-6">
-                <form class="form-inline">
-                    <input class="form-control mb-2 mr-sm-2" placeholder="Ingrese su consulta " size="40" />
-                    <button type="button" class="btn btn-success mb-2 ">
+                @using (Ajax.BeginForm( "ConsultarClienteF", new AjaxOptions()
+                {
+                    HttpMethod = "POST",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "contenedorClientes"
+                }))
+                {
+                <form class="form-inline" method="post">
+                    <input class="form-control mb-2 mr-sm-2" placeholder="Ingrese su consulta " size="40" name="consultaCliente"/>
+                    <button type="submit" class="btn btn-success mb-2 ">
                         <span class="fi-icon-name" title="icon name" aria-hidden="true"></span>Consultar
                     </button>
                 </form>
+                }
             </div>
             <div class="col-sm-4 btn-group-inline">
-                <button type="button" class="btn btn-dark mb-2 ">Listar Todos</button>
+                <button type="button" class="btn btn-dark mb-2 ">@Ajax.ActionLink("Listar Todos", "ConsultarClienteF", new AjaxOptions()
+                                                            {
+                                                                HttpMethod = "GET",
+                                                                InsertionMode = InsertionMode.Replace,
+                                                                UpdateTargetId = "contenedorClientes",
+                                                            })</button>
                 <button type="button" class="btn btn-success mb-2 ">@Html.ActionLink("Adicionar", "AdicionarCliente", null, new { @class = "myclass" })</button>
             </div>
         </div>
