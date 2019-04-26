@@ -17,26 +17,26 @@ namespace Persistencia
                 if (Conexion.State == System.Data.ConnectionState.Open)
                 {
                     Console.WriteLine("se conecto");
-                   
+
 
                 }
                 else
                 {
                     Console.WriteLine("llorelo papa");
                 }
-               
+
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex);
-  
+
 
             }
         }
 
 
-        
+
 
 
         //............MARCA....................................//
@@ -46,20 +46,20 @@ namespace Persistencia
             {
                 Conexion.Open();
             }
-            
-            string query = "delete from marca where nombre='"+nombre+"'";
+
+            string query = "delete from marca where nombre='" + nombre + "'";
             MySqlCommand my = new MySqlCommand(query, Conexion);
             my.ExecuteNonQuery();
             Conexion.Close();
-            
+
         }
-        public void ActualizarMarcaRepositorio(string Nombre,string Pais)
+        public void ActualizarMarcaRepositorio(string Nombre, string Pais)
         {
             if (Conexion.State == System.Data.ConnectionState.Closed)
             {
                 Conexion.Open();
             }
-            string query = "update marca set Pais='"+Pais+"' where Nombre='"+Nombre+"'";
+            string query = "update marca set Pais='" + Pais + "' where Nombre='" + Nombre + "'";
             MySqlCommand my = new MySqlCommand(query, Conexion);
             my.ExecuteNonQuery();
             Conexion.Close();
@@ -82,7 +82,7 @@ namespace Persistencia
             while (reader.Read())
             {
                 NombreMarca = Convert.ToString(reader["Nombre"]);
-                Pais= Convert.ToString(reader["Pais"]);
+                Pais = Convert.ToString(reader["Pais"]);
                 listaMarcas.Add(new string[] { NombreMarca, Pais });
             }
 
@@ -97,7 +97,7 @@ namespace Persistencia
             {
                 Conexion.Open();
             }
-            string query = "INSERT INTO Marca (Nombre,Pais) VALUES('"+NombreMarca+"','"+Pais+"')";
+            string query = "INSERT INTO Marca (Nombre,Pais) VALUES('" + NombreMarca + "','" + Pais + "')";
             MySqlCommand my = new MySqlCommand(query, Conexion);
             my.ExecuteNonQuery();
             Conexion.Close();
@@ -120,7 +120,7 @@ namespace Persistencia
 
         }
 
-        
+
         public List<string[]> RecuperarClientesRepositorio()
         {
             if (Conexion.State == System.Data.ConnectionState.Closed)
@@ -149,7 +149,7 @@ namespace Persistencia
                 Cedula = Convert.ToString(reader["Cedula"]);
                 Correo = Convert.ToString(reader["Correo"]);
                 Contraseña = Convert.ToString(reader["Contraseña"]);
-                listaClientes.Add(new string[] { Codigo,Nombre, Apellido,Fecha,Cedula,Correo,Contraseña });
+                listaClientes.Add(new string[] { Codigo, Nombre, Apellido, Fecha, Cedula, Correo, Contraseña });
 
             }
 
@@ -170,7 +170,7 @@ namespace Persistencia
             Conexion.Close();
         }
 
-        public void ActualizarClienteRepositorio(int codigo ,string Nombre, string Apellido, DateTime FechaDeNacimiento, int Cedula, string Correo, string Contraseña)
+        public void ActualizarClienteRepositorio(int codigo, string Nombre, string Apellido, DateTime FechaDeNacimiento, int Cedula, string Correo, string Contraseña)
         {
             if (Conexion.State == System.Data.ConnectionState.Closed)
             {
@@ -186,7 +186,7 @@ namespace Persistencia
 
 
 
-     //..............................Concesionarios..............................................//
+        //..............................Concesionarios..............................................//
 
         public List<string[]> ConsultarConcesionariosRepositorio()
         {
@@ -214,7 +214,7 @@ namespace Persistencia
                 Direccion = Convert.ToString(reader["Direccion"]);
                 Telefono = Convert.ToString(reader["Telefono"]);
                 Ciudad = Convert.ToString(reader["Ciudad"]);
-                listaConcesionarios.Add(new string[] { Codigo, NombreConcesionario,CodigoAdministrador, Direccion, Telefono, Ciudad});
+                listaConcesionarios.Add(new string[] { Codigo, NombreConcesionario, CodigoAdministrador, Direccion, Telefono, Ciudad });
 
             }
 
@@ -228,7 +228,7 @@ namespace Persistencia
             {
                 Conexion.Open();
             }
-            string query = "INSERT INTO concesionario (NombreConcesionario,CodigoAdministrador,Direccion,Telefono,Ciudad) VALUES('" + NombreConcesionario + "','" + CodigoAdministrador + "','" + Direccion + "','" + Telefono + "','" + Ciudad+ "')";
+            string query = "INSERT INTO concesionario (NombreConcesionario,CodigoAdministrador,Direccion,Telefono,Ciudad) VALUES('" + NombreConcesionario + "','" + CodigoAdministrador + "','" + Direccion + "','" + Telefono + "','" + Ciudad + "')";
             MySqlCommand my = new MySqlCommand(query, Conexion);
             my.ExecuteNonQuery();
             Conexion.Close();
@@ -266,8 +266,8 @@ namespace Persistencia
             {
                 Conexion.Open();
             }
-            
-            string query = "SELECT * FROM concesionario where NombreConcesionario='"+Nombre+"'";
+
+            string query = "SELECT * FROM concesionario where NombreConcesionario='" + Nombre + "'";
             MySqlCommand my = new MySqlCommand(query, Conexion);
             my.ExecuteNonQuery();
             MySqlDataReader reader = my.ExecuteReader();
@@ -281,7 +281,7 @@ namespace Persistencia
                 string Direccion = Convert.ToString(reader["Direccion"]);
                 string Telefono = Convert.ToString(reader["Telefono"]);
                 string Ciudad = Convert.ToString(reader["Ciudad"]);
-                Concesionario = new string[]{ Codigo, NombreConcesionario, CodigoAdministrador, Direccion, Telefono, Ciudad };
+                Concesionario = new string[] { Codigo, NombreConcesionario, CodigoAdministrador, Direccion, Telefono, Ciudad };
 
 
             }
@@ -290,7 +290,7 @@ namespace Persistencia
             return Concesionario;
 
 
-  
+
         }
 
         //..................................Crud empleado................................................//
@@ -322,7 +322,7 @@ namespace Persistencia
                 Codigo = Convert.ToString(reader["Codigo"]);
                 Nombre = Convert.ToString(reader["Nombre"]);
                 Apellido = Convert.ToString(reader["Apellido"]);
-                
+
                 Cedula = Convert.ToString(reader["Cedula"]);
                 if (Cedula.Length > 10)
                 {
@@ -334,7 +334,7 @@ namespace Persistencia
                 Contraseña = Convert.ToString(reader["Contraseña"]);
                 Concesionario = Convert.ToString(reader["Concesionario"]);
 
-                listaEmpleados.Add(new string[] {  Nombre, Apellido, Cedula,Cargo,Fecha, Correo, Contraseña,Codigo,Concesionario });
+                listaEmpleados.Add(new string[] { Nombre, Apellido, Cedula, Cargo, Fecha, Correo, Contraseña, Codigo, Concesionario });
 
             }
 
@@ -363,7 +363,7 @@ namespace Persistencia
                 Conexion.Open();
             }
 
-            string query = "delete from vendedores where Codigo='"+Codigo+"'";
+            string query = "delete from vendedores where Codigo='" + Codigo + "'";
             MySqlCommand my = new MySqlCommand(query, Conexion);
             my.ExecuteNonQuery();
             Conexion.Close();
@@ -377,7 +377,7 @@ namespace Persistencia
             }
 
             string Fecha = Convert.ToString(FechaNacimiento);
-            string query = "Insert Into vendedores (Nombre,Apellido,Cedula,Cargo,FechaNacimiento,Correo,Contraseña,Concesionario) values ('"+Nombre+ "','" + Apellido + "','" + Cedula + "','" + Cargo + "','" + Fecha + "','correo@falta','contraseñafalta','" + NombreConcesionario + "')";
+            string query = "Insert Into vendedores (Nombre,Apellido,Cedula,Cargo,FechaNacimiento,Correo,Contraseña,Concesionario) values ('" + Nombre + "','" + Apellido + "','" + Cedula + "','" + Cargo + "','" + Fecha + "','correo@falta','contraseñafalta','" + NombreConcesionario + "')";
             MySqlCommand my = new MySqlCommand(query, Conexion);
             my.ExecuteNonQuery();
             Conexion.Close();
@@ -401,7 +401,7 @@ namespace Persistencia
             string Correo = "";
             string Contraseña = "";
             string Concesionario = "";
-            string query = "SELECT * FROM vendedores where concesionario='"+NombreConcesionario+"'";
+            string query = "SELECT * FROM vendedores where concesionario='" + NombreConcesionario + "'";
             MySqlCommand my = new MySqlCommand(query, Conexion);
             my.ExecuteNonQuery();
             MySqlDataReader reader = my.ExecuteReader();
@@ -434,7 +434,7 @@ namespace Persistencia
 
         //..............................CrudModelo...............................................//
 
-       public List<string[]> ConsultarModelosRepositorio()
+        public List<string[]> ConsultarModelosRepositorio()
         {
             if (Conexion.State == System.Data.ConnectionState.Closed)
             {
@@ -455,12 +455,12 @@ namespace Persistencia
             while (reader.Read())
             {
                 NombreModelo = Convert.ToString(reader["NombreModelo"]);
-                NombreMarca= Convert.ToString(reader["NombreMarca"]);
-                NumeroPuertas= Convert.ToString(reader["NumeroPuertas"]);
+                NombreMarca = Convert.ToString(reader["NombreMarca"]);
+                NumeroPuertas = Convert.ToString(reader["NumeroPuertas"]);
                 Cilindraje = Convert.ToString(reader["NumeroPuertas"]);
                 Transmision = Convert.ToString(reader["NumeroPuertas"]);
 
-                listaModelos.Add(new string[] { NombreModelo, NombreMarca,NumeroPuertas,Cilindraje,Transmision });
+                listaModelos.Add(new string[] { NombreModelo, NombreMarca, NumeroPuertas, Cilindraje, Transmision });
             }
 
             Conexion.Close();
@@ -494,14 +494,14 @@ namespace Persistencia
             Conexion.Close();
         }
 
-        public void AdicionarModelosRepositorio(string NombreModelo, string NombreMarca, int  NumeroPuertas, string Cilindraje, string Transmision)
+        public void AdicionarModelosRepositorio(string NombreModelo, string NombreMarca, int NumeroPuertas, string Cilindraje, string Transmision)
         {
             if (Conexion.State == System.Data.ConnectionState.Closed)
             {
                 Conexion.Open();
             }
 
-            string query = "INSERT INTO modelo (NombreModelo,NombreMarca,Transmision,NumeroPuertas,Cilindraje) values('" + NombreModelo+ "','" + NombreMarca + "','" + Transmision + "','" + NumeroPuertas + "','" + Cilindraje + "')";
+            string query = "INSERT INTO modelo (NombreModelo,NombreMarca,Transmision,NumeroPuertas,Cilindraje) values('" + NombreModelo + "','" + NombreMarca + "','" + Transmision + "','" + NumeroPuertas + "','" + Cilindraje + "')";
             MySqlCommand my = new MySqlCommand(query, Conexion);
             my.ExecuteNonQuery();
             Conexion.Close();
@@ -521,7 +521,7 @@ namespace Persistencia
             string Descripcion = "";
             string SolucionReclamo = "";
             string IdReclamo = "";
-            string IdCliente= "";
+            string IdCliente = "";
             string IdAdministrador = "";
 
 
@@ -543,7 +543,7 @@ namespace Persistencia
 
 
 
-                listaReclamos.Add(new string[] {IdReclamo, TipoReclano, Concesionario, Descripcion,IdCliente });
+                listaReclamos.Add(new string[] { IdReclamo, TipoReclano, Concesionario, Descripcion, IdCliente });
             }
 
             Conexion.Close();
@@ -567,7 +567,7 @@ namespace Persistencia
             string IdAdministrador = "";
 
 
-            string query = "SELECT * FROM reclamo where Concesionario='"+concesionario+"'";
+            string query = "SELECT * FROM reclamo where Concesionario='" + concesionario + "'";
             MySqlCommand my = new MySqlCommand(query, Conexion);
             my.ExecuteNonQuery();
             MySqlDataReader reader = my.ExecuteReader();
@@ -585,7 +585,7 @@ namespace Persistencia
 
 
 
-                listaReclamos.Add(new string[] { IdReclamo, TipoReclano, Concesionario, Descripcion, IdCliente,SolucionReclamo,IdAdministrador });
+                listaReclamos.Add(new string[] { IdReclamo, TipoReclano, Concesionario, Descripcion, IdCliente, SolucionReclamo, IdAdministrador });
             }
 
             Conexion.Close();
@@ -594,14 +594,14 @@ namespace Persistencia
         }
 
 
-        public int  ConsultarAdministrador(string Concesionario)
+        public int ConsultarAdministrador(string Concesionario)
         {
             if (Conexion.State == System.Data.ConnectionState.Closed)
             {
                 Conexion.Open();
             }
             int CodigoAdministrador = 0;
-            string query = "select CodigoAdministrador from concesionario where NombreConcesionario='"+Concesionario+"'";
+            string query = "select CodigoAdministrador from concesionario where NombreConcesionario='" + Concesionario + "'";
             MySqlCommand my = new MySqlCommand(query, Conexion);
             my.ExecuteNonQuery();
             MySqlDataReader reader = my.ExecuteReader();
@@ -623,14 +623,14 @@ namespace Persistencia
                 Conexion.Open();
             }
 
-            
-            string query = "INSERT INTO reclamo (TipoReclamo,Concesionario,Descripcion,SolucionReclamo,Idcliente,IdAdministrador) values('" + TipoReclamo + "','" + Concesionario + "','" + Descripcion + "','----------','" + IdCliente + "','"+CodigoAdministrador+"')";
+
+            string query = "INSERT INTO reclamo (TipoReclamo,Concesionario,Descripcion,SolucionReclamo,Idcliente,IdAdministrador) values('" + TipoReclamo + "','" + Concesionario + "','" + Descripcion + "','----------','" + IdCliente + "','" + CodigoAdministrador + "')";
             MySqlCommand my = new MySqlCommand(query, Conexion);
             my.ExecuteNonQuery();
             Conexion.Close();
         }
 
-        public void AdicionarReclamoSolucionRepositorio(int  IdReclamo, string TipoReclamo, string Concesionario, string Descripcion, int  IdCliente, string solucionReclamo, int idAministrador)
+        public void AdicionarReclamoSolucionRepositorio(int IdReclamo, string TipoReclamo, string Concesionario, string Descripcion, int IdCliente, string solucionReclamo, int idAministrador)
         {
             int CodigoAdministrador = ConsultarAdministrador(Concesionario);
             if (Conexion.State == System.Data.ConnectionState.Closed)
@@ -639,7 +639,7 @@ namespace Persistencia
             }
 
 
-            string query = "INSERT INTO reclamo (TipoReclamo,Concesionario,Descripcion,SolucionReclamo,Idcliente,IdAdministrador) values('" + TipoReclamo + "','" + Concesionario + "','" + Descripcion + "','"+solucionReclamo+"','" + IdCliente + "','" + CodigoAdministrador + "')";
+            string query = "INSERT INTO reclamo (TipoReclamo,Concesionario,Descripcion,SolucionReclamo,Idcliente,IdAdministrador) values('" + TipoReclamo + "','" + Concesionario + "','" + Descripcion + "','" + solucionReclamo + "','" + IdCliente + "','" + CodigoAdministrador + "')";
             MySqlCommand my = new MySqlCommand(query, Conexion);
             my.ExecuteNonQuery();
             Conexion.Close();
@@ -656,7 +656,7 @@ namespace Persistencia
             }
             List<string[]> listaUsuarios = new List<string[]>();
             string Usuario = "";
-            string Contraseña= "";
+            string Contraseña = "";
             string Tipo = "";
             string query = "SELECT * FROM usuarios";
             MySqlCommand my = new MySqlCommand(query, Conexion);
@@ -669,12 +669,25 @@ namespace Persistencia
                 Contraseña = Convert.ToString(reader["Contraseña"]);
                 Tipo = Convert.ToString(reader["Tipo"]);
 
-                listaUsuarios.Add(new string[] { Usuario, Contraseña,Tipo });
+                listaUsuarios.Add(new string[] { Usuario, Contraseña, Tipo });
             }
 
             Conexion.Close();
 
             return listaUsuarios;
+        }
+
+        public void ActualizarUsuario(string usuario,string contraseña)
+        {
+            if (Conexion.State == System.Data.ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+
+            string query = "update usuarios set contraseña='" + contraseña + "'where User='" + usuario + "'";
+            MySqlCommand my = new MySqlCommand(query, Conexion);
+            my.ExecuteNonQuery();
+            Conexion.Close();
         }
 
         //..................................Vehiculos.....................................................//

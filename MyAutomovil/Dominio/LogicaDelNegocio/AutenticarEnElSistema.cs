@@ -76,35 +76,27 @@ namespace Dominio.LogicaDelNegocio
        pre:  RecuperarContraseña(correo) and correo != null 
        post: RecuperarContraseña(correo) or  self@!correo.Exception  
        */
-        public void RecuperarContraseña(string correo)
+        public Boolean RecuperarContraseña(string correo, string contraseña)
         {
             Usuarios.Clear();
             RecuperarUsuarios();
             Boolean existe = false;
-            if (correo.Length > 0)
+            for (int i = 0; i < Usuarios.Count; i++) {
+                if (Usuarios[i].user.Equals(correo))
+                {
+                    existe = true;
+                }
+            } 
+            if (existe)
             {
-                for (int i=0; i<Usuarios.Count; i++){
-                    if (Usuarios[i].user.Equals(correo))
-                    {
-                        existe = true;
-                    }
-                   
-                }
-                if (existe)
-                {
-                    Console.WriteLine("REVISE SU CORREO PARA NUEVA CONTRASEÑA");
-
-                }
-                else
-                {
-                    Console.WriteLine("Excepcion usuario inexistente");
-
-                }
+                ActualizarUsuario(correo, contraseña);
+                return existe;
 
             }
             else
             {
-                Console.WriteLine("Excepcion Campo vacio");
+                return existe;
+
             }
         }
 

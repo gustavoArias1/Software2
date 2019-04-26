@@ -17,6 +17,7 @@ namespace Pruebas
     {
         static void Main(string[] args)
         {
+
         }
 
         [TestCase]
@@ -26,11 +27,19 @@ namespace Pruebas
             Assert.AreEqual(true, r.AdicionarMarca("Mercedez3","A10"));
         }
 
+        [TestCase]
+        public void ConsultarMarcaTest()
+        {
+            RegistrarMarca C = new RegistrarMarca();
+            Marca m = new Marca("At Institute", "Aruba");
+            string pais = m.Pais;
+            Assert.AreEqual(null, C.ConsultarMarca("UTTa"));
+        }
+          
         
         [TestCase]
         public void EliminarMarcaTest()
         {
-
             RegistrarMarca E = new RegistrarMarca();
             Assert.AreEqual(true, E.EliminarMarca("Mercedez2"));
         }
@@ -51,10 +60,25 @@ namespace Pruebas
         }
 
         [TestCase]
+        public void RecuperarUsuarioTest()
+        {  
+            AutenticarEnElSistema recuperar= new AutenticarEnElSistema();
+            Assert.AreEqual(null, recuperar.RecuperarUsuario(""));
+        }
+
+
+        [TestCase]
         public void AdicionarModeloTest()
         {
             RegistrarModelo adicion = new RegistrarModelo ();
             Assert.AreEqual(true, adicion.AdicionarModelo("speed", "Ut Inc.", 4,"1000","mecanica"));
+        }
+
+        [TestCase]
+        public void ConsultarModeloTest()
+        {
+            RegistrarModelo C = new RegistrarModelo();
+            Assert.AreEqual(false, C.ConsultarModelo("BButi","Bugary"));
         }
 
 
@@ -70,9 +94,17 @@ namespace Pruebas
         public void AdicionarConcesionarioTest()
         {
             RegistrarConcesionario C= new RegistrarConcesionario();
-            DateTime data = DateTime.Now;
             Assert.AreEqual(true, C.AdicionarConcesionario("Kia",5,"cll 45 n 65-01","8705555","Manizales"));
         }
+
+        [TestCase]
+        public void eliminarEmpleadoTest()
+        {
+            RegistrarEmpleado E = new RegistrarEmpleado();
+            Assert.AreEqual(true, E.EliminarEmpleado(104));
+        }
+
+
 
     }
 }
