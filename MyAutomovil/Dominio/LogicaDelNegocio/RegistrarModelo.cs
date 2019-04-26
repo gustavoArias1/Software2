@@ -114,7 +114,7 @@ namespace Dominio.LogicaDelNegocio
              post: ConsultarModelo(nombreModelo, nombreMarca) or self@!nombreModelo.Exception or self@!nombreMarca.Exception
              */
             public Modelo ConsultarModelo(string nombreModelo, string nombreMarca)
-        {
+            {
 
             // acceso a la base de datos para extraer modelos
             modelos.Clear();

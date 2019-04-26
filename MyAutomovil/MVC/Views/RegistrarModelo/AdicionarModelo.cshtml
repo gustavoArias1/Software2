@@ -138,7 +138,7 @@
                         <div class="row">
                             <input type="submit" class="btn btn-success col-md-4" value="Guardar" />
                             <div class="col-md-4"><br /></div>
-                            <button onclick="window.location.href='/RegistarModelo/ConsultarModelo'" class="btn btn-danger col-md-4">Cancelar</button>
+                            <button type="button" class="btn btn-danger col-md-4 ">@Html.ActionLink("Cancelar", "ConsultarModelo", null, new { @class = "myclass" })</button>
                         </div>
                     </form>
                 </div>
