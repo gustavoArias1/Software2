@@ -59,6 +59,19 @@ namespace MVC.Models
             return c;
         }
 
+        public List<Marca> ConsultarMarca() { 
+            RegistrarMarca Marca = new RegistrarMarca();
+            Marca.ConsultarMarca();
+            return Marca.marcas;
+        }
+
+        public Marca ConsultarMarca(string marca)
+        {
+            RegistrarMarca Marca = new RegistrarMarca();
+            return Marca.ConsultarMarca(marca);
+        }
+
+
         public void ActualizarCliente()
         {
 
