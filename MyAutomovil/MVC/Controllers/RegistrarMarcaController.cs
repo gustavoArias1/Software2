@@ -21,6 +21,41 @@ namespace MVC.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult AdicionarMarca(AdicionarMarcaViewModel AdicionarMarca)
+        {
+            if (AdicionarMarca.nombreMarca == null)
+            {
+                ViewData["MensajeMarca"] = "Campo obligatorio";
+                return View();
+            }
+
+            if (AdicionarMarca.pais == null)
+            {
+                ViewData["MensajePais"] = "Campo obligatorio";
+                return View();
+            }
+
+            Dominio.EntidadesDominio.Marca Marca = new Dominio.EntidadesDominio.Marca
+            {
+                nombreMarca = AdicionarMarca.nombreMarca,
+                pais = AdicionarMarca.pais
+            };
+            if(_registrarMarca.AdicionarMarca(Marca.nombreMarca, Marca.pais))
+            {
+
+                ViewData["MensajeExito"] = "Exito en la creacion de marca";
+                return View();
+            }
+            else
+            {
+                ViewData["MensajeIngreso"] = "Error al adicionar marca";
+                return View();
+            }
+            
+            
+        }
+
         public ActionResult ActualizarMarca(string nombreMarca)
         {
             var entidadMarca = _registrarMarca.ConsultarMarca(nombreMarca);
