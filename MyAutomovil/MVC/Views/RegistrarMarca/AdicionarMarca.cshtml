@@ -65,7 +65,7 @@
                                     @Html.ValidationMessageFor(model => model.nombreMarca, "", new { @class = "text-danger" })
                                 </div>
                                 @{
-                                    if (@ViewData["MensajeUsuario"] != null)
+                                    if (@ViewData["MensajeMarca"] != null)
                                     {
                                         <p class="alert alert-danger"> @ViewData["MensajeMarca"]</p>
                                     }
@@ -81,7 +81,7 @@
                                     @Html.ValidationMessageFor(model => model.pais, "", new { @class = "text-danger" })
                                 </div>
                                 @{
-                                    if (@ViewData["MensajeUsuario"] != null)
+                                    if (@ViewData["MensajePais"] != null)
                                     {
                                         <p class="alert alert-danger"> @ViewData["MensajePais"]</p>
                                     }
@@ -112,6 +112,12 @@
                 if (@ViewData["MensajeIngreso"] != null)
                 {
                     <p class="alert alert-danger"> @ViewData["MensajeIngreso"]</p>
+                }
+            }
+            @{
+                if (@ViewData["MensajeExito"] != null)
+                {
+                    <p class="btn-success"> @ViewData["MensajeExito"]</p>
                 }
             }
         </div>

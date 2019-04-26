@@ -100,7 +100,12 @@ namespace Dominio.LogicaDelNegocio
             }
         }
 
-
+        /*
+      * El metodo RecuperarUsusarios adiciona un nuevo usuario en la base de datos consultando si dicho usuario existe en la lista.
+      * @ Yherson Blandon
+      * @ version 4.0 05/04/2019
+      context AutenticarEnElsistema :: RecuperarUsuarios
+      */
         public void RecuperarUsuarios()
         {
             string Usuario = "";

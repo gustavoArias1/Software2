@@ -168,9 +168,13 @@ namespace Dominio.LogicaDelNegocio
                 return concesionario.vendedores;
         }
 
-        /*
-         retorna todos los empleados del sistema
-             */
+        /* Este metodo nos permite retornar todos los empleados del sistema
+          * @ Gustavo Andres Arias
+          * @ version 3.0 04/04/2019
+          * context : RegistarEmpleado :: RecuperarEmpleados
+          * pre : 
+          * post:
+          **/
         public List<Vendedor> RecuperarEmpleados()
         {
             List<Vendedor> vendedoresAux = new List<Vendedor>();
@@ -191,9 +195,13 @@ namespace Dominio.LogicaDelNegocio
             return vendedoresAux;
         }
 
-        /*
-         Busca un objeto concesionario
-             */
+        /* Este metodo nos permite buscar un objeto concesionario en la base de datos 
+          * @ Gustavo Andres Arias
+          * @ version 2.0 04/04/2019
+          * context : RegistrarEmpleado :: RecuperarConcesionario
+          * pre : RecuperarConcesionario(nombreConcesionario)
+          * post: !RecuperarConcesionario(NombreConcesionario ) 
+          */
         public Concesionario RecuperarConcesionario(string nombreConcesionario)
         {
             Concesionario c;
