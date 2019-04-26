@@ -6,7 +6,7 @@ using Persistencia;
 
 namespace Dominio.LogicaDelNegocio
 {
-    class RegistrarVehiculo : ConexionBaseDatos
+    public class RegistrarVehiculo : ConexionBaseDatos
     {
         List<Vehiculo> vehiculos = null;
 

@@ -72,6 +72,12 @@ namespace MVC.Models
         }
 
 
+        public List<Vehiculo> ConsultarVehiculo()
+        {
+            RegistrarVehiculo r = new RegistrarVehiculo();
+            return r.RecuperarVehiculos();
+        }
+
         public void ActualizarCliente()
         {
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MVC.Models;
+using Fachada;
 
 namespace MVC.Controllers
 {
@@ -22,6 +24,12 @@ namespace MVC.Controllers
         public ActionResult ConsultarVehiculo()
         {
             return View();
+        }
+
+        public PartialViewResult ConsultarVehiculoF()
+        {
+            FachadaW f = new FachadaW();
+            return PartialView("_Vehiculos",f.ConsultarVehiculo());
         }
     }
 }
