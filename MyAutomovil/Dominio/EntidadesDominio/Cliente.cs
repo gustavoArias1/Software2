@@ -6,6 +6,7 @@ namespace Dominio.EntidadesDominio
 {
     public class Cliente
     {
+        //YOLO
         public int codigo { get; set; }
         public string nombre { get; set; }
         public string apellido { get; set; }
