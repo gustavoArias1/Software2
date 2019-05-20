@@ -172,6 +172,10 @@
       <Project>{61e18bc3-0d16-4ac0-950f-5004780620ef}</Project>
       <Name>Dominio</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Fachada\Fachada.csproj">
+      <Project>{95ce019f-0db9-49ce-b848-489c21a81e7f}</Project>
+      <Name>Fachada</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Persistencia\Persistencia.csproj">
       <Project>{5c4b6b64-b158-4295-8109-9335e87dc543}</Project>
       <Name>Persistencia</Name>
