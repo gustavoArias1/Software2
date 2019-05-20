@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC", "MVC\MVC.csproj", "{C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pruebas", "Pruebas\Pruebas.csproj", "{C9C01E0F-DCAB-49DF-93FA-2F8354E27A28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fachada", "ClassLibrary1\Fachada.csproj", "{95CE019F-0DB9-49CE-B848-489C21A81E7F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fachada", "Fachada\Fachada.csproj", "{95CE019F-0DB9-49CE-B848-489C21A81E7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
