@@ -68,6 +68,7 @@ namespace MVC.Controllers
             }
             Dominio.EntidadesDominio.Cliente cliente = new Dominio.EntidadesDominio.Cliente
             {
+                codigo = nuevoCliente.codigo,
                 cedula = nuevoCliente.cedula,
                 nombre = nuevoCliente.nombre,
                 apellido = nuevoCliente.apellido,
@@ -92,6 +93,39 @@ namespace MVC.Controllers
         {
             FachadaW f = new FachadaW();
                 return View(f.retornarCliente(id));
+        }
+
+        [HttpPost]
+        public ActionResult ActualizarCliente(ActualizarClienteViewModel nuevoCliente)
+        {
+            if (nuevoCliente.cedula == null)
+            {
+                ViewData["MensajeCedula"] = "Campos obligatorios";
+                return View();
+            }
+            else if (nuevoCliente.nombre == null)
+            {
+                ViewData["MensajeNombre"] = "Campos obligatorios";
+                return View();
+            }
+            Dominio.EntidadesDominio.Cliente cliente = new Dominio.EntidadesDominio.Cliente
+            {
+                nombre = nuevoCliente.nombre,
+                apellido = nuevoCliente.apellido,
+                fechaDeNacimiento = nuevoCliente.fechaDeNacimiento,
+                cedula = nuevoCliente.cedula,
+                correo = nuevoCliente.correo,
+                contraseña = nuevoCliente.contraseña
+            };
+            if (_registrarCliente.ActualizarCliente(cliente.codigo, cliente.nombre, cliente.apellido, cliente.cedula, cliente.fechaDeNacimiento, cliente.correo, cliente.contraseña))
+            {
+                return RedirectToAction("ConsultarMarca");
+            }
+            else
+            {
+                ViewData["MensajeError"] = "Error al actualizar la marca";
+                return View();
+            }
         }
 
         public ActionResult ConsultarCliente()
