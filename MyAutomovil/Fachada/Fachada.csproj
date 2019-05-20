@@ -50,6 +50,7 @@
     <Compile Include="AdicionarConcesionarioViewModel.cs" />
     <Compile Include="AdicionarMarcaViewModel.cs" />
     <Compile Include="AdicionarModeloViewModelo.cs" />
+    <Compile Include="ActualizarClienteViewModel.cs" />
     <Compile Include="IndexViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecuperarContraseñaModel.cs" />
