@@ -13,7 +13,7 @@ namespace Dominio.LogicaDelNegocio
         {
             ConexionBaseDatos conexion = new ConexionBaseDatos();
             conexion.Conectar();
-            conexion.ActualizarUsuario("ac.eleifend@pede.ca", "HWY72FYY0FG");
+            conexion.ActualizarUsuario("ac.eleifend@pede.ca", "HWY72FYY0FR");
             
         }
     }
